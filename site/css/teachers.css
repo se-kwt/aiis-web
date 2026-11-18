@@ -1,0 +1,116 @@
+/* Teachers: Fraunces statement with the crest icon, a centred, looping 7-card video carousel (Slick-style: 410 x 560 cards on a 440 px pitch,
+   313 x 420 below 1000 px, neighbours peek in at both sides), pager + arrows, Orange line art.
+   Geometry from the reference measurements; motion from the reference measurements item 8 (track transition 500 ms ease). */
+.teachers {
+  position: relative; z-index: 1; overflow: hidden; padding: 60px 0 70px; background: var(--c-bg-alt);
+  font: 400 14px/21px var(--f-sans); color: var(--c-text);
+}
+@media (min-width: 1000px) { .teachers { padding: 130px 0 190px; font-size: 18px; line-height: 27px; } }
+.teachers__inner { position: relative; z-index: 1; }
+
+.teachers__lines { position: absolute; z-index: 0; display: block; pointer-events: none; background: no-repeat 0 0 / contain; }
+.teachers__lines--top { left: 0; top: -30px; width: 161px; height: 120px; background-image: url("../assets/art/teachers-lines-top.svg"); }
+.teachers__lines--bottom { right: 0; bottom: 30px; width: 161px; height: 124px; background-position: 100% 50%; background-image: url("../assets/art/teachers-lines-bottom.svg"); }
+@media (min-width: 1000px) {
+  .teachers__lines--top { top: -60px; width: 420px; height: 319px; }
+  .teachers__lines--bottom { bottom: 0; width: 420px; height: 320px; }
+}
+
+/* statement */
+.teachers__heading { margin: 0 40px 40px; font: 700 34px/40.8px var(--f-serif); color: var(--c-navy); }
+.teachers__heading .word { display: inline-block; position: relative; transform-origin: 0% 100%; }
+.teachers__icon { display: block; width: 81px; height: 50px; object-fit: contain; object-position: center; }
+@media (min-width: 1000px) {
+  .teachers__heading { margin: 0 130px 60px; font-size: 64px; line-height: 76.8px; }
+  .teachers__icon { float: left; width: 96px; height: 60px; margin-right: 4px; }
+}
+
+/* carousel */
+.teachers__carousel { position: relative; z-index: 1; }
+.teachers__slider { position: relative; z-index: 1; height: 420px; overflow: clip; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+.teachers__slider.is-dragging { cursor: grabbing; }
+.teachers__track {
+  display: flex; gap: 10px; width: max-content; height: 100%; margin: 0; padding: 0; list-style: none;
+  transition: transform .5s ease; will-change: transform;
+}
+.teachers__track.is-dragging { transition: none; }
+.teachers__slide { position: relative; flex: none; width: 313px; height: 420px; margin: 0; font: inherit; color: inherit; }
+@media (min-width: 800px) { /* the reference switches the card size and the 10 -> 30 px gap at 800 px (slide margin 5 -> 15 px) */
+  .teachers__track { gap: 30px; }
+  .teachers__slider { height: 560px; }
+  .teachers__slide { width: 410px; height: 560px; }
+}
+.teachers__photo { width: 100%; height: 100%; background: none; transition: height .5s ease, margin-top .5s ease; }
+.teachers__photo::after { right: auto; bottom: auto; top: 0; left: 0; } /* the Temp photo tag sits top left: the caption occupies the bottom edge */
+.teachers__photo > img { background: var(--c-grey-1); }
+.teachers__photo > img { -webkit-user-drag: none; transition: transform .5s ease, filter .5s ease; }
+.teachers__slide:hover .teachers__photo > img, .teachers__slide:focus-within .teachers__photo > img { transform: scale(1.1); }
+[data-carousel][data-state] .teachers__slide:not(.is-current) .teachers__photo > img { filter: grayscale(1); }
+/* the side cards are shorter than the centred card, trimmed equally top and bottom, and their photo is re-fitted to the shorter box (measured on the reference: 330 of 420 px below 800 px, 380 of 560 px above) */
+[data-carousel][data-state] .teachers__slide:not(.is-current) .teachers__photo { height: calc(100% - 90px); margin-top: 45px; }
+@media (min-width: 800px) { [data-carousel][data-state] .teachers__slide:not(.is-current) .teachers__photo { height: calc(100% - 180px); margin-top: 90px; } }
+
+.teachers__caption {
+  position: absolute; z-index: 3; left: 40px; right: 40px; bottom: 0; margin: 0; padding: 10px 20px 0;
+  border-radius: 20px 20px 0 0; background: var(--c-bg-alt); text-align: center;
+  font: 400 14px/21px var(--f-sans); color: var(--c-text-2); pointer-events: none; transition: opacity .5s ease;
+}
+.teachers__caption p { margin: 0; font: inherit; color: inherit; }
+.teachers__caption h3 { margin: 0; font: 400 18px/21.6px var(--f-display); text-transform: uppercase; color: var(--c-navy); }
+@media (min-width: 1000px) { .teachers__caption h3 { font-size: 24px; line-height: 28.8px; } }
+/* inverse corners where the caption tab meets the photo's bottom edge */
+.teachers__corner { position: absolute; bottom: 0; width: 20px; height: 20px; font: 400 14px/21px var(--f-sans); color: var(--c-text-2); }
+.teachers__corner--l { left: -20px; background: radial-gradient(circle at 0 0, transparent 19.5px, var(--c-bg-alt) 20px); }
+.teachers__corner--r { right: -20px; background: radial-gradient(circle at 100% 0, transparent 19.5px, var(--c-bg-alt) 20px); }
+
+.teachers__play {
+  position: absolute; z-index: 4; inset: 0; display: block; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; border-radius: 0; background: none;
+  font: 900 14px/21px var(--f-sans); color: var(--c-navy); text-align: left; cursor: pointer;
+}
+@media (min-width: 1000px) { .teachers__play { font-size: 18px; line-height: 27px; } }
+.teachers__play:focus-visible { outline: 3px solid var(--c-accent); outline-offset: -6px; }
+.teachers__disc {
+  position: absolute; left: 50%; bottom: 80px; width: 60px; height: 60px; transform: translateX(-50%); color: transparent;
+  transition: transform .5s ease, bottom .5s ease, opacity .5s ease;
+}
+.teachers__disc::before {
+  content: ""; position: absolute; inset: 0; background: var(--c-white); transition: transform .5s ease;
+  -webkit-mask: url("../assets/art/badge-disc.svg") center / 100% 100% no-repeat; mask: url("../assets/art/badge-disc.svg") center / 100% 100% no-repeat;
+}
+.teachers__disc::after {
+  content: ""; position: absolute; left: 23px; top: 19px; width: 0; height: 0;
+  border-style: solid; border-width: 11px 0 11px 17px; border-color: transparent transparent transparent var(--c-navy);
+}
+.teachers__slide:hover .teachers__disc, .teachers__slide:focus-within .teachers__disc { transform: translateX(-50%) scale(1.2); bottom: 100px; }
+.teachers__slide:hover .teachers__disc::before, .teachers__slide:focus-within .teachers__disc::before { transform: rotate(90deg); }
+[data-carousel][data-state] .teachers__slide:not(.is-current) .teachers__disc,
+[data-carousel][data-state] .teachers__slide:not(.is-current) .teachers__caption { opacity: 0; }
+
+/* pager and arrows */
+.teachers__controls { position: relative; z-index: 2; padding-top: 30px; text-align: center; }
+.teachers__paging { display: block; font: 400 14px/21px var(--f-sans); color: var(--c-text); }
+.teachers__cur, .teachers__tot { font: 700 18px/21.6px var(--f-serif); color: var(--c-navy); }
+.teachers__tot { font-size: 14px; }
+.teachers__sep { display: inline-block; width: 40px; text-align: center; color: var(--c-text-2); font: 400 14px/21px var(--f-sans); }
+.teachers__arrows { display: flex; justify-content: center; align-items: center; margin-top: 10px; }
+.teachers__arrows .teachers__sep { width: 20px; }
+.teachers__arrow {
+  display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; margin: 0; padding: 0; border: 0; border-radius: 0; background: none;
+  font: inherit; font-weight: 400; color: transparent; cursor: pointer; transition: transform .3s ease;
+}
+.teachers__arrow path { stroke: var(--c-navy); }
+.teachers__arrow--prev:hover { transform: translateX(-3px); }
+.teachers__arrow--next:hover { transform: translateX(3px); }
+.teachers__arrow:focus-visible { outline: 3px solid var(--c-accent); outline-offset: 2px; }
+@media (min-width: 1000px) {
+  .teachers__controls { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; height: 60px; padding: 0; pointer-events: none; }
+  .teachers__paging { font-size: 18px; line-height: 27px; position: absolute; top: 0; left: calc(50% - 332.34px); display: flex; align-items: center; height: 60px; pointer-events: auto; }
+  .teachers__arrows { position: absolute; top: 10px; left: calc(50% + 243.5px); margin: 0; pointer-events: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .teachers__track, .teachers__photo > img, .teachers__disc, .teachers__disc::before, .teachers__caption, .teachers__arrow, .teachers__photo { transition: none; }
+}
+
+/* keep the "Temp photo" tag readable above the caption's inverse corner */
+.teachers__photo::after { z-index: 5; }

@@ -1,0 +1,11 @@
+node_modules/
+.superpowers/
+.DS_Store
+.compare-tmp/
+
+# Local working material: screenshots of another school's site (never publish)
+docs/reference/screenshots/
+docs/reference/compare-*.png
+
+# Owner reference documents (kept locally, not versioned)
+Other Doc/

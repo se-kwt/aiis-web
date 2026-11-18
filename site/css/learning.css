@@ -1,0 +1,98 @@
+/* Learning section: statement, overlapping Anton title panel over the video, three icon columns, Sky line art.
+   Geometry from the reference measurements and the reference's computed styles (breakpoints 600 / 1000); motion from the reference measurements items 7 and 11. */
+.learning {
+  position: relative; z-index: 1; padding: 0 10px; background: var(--c-bg-alt);
+  font: 400 14px/21px var(--f-sans); color: var(--c-text);
+}
+@media (min-width: 1000px) { .learning { padding: 0 20px; font-size: 18px; line-height: 27px; } }
+.learning__wrap { padding: 60px 10px; background: var(--c-white); border-radius: 20px; }
+@media (min-width: 1000px) { .learning__wrap { padding: 130px 0; } }
+
+/* line art: real elements standing in for the reference's ::before / ::after backgrounds */
+.learning__lines { position: absolute; z-index: 1; display: block; pointer-events: none; background: no-repeat 0 0 / cover; }
+.learning__lines--top { left: 0; top: 30px; width: 131px; height: 54px; background-image: url("../assets/art/learning-lines-top.svg"); }
+.learning__lines--bottom { right: 0; bottom: -17px; width: 131px; height: 34px; background-image: url("../assets/art/learning-lines-bottom.svg"); }
+@media (min-width: 1000px) {
+  .learning__lines--top { top: 70px; width: 510px; height: 214px; }
+  .learning__lines--bottom { bottom: -65px; width: 510px; height: 130px; }
+}
+
+/* statement */
+.learning__intro { position: relative; z-index: 100; max-width: 293px; margin: 0 auto 20px; text-align: center; }
+.learning__statement { margin: 0; font: 700 34px/40.8px var(--f-serif); color: var(--c-navy); position: relative; }
+.learning__spacer { display: none; }
+.learning__statement .word { display: inline-block; position: relative; transform-origin: 0% 100%; }
+@media (min-width: 1000px) {
+  .learning__intro { max-width: 580px; margin: 0 110px 60px auto; text-align: left; }
+  .learning__statement { font-size: 64px; line-height: 76.8px; }
+  .learning__spacer { display: inline-block; width: 100px; }
+}
+
+/* panel: title box overlapping the video */
+.learning__panel { position: relative; display: flex; flex-direction: column; align-items: center; margin: 0 0 60px; }
+.learning__title { position: relative; z-index: 2; top: 40px; bottom: -40px; width: 293px; }
+.learning__title h2 {
+  position: relative; margin: 0; padding: 0 20px 20px; border-radius: 20px; background: var(--c-white);
+  font: 400 60px/60px var(--f-display); text-transform: uppercase; text-align: center; color: var(--c-navy);
+}
+.learning__title .word { display: inline-block; position: relative; transform-origin: 0% 100%; }
+.learning__title em { display: block; font: 700 20px/24px var(--f-sans); text-transform: uppercase; }
+/* inverse-corner fillers where the title box meets the video */
+.learning__title h2::before, .learning__title h2::after {
+  content: ""; position: absolute; display: block; width: 20px; height: 20px;
+  background: radial-gradient(circle at 100% 0, transparent 19.5px, var(--c-white) 20px);
+}
+.learning__title h2::before { left: -20px; bottom: 20px; transform: rotate(180deg); }
+.learning__title h2::after { left: 100%; bottom: 20px; transform: rotate(90deg); }
+
+.learning__frame { position: relative; width: 100%; height: 200px; line-height: 0; }
+@media (min-width: 600px) { .learning__frame { height: auto; aspect-ratio: 16 / 9; } }
+.learning__frame .tp { width: 100%; height: 100%; background: var(--c-navy-800); }
+.learning__frame .tp > video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.learning__frame .tp::after { right: auto; left: 0; } /* the Temp photo tag moves to the left corner: the play / pause control sits bottom right */
+.learning__frame::before {
+  content: ""; position: absolute; z-index: 1; left: 0; bottom: 0; width: 100%; height: 80px; pointer-events: none;
+  background: linear-gradient(rgba(26, 25, 71, 0), rgba(26, 25, 71, .75));
+}
+.learning__ctl {
+  position: absolute; z-index: 100; right: 10px; bottom: 10px; width: 18px; height: 18px; padding: 0; border: 0; background: none;
+  font: 400 14px/0 var(--f-sans); color: transparent;
+  display: flex; align-items: center; justify-content: center; gap: 3px; cursor: pointer;
+}
+.learning__ctl i { display: block; width: 4px; height: 14px; background: var(--c-white); border-radius: 1px; }
+.learning__ctl[aria-pressed="true"] i:first-of-type { width: 0; height: 0; background: none; border-radius: 0; border-style: solid; border-width: 7px 0 7px 12px; border-color: transparent transparent transparent var(--c-white); }
+.learning__ctl[aria-pressed="true"] i:last-of-type { display: none; }
+.learning__ctl:focus-visible { outline: 3px solid var(--c-accent); outline-offset: 3px; }
+@media (min-width: 1000px) {
+  .learning__panel { flex-direction: row; }
+  .learning__title { position: absolute; top: auto; bottom: auto; left: 0; width: 490px; }
+  .learning__title h2 { padding: 20px 20px 40px; border-radius: 0 20px 20px 0; font-size: 120px; line-height: 144px; }
+  .learning__title em { font-size: 32px; line-height: 38.4px; }
+  /* The h2 keeps the reference's 120px/144px; the Anton words are set at 114px so "CONNECTS." (471 px at 120) fits the 450 px content box (447 px). */
+  .learning__title h2 > .word { font-size: 114px; vertical-align: top; }
+  .learning__title h2::before { left: 410px; top: -20px; bottom: auto; transform: none; }
+  .learning__title h2::after { left: 410px; top: 100%; bottom: auto; transform: rotate(90deg); }
+  .learning__frame { width: 990px; height: 525px; aspect-ratio: auto; margin-left: 410px; }
+  .learning__ctl { right: 20px; bottom: 20px; font-size: 18px; }
+}
+
+/* columns */
+.learning__cols { display: flex; flex-wrap: wrap; }
+.learning__colwrap { width: 100%; padding: 0; margin: 0 0 20px; }
+@media (min-width: 600px) { .learning__colwrap { padding: 0 20px; } }
+@media (min-width: 1000px) { .learning__colwrap { width: 33.3333333%; margin: 0; } }
+.learning__icon { width: 180px; height: 180px; margin: 0 auto 30px; background: none; }
+.learning__icon.tp--broken { background: var(--c-grey-1); }
+.learning__body { max-width: 287px; margin: 0 auto; text-align: center; }
+.learning__body h2 { margin: 0 0 20px; font: 900 20px/24px var(--f-sans); text-transform: uppercase; color: var(--c-navy); }
+.learning__body p { margin: 0; font-weight: 200; }
+.learning__body .lead-in { font: 900 16px/19.2px var(--f-sans); text-transform: uppercase; color: var(--c-navy); }
+@media (min-width: 1000px) { .learning__body h2 { font-size: 32px; line-height: 38.4px; } }
+
+/* reveals (js/reveals.js): hidden only once the script has marked an element pending, so the page works without JS */
+[data-reveal] { transition: opacity 1s ease var(--reveal-delay, .05s), transform 1s ease var(--reveal-delay, .05s); }
+[data-reveal][data-reveal-pending] { opacity: 0; transform: translateY(100px); }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { transition: none; }
+  .learning__ctl i { transition: none; }
+}

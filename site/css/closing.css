@@ -1,0 +1,70 @@
+/* Closing band: Navy 900 panel with the Orange-to-Sky spirograph, big Anton words, "Take the Next Step" button and a vertical line
+   (the reference measurements item 10). It scrolls over the pinned values panel (values.js), so it stacks above it. */
+.closing {
+  position: relative; z-index: 1; overflow: hidden; padding: 100px 0 180px;
+  font: 400 14px/21px var(--f-sans); color: var(--c-text);
+}
+@media (min-width: 800px) { .closing { height: 1057px; padding: 130px 0 0; } }
+@media (min-width: 1000px) { .closing { font-size: 18px; line-height: 27px; } }
+@media (min-width: 1200px) { .closing { height: 1244px; } }
+.closing::before { content: ""; position: absolute; inset: 0; z-index: 0; background: var(--c-navy-800); }
+
+.closing__spiral { position: absolute; top: 0; left: 0; z-index: 0; display: block; width: 1000px; aspect-ratio: 3 / 2; pointer-events: none; }
+@media (min-width: 800px) { .closing__spiral { width: 100%; } }
+.closing__spiral img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) { .closing__spiral img { transform: translateY(93.48px); } }
+
+.closing__intro { position: relative; z-index: 1; max-width: 500px; margin: 0 auto; }
+.closing h2 {
+  display: flex; flex-direction: column; align-items: center; margin: 0; text-align: center; text-transform: uppercase;
+  font: 400 120px/100% var(--f-display); color: var(--c-accent);
+}
+@media (min-width: 800px) { .closing h2 { font-size: 160px; } }
+@media (min-width: 1200px) { .closing h2 { font-size: 200px; } }
+.closing h2 .word { display: block; position: relative; transform-origin: 0% 100%; }
+.closing h2 em { display: block; margin-bottom: 30px; font: 700 20px/100% var(--f-sans); font-style: normal; color: var(--c-white); }
+.closing h2 em .word { display: inline-block; }
+@media (min-width: 800px) { .closing h2 em { font-size: 26px; } }
+@media (min-width: 1200px) { .closing h2 em { font-size: 32px; } }
+/* "JOURNEY" is 3.26 em wide: only on very narrow screens (< 420 px) does it need setting smaller than the h2's size to stay on screen */
+.closing h2 > .word { font-size: min(1em, calc((100vw - 30px) / 3.26)); }
+
+.closing__foot { position: relative; margin-top: 60px; text-align: center; line-height: 0; }
+.closing__foot::after {
+  content: ""; position: absolute; left: 50%; top: calc(100% + 60px); width: 1px; height: 280px; background: var(--c-accent);
+  transform: translate3d(-50%, 0, 0); transition: all 1s;
+}
+.closing[data-fx] .closing__foot::after { height: 0; }
+.closing[data-fx].animate .closing__foot::after { height: 280px; }
+
+.large-button {
+  position: relative; display: inline-block; margin: 0; padding: 17px 40px; overflow: hidden; border: 0; border-bottom: 2px solid var(--c-white);
+  background: linear-gradient(to bottom, transparent 50%, var(--c-accent) 50%); background-size: 100% 200%; background-position: left top;
+  color: var(--c-accent); font: 700 24px/28px var(--f-sans); letter-spacing: 0; text-decoration: none; text-align: center; cursor: pointer;
+  transition: .7s all;
+}
+.large-button .inner { position: relative; display: inline-block; overflow: hidden; }
+.large-button .inner > span { display: block; transform: translateY(0); transition: transform .5s; }
+.large-button .inner > span:last-child { position: absolute; left: 0; bottom: -100%; z-index: 1; }
+.large-button:hover, .large-button:focus-visible {
+  border-bottom-color: transparent; background-position: right bottom; color: var(--c-navy-800); text-decoration: none; transition: .3s all;
+}
+.large-button:hover .inner > span, .large-button:focus-visible .inner > span { transform: translateY(-100%); }
+.large-button:focus-visible { outline: 2px solid var(--c-white); outline-offset: 4px; }
+
+/* the three destinations behind "Take the Next Step", set in the 60 px gap between the button and the line */
+.closing__links {
+  position: absolute; left: 50%; top: calc(100% + 20px); display: flex; gap: 12px 28px; margin: 0; padding: 0; list-style: none;
+  transform: translateX(-50%); white-space: nowrap; font: 400 14px/20px var(--f-sans);
+}
+.closing__links a {
+  color: var(--c-white); text-decoration: none; background: linear-gradient(var(--c-white), var(--c-white)) 0 100% / 0% 1px no-repeat;
+  transition: background-size .3s, background-position 0s .3s;
+}
+.closing__links a:hover, .closing__links a:focus-visible { background-position: 100% 100%; background-size: 100% 1px; }
+.closing__links a:focus-visible { outline: 2px solid var(--c-white); outline-offset: 3px; }
+@media (max-width: 420px) { .closing__links { gap: 12px 16px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .closing__foot::after, .large-button, .large-button .inner > span, .closing__links a { transition: none !important; }
+}

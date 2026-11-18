@@ -1,0 +1,132 @@
+/* Values: the big words (right) are a sticky 100vh column, the three "+" photo buttons (left) scroll past; on desktop the panel is pinned by
+   values.js while the closing band scrolls over it like a curtain (the reference measurements items 9 and 10).
+   Geometry from the reference measurements. Two-column / sticky only >= 1000 px with motion; below that, or under reduced motion, it is stacked. */
+.values {
+  position: relative; z-index: 0; margin-bottom: 40px; padding: 60px 20px;
+  font: 400 14px/21px var(--f-sans); color: var(--c-text);
+  background-image: linear-gradient(to right, var(--c-bg-alt) 58%, var(--c-white) 58%);
+}
+@media (min-width: 800px) { .values { padding: 130px 20px 50px; background-image: linear-gradient(to right, var(--c-bg-alt) 278px, var(--c-white) 278px); } }
+@media (min-width: 1000px) { .values { font-size: 18px; line-height: 27px; } }
+@media (min-width: 1200px) { .values { padding: 190px 20px 110px; background-image: linear-gradient(to right, var(--c-bg-alt) 512px, var(--c-white) 512px); } }
+
+.values__cols { display: flex; flex-direction: column; }
+@media (min-width: 600px) { .values__cols { margin: 0 -20px; } .values__col { padding: 0 20px; } }
+.values__col--words { order: -1; margin-bottom: 40px; }
+.values__col--list { padding-bottom: 20px; }
+@media (min-width: 800px) { .values__col--words { margin-bottom: 60px; } }
+@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
+  .values__cols { flex-direction: row; }
+  .values__col { width: 50%; }
+  .values__col--list { order: 0; padding-left: 20px; }
+  .values__col--words { order: 0; position: sticky; top: 0; height: 100vh; margin-bottom: 0; }
+}
+@media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
+  .values__col--list { display: flex; flex-flow: column; align-items: center; padding-left: 20px; }
+}
+
+/* big words */
+.values-intro { position: relative; z-index: 0; margin: 0; }
+@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
+  .values-intro { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+}
+.values-intro h2 {
+  margin: 0; font: 400 60px/60px var(--f-display); text-transform: uppercase; text-align: center; color: var(--c-navy);
+}
+.values-intro h2 .word { display: inline-block; position: relative; transform-origin: 0% 100%; }
+.values-intro h2 em .word { display: inline-block; }
+/* "YOU CAN SHINE." is 5.66 em wide at 120 px (words 5.19 em + two spaces set at the h2's size), wider than the reference's 4.93 em box (its own last line is shorter): the Anton words are set
+   smaller to fit it, as on the hero and learning titles; the h2 keeps the reference's size, line-height and box */
+.values-intro h2 > .word { vertical-align: top; font-size: min(1em, calc((100vw - 40px) / 5.85)); }
+.values-intro h2 em { display: block; font: 700 20px/24px var(--f-sans); font-style: normal; color: var(--c-navy); }
+@media (min-width: 800px) {
+  .values-intro h2 { font-size: 100px; line-height: 120px; }
+  .values-intro h2 em { font-size: 26px; line-height: 31.2px; }
+}
+@media (min-width: 1200px) {
+  .values-intro h2 { font-size: 120px; line-height: 144px; }
+  .values-intro h2 em { font-size: 32px; line-height: 38.4px; }
+}
+/* the reference's box is as wide as its widest line (591.5 px at 120 px); keep that box and set the Anton words to fit it */
+@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
+  .values-intro h2 { width: 4.92917em; }
+  .values-intro h2 > .word { font-size: .855em; }
+}
+
+.values-spiral { margin: 0; }
+.values-spiral__in { margin: 0; transition: transform .5s ease; }
+.values-spiral img {
+  display: block; width: 60px; height: 60px; margin: 30px auto 0; animation: values-rotate 30s linear infinite; transition: all .3s;
+}
+@media (min-width: 800px) { .values-spiral img { width: 100px; height: 100px; } }
+@keyframes values-rotate { to { transform: rotate(360deg); } }
+.values[data-fx] .values-spiral__in { transform: scale(0); }
+.values[data-fx].animate .values-spiral__in { transform: scale(1); }
+
+/* photo buttons */
+.value-button-container { height: 440px; max-width: 353px; margin: 0 auto 40px; overflow: hidden; }
+@media (min-width: 800px) { .value-button-container { height: 500px; max-width: 675px; margin: 0 0 60px; } }
+@media (min-width: 1440px) and (prefers-reduced-motion: no-preference) { .value-button-container { width: 100%; } }
+.value-button { position: relative; width: 100%; height: 440px; margin: 0; }
+@media (min-width: 800px) { .value-button { height: 500px; } }
+
+.value-fig { z-index: 0; display: flex; width: 100%; height: 100%; margin: 0; background: none; }
+@media (min-width: 800px) { .value-fig { width: calc(100% + 30px); margin-left: -60px; } }
+.value-fig > img { order: 1; min-width: 0; width: 100%; height: 100%; object-fit: cover; background: var(--c-grey-1); }
+.value-fig::after { top: 0; bottom: auto; } /* the Temp photo tag sits top right: the "+" corner block covers the bottom right */
+.value-fig figcaption { position: absolute; top: 0; left: 0; z-index: 1; width: 172px; margin: 0; }
+@media (min-width: 800px) { .value-fig figcaption { position: relative; flex-shrink: 0; width: 270px; margin-top: 40px; left: 60px; } }
+@media (min-width: 1000px) { .value-fig figcaption { width: 210px; } }
+@media (min-width: 1200px) { .value-fig figcaption { width: 270px; } }
+.value-fig h2 {
+  position: relative; left: 0; margin: 0; padding: 0 10px 10px 0; border-radius: 0 0 20px 0; text-align: right; text-transform: uppercase;
+  font: 900 20px/120% var(--f-sans); color: var(--c-navy); background: var(--c-bg-alt); transition: all .5s;
+}
+@media (min-width: 800px) { .value-fig h2 { padding: 20px; border-radius: 0 20px 20px 0; font-size: 30px; } }
+@media (min-width: 1000px) { .value-fig h2 { font-size: 26px; } }
+@media (min-width: 1200px) { .value-fig h2 { font-size: 32px; } }
+/* inverse corners (quarter-disc cut-outs) */
+.value-fig h2::before, .value-fig h2::after, .colorblock::before, .colorblock::after {
+  content: ""; position: absolute; width: 20px; height: 20px; transition: all .5s;
+  background: radial-gradient(circle at 100% 0, transparent 19.5px, var(--corner, var(--c-bg-alt)) 20px);
+}
+.value-fig h2::before { top: 0; right: -20px; transform: rotate(90deg); }
+.value-fig h2::after { bottom: -20px; left: 0; transform: rotate(90deg); }
+@media (min-width: 800px) {
+  .value-fig h2::before { top: -20px; right: 40px; transform: rotate(0deg); }
+  .value-fig h2::after { bottom: -20px; left: auto; right: 40px; }
+}
+@media (min-width: 1000px) {
+  .value-button:hover .value-fig h2, .value-button:focus-within .value-fig h2 { left: 20px; }
+  .value-button:hover .value-fig h2::before, .value-button:hover .value-fig h2::after,
+  .value-button:focus-within .value-fig h2::before, .value-button:focus-within .value-fig h2::after { right: 60px; }
+}
+.value-open { position: absolute; top: 0; left: 0; z-index: 101; display: block; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: none; color: transparent; }
+
+.colorblock {
+  --corner: var(--c-white);
+  position: absolute; right: 0; bottom: 0; display: flex; align-items: flex-end; justify-content: center; width: 60px; height: 50px;
+  background: var(--c-white); border-radius: 20px 0 0 0;
+}
+.colorblock::before { top: -20px; right: 0; transform: rotate(-90deg); }
+.colorblock::after { bottom: 0; right: 60px; transform: rotate(-90deg); }
+@media (min-width: 800px) {
+  .colorblock { align-items: center; width: 80px; height: 100px; bottom: 40px; border-radius: 20px 0 0 20px; }
+  .colorblock::before { left: 30px; right: auto; }
+  .colorblock::after { bottom: -20px; left: 30px; right: auto; transform: rotate(-180deg); }
+}
+/* "+" toggle: the shared .plus control, sized 40 px (60 px from 800 px) and set into the colour block */
+.colorblock .plus { position: relative; z-index: 100; right: auto; bottom: auto; flex: none; }
+@media (min-width: 800px) {
+  .colorblock .plus, .colorblock .plus > span { width: 60px; height: 60px; }
+  .colorblock .plus::before { width: 18px; height: 18px; }
+}
+.value-button:hover .plus, .value-button:focus-within .plus { transform: rotate(45deg); }
+.value-button:hover .plus::before, .value-button:focus-within .plus::before { width: 16px; height: 16px; background: var(--c-navy); }
+.value-button:hover .plus > span::before, .value-button:focus-within .plus > span::before { transform: rotate(90deg); }
+.value-button:hover .plus > span::after, .value-button:focus-within .plus > span::after { transform: rotate(90deg) scale(1.02); }
+
+@media (prefers-reduced-motion: reduce) {
+  .values-spiral img { animation: none; }
+  .value-fig h2, .value-fig h2::before, .value-fig h2::after, .values-spiral__in, .value-button .plus, .value-button .plus::before, .value-button .plus > span::before, .value-button .plus > span::after { transition: none !important; }
+}

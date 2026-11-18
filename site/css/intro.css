@@ -1,0 +1,63 @@
+/* Crest intro. Timings: the reference measurements item 1 (t = 0 at the window load event).
+   Classes are added by js/intro.js: is-seal (0), is-rings (800), is-circle (3000), is-fade (4300).
+   Colours: circle = Navy 900, ring outlines = Navy (colour map). */
+.intro {
+  display: none;
+  position: fixed; inset: 0; z-index: 602; overflow: hidden;
+  background: var(--c-white);
+  font: 400 14px/21px var(--f-sans);
+  transition: background-color .5s ease;
+}
+@media (min-width: 1000px) { .intro { font-size: 18px; line-height: 27px; } }
+html.intro-playing .intro { display: block; }
+html.intro-playing, html.intro-playing body { overflow: hidden; }
+
+.intro__seal {
+  position: absolute; left: 50%; top: 50%;
+  width: min(254px, 50vw); aspect-ratio: 254 / 250;
+  margin: 0; background: var(--c-white);
+  transform: translate(-50%, -50%) scale(0);
+  transition: opacity .5s ease;
+}
+.intro__seal img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.intro.is-seal .intro__seal { transform: translate(-50%, -50%) scale(1); transition: transform 1s ease, opacity .5s ease; }
+
+/* ring animation: stands in for the Lottie outline loop (3 s per loop, starts at 800 ms) */
+.intro__rings {
+  position: absolute; left: 50%; top: 50%; width: 100vh; aspect-ratio: 1440 / 1104.75;
+  transform: translate(-50%, -50%);
+  transition: opacity .5s ease;
+}
+@media (min-width: 1000px) { .intro__rings { width: 100%; } }
+.intro__rings svg { display: block; width: 100%; height: 100%; }
+.intro__rings circle { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.intro.is-rings .intro__rings circle { animation: intro-ring 3s ease-in-out infinite; }
+.intro.is-rings .intro__rings circle:nth-child(2) { animation-delay: .25s; }
+.intro.is-rings .intro__rings circle:nth-child(3) { animation-delay: .5s; }
+@keyframes intro-ring {
+  0% { stroke-dashoffset: 1; opacity: 1; }
+  60% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+.intro__circle {
+  position: absolute; left: 50%; top: 50%; width: 300vw; height: 300vh; border-radius: 50%;
+  background: var(--c-navy-800);
+  transform: translate(-50%, -50%) scale(0);
+}
+.intro.is-circle .intro__circle { transform: translate(-50%, -50%) scale(1); transition: transform 2s ease; }
+
+/* 4300 ms: loader background and crest fade, the navy disc fades over 2 s */
+.intro.is-fade { background-color: transparent; }
+.intro.is-fade .intro__seal, .intro.is-fade .intro__rings { opacity: 0; }
+.intro.is-fade .intro__circle { opacity: 0; transition: transform 2s ease, opacity 2s ease; }
+.intro.is-gone { opacity: 0; transition: opacity .6s linear; }
+
+/* page revealed through a growing circle (mask 250 px -> 3220 px over 2 s, centred 90 px above middle on desktop) */
+html.intro-playing main { clip-path: circle(125px at 50% calc(50vh - 70px)); }
+html.intro-playing .intro.is-fade ~ main { clip-path: circle(1610px at 50% calc(50vh - 70px)); transition: clip-path 2s ease; }
+@media (min-width: 1000px) {
+  html.intro-playing main { clip-path: circle(125px at 50% calc(50vh - 90px)); }
+  html.intro-playing .intro.is-fade ~ main { clip-path: circle(1610px at 50% calc(50vh - 90px)); }
+}
+@media (prefers-reduced-motion: reduce) { .intro { display: none !important; } }

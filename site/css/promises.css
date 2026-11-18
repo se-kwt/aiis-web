@@ -1,0 +1,146 @@
+/* Promise rows: lead-in, Fraunces statement with Sky marker, inset photo, cut-out figure, wave-line art.
+   Geometry from the reference measurements plus the breakpoints the reference uses (800 / 1000 / 1200 / 1400 / 1440 px);
+   motion from the reference measurements item 5. Colours: Navy text, Sky marker and line art. */
+.promises { margin-top: 40px; padding-top: 30px; } /* the gap below the news strip: 40 px, 68 px from 800 px, 80 px from 1000 px */
+@media (min-width: 800px) { .promises { margin-top: 68px; } }
+@media (min-width: 1000px) { .promises { margin-top: 80px; padding-top: 60px; } }
+
+.promise {
+  position: relative; z-index: 0; margin: 0 0 60px;
+  font: 400 14px/21px var(--f-sans); color: var(--c-text);
+}
+.promises { font: 400 14px/21px var(--f-sans); }
+@media (min-width: 1000px) {
+  .promises { font-size: 18px; line-height: 27px; }
+  .promise { margin: 0; font-size: 18px; line-height: 27px; }
+  .promise--right { margin-top: -50px; }
+}
+@media (min-width: 1440px) {
+  .promise--left { margin-left: calc(350 * (100vw - 1440px) / 1060); }
+  .promise--right { margin-right: calc(350 * (100vw - 1440px) / 1060); }
+}
+
+/* One grid stands in for the reference's wrapping flex row: lead / statement / [photo | cut-out] (reversed in right rows). */
+.promise__grid {
+  display: grid; grid-template-columns: 43% 57%;
+  grid-template-areas: "lead lead" "title title" "photo cutout";
+}
+.promise--right .promise__grid { grid-template-columns: 57% 43%; grid-template-areas: "lead lead" "title title" "cutout photo"; }
+@media (min-width: 1000px) {
+  .promise__grid { grid-template-columns: 61.8055555556% 38.1944444444%; grid-template-areas: "lead lead" "media cutout"; }
+  .promise--right .promise__grid { grid-template-columns: 38.1944444444% 61.8055555556%; grid-template-areas: "lead lead" "cutout media"; }
+}
+
+/* ---- lead-in ---- */
+.promise__intro {
+  grid-area: lead; margin: 0 0 20px; padding: 0 20px 0 40px;
+  font: 400 14px/21px var(--f-sans);
+}
+.promise--right .promise__intro { padding: 0 40px 0 40px; text-align: right; }
+.promise__lead { display: inline; font-size: 22px; line-height: 150%; color: var(--c-navy); }
+@media (min-width: 800px) {
+  .promise__intro { margin-bottom: 30px; padding-left: 105px; }
+  .promise--right .promise__intro { padding: 0 104px 0 40px; }
+  .promise__lead { font-size: 26px; }
+}
+@media (min-width: 1000px) {
+  .promise__intro { margin-bottom: 40px; padding-left: 110px; font-size: 18px; line-height: 27px; }
+  .promise--right .promise__intro { padding: 0 110px 0 40px; }
+}
+@media (min-width: 1200px) {
+  .promise__intro { padding-left: 130px; }
+  .promise--right .promise__intro { padding: 0 130px 0 60px; }
+}
+
+/* ---- statement (below 1000 it sits under the lead; from 1000 it sits beside the photo) ---- */
+.promise__media { display: contents; }
+.promise__title {
+  grid-area: title; margin: 0 20px 40px;
+  font: 700 34px/120% var(--f-serif); color: var(--c-navy);
+}
+.promise__spacer { display: inline-block; width: 50px; } /* first-line indent below 1000 px, as on the reference */
+@media (min-width: 1000px) { .promise__spacer { display: none; } }
+.promise__title .word { display: inline-block; transform-origin: 0% 100%; }
+@media (min-width: 800px) { .promise__title { margin-left: 40px; font-size: 60px; } }
+
+/* Sky marker: bottom 40% of the word, wipes in left to right (static and filled when nothing animates). */
+.hl {
+  position: relative; z-index: 0; color: inherit;
+  background-image: linear-gradient(to right, transparent 50%, var(--c-highlight) 50%);
+  background-size: 200% 40%; background-repeat: repeat-x; background-position: -100% 100%;
+  transition: background-position .5s;
+}
+.animate-text.at-ready .hl { background-position: 0 100%; }
+.animate-text.at-ready .hl.is-marked { background-position: -100% 100%; }
+
+/* ---- inset photo ---- */
+.promise__inset { grid-area: photo; padding-left: 20px; }
+.promise--right .promise__inset { padding: 0 20px 0 0; }
+@media (min-width: 800px) {
+  .promise__inset { padding-left: 40px; }
+  .promise--right .promise__inset { padding: 0 40px 0 0; }
+}
+.promise__inset .tp { width: 100%; aspect-ratio: 1 / 1.4393; background: none; }
+.promise__inset .tp.tp--broken { background: var(--c-grey-1); }
+[data-k="promise1-container"] .promise__inset .tp { aspect-ratio: 1 / 1.28; }
+.promise__inset .tp > img { position: absolute; inset: 0; will-change: transform; }
+@media (min-width: 800px) {
+  .promise__inset .tp, [data-k="promise1-container"] .promise__inset .tp { width: 250px; aspect-ratio: 1 / 1.28; }
+  .promise--right .promise__inset .tp { margin-left: auto; }
+}
+
+/* ---- cut-out figure and wave lines ---- */
+.promise__cutout {
+  grid-area: cutout; position: relative; align-self: start; max-width: 100%;
+  top: 20px; right: 20px;
+}
+.promise--right .promise__cutout { right: auto; left: 20px; }
+.promise__cutout-art { will-change: transform; }
+.promise__cutout .tp { width: 100%; overflow: visible; background: none; }
+[data-k="promise1-container"] .tp--cutout { aspect-ratio: 549.98 / 684.72; }
+[data-k="promise2-container"] .tp--cutout { aspect-ratio: 549.98 / 687.47; }
+[data-k="promise3-container"] .tp--cutout { aspect-ratio: 549.98 / 652.41; }
+.promise__cutout .tp > img { position: absolute; inset: 0; height: 100%; }
+.promise__cutout .tp::after { right: 12px; bottom: 12px; }
+
+.promise__lines {
+  position: absolute; z-index: -1; display: block; pointer-events: none;
+  bottom: 40px; right: -20px; width: 80%; height: 100%;
+}
+.promise__lines svg { display: block; width: 100%; height: 100%; }
+.promise__lines path { stroke: var(--c-highlight); stroke-width: 1.35; stroke-miterlimit: 10; }
+[data-k="promise1-lines"] { width: 76%; }
+[data-k="promise2-lines"] { right: auto; left: -20px; bottom: 30px; width: 75%; }
+[data-k="promise3-lines"] { width: 38.5%; bottom: 60px; }
+@media (min-width: 1000px) {
+  [data-k="promise1-lines"], [data-k="promise3-lines"] { bottom: 80px; }
+}
+
+/* ---- desktop (>= 1000): the statement joins the photo in one flex box ---- */
+@media (min-width: 1000px) {
+  .promise__media { grid-area: media; display: flex; padding: 0 0 0 40px; }
+  .promise--right .promise__media { flex-direction: row-reverse; padding: 0 60px 0 0; }
+  .promise__inset, .promise--right .promise__inset { grid-area: auto; flex: none; padding: 0; }
+  .promise__inset .tp { width: 250px; }
+  .promise--right .promise__inset .tp { margin-left: 0; }
+  .promise__title {
+    grid-area: auto; flex: 1 1 auto; min-width: 0; margin: 0 0 60px 30px;
+    font-size: 40px;
+  }
+  .promise--right .promise__title { margin: 60px 50px 60px 0; }
+  .promise__cutout { top: -50px; }
+}
+@media (min-width: 1200px) {
+  .promise__media { padding-left: 60px; }
+  .promise__title { margin: 60px 10px 60px 60px; font-size: 64px; }
+  .promise--right .promise__title { margin: 60px 50px 60px 0; }
+  .promise__cutout { top: -100px; }
+}
+@media (min-width: 1400px) { .promise__cutout { top: -150px; } }
+@media (min-width: 1440px) { .promise__inset .tp { width: 17.3611111111vw; } }
+
+/* Parallax: motion is applied by js/parallax.js only; reduced motion keeps everything still. */
+@media (prefers-reduced-motion: reduce) {
+  .hl { transition: none; }
+  .promise__inset .tp > img { transition: none; }
+}

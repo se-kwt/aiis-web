@@ -1,0 +1,20 @@
+/* Colour values are the official AIIS brand values (brand guidelines v2.0, Aug 2026, pp. 11-14), listed in tools/brand-palette.json; fonts are the reference families. */
+:root {
+  --c-navy: #2C2B7A;
+  --c-navy-800: #1A1947;   /* Navy 800: large dark bands, photo overlays */
+  --c-text: #2A3242;       /* Neutral 800 (the reference body text) */
+  --c-text-2: #596376;     /* Neutral 600 */
+  --c-text-900: #171D2A;   /* Neutral 900 (footer location subtitles / phone) */
+  --c-bg-alt: #F8F9FC;     /* Neutral 50 */
+  --c-grey-1: #E2E6EE;     /* Neutral 200 */
+  --c-grey-2: #CDD3DF;     /* Neutral 300 */
+  --c-accent: #FF6600;     /* Orange 500 (never small white text on it) */
+  --c-accent-700: #BD4B00; /* Orange 700 */
+  --c-accent-light: #FF9751; /* brand light orange: text on the Navy badge disc (5.6:1; Orange 500 is only 4.1:1) */
+  --c-highlight: #5CB9EB;  /* Sky */
+  --c-white: #FFFFFF;
+
+  --f-display: "Anton", Impact, "Arial Narrow", sans-serif;
+  --f-serif: "Fraunces", Georgia, serif;
+  --f-sans: "Geologica", system-ui, -apple-system, "Segoe UI", sans-serif;
+}

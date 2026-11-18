@@ -1,0 +1,7 @@
+# Logo sources
+
+- `crest.png`: the official school crest, supplied by the site owner (1437 x 1094 px, RGBA, transparent background, about 1.5 MB). It is the source file and is never edited. It is the only official logo asset so far.
+- `crest-web.png`: a proportional downscale of `crest.png` (540 x 411 px, alpha kept, nothing else changed) that the page and the single-file bundle actually load, because the original is too heavy for a page. Its width is at least twice the largest size any slot shows it at (the 254 px intro seal), so it stays sharp on 2x screens; the size cap is 350 KB. Regenerate it after any change to `crest.png` with `tools/make-crest-web.sh` (macOS `sips -Z 540`), then run `npm run build:single`.
+- The earlier website stand-ins (`logo-horizontal.png`, `logo-horizontal-white.png` and the old opaque crest crop, all taken from the school's current website as white-background images) were removed. The crest is shown in every logo slot with its own aspect ratio (`object-fit: contain`); it is never stretched, cropped or recoloured.
+
+Note: the brand guide sets a minimum crest size of 60 px, and the desktop header slot (51 px wide, as in the reference) and the mobile header and menu slots (31 px) are smaller. When a horizontal lockup or an emblem-only file is available, it should replace the crest in those slots.

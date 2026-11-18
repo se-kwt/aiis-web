@@ -1,0 +1,79 @@
+{
+  "_source": "AIIS Website Sitemap, August 2026 (owner's document), navigation list supplied by the owner in November 2026. Labels and root-relative paths are used verbatim; the site is expected to live at aiiskwt.com. In a group, a link with a `group` sits under that sub-heading; a link with a `parent` sits in that nested submenu (Sports). A group's top link goes to its first link.",
+  "menu": [
+    { "title": "ABOUT US", "path": "/chairmans-message", "links": [
+      { "label": "Chairman's Message", "path": "/chairmans-message" },
+      { "label": "Principal's Message", "path": "/principals-message" },
+      { "label": "Vision and Mission", "path": "/vision-mission" },
+      { "label": "Vice Principal's Message", "path": "/vice-principal-message" },
+      { "label": "Events", "path": "/das-trailblazer", "group": "Community" },
+      { "label": "CSR Reports", "path": "/csr-reports", "group": "Community" },
+      { "label": "Mandatory Public Disclosure", "path": "/mandatory-public-disclosure", "group": "Community" } ] },
+    { "title": "ACADEMICS", "path": "/kindergarten-school", "links": [
+      { "label": "Kindergarten", "path": "/kindergarten-school" },
+      { "label": "Primary School", "path": "/primary-school" },
+      { "label": "Middle School", "path": "/middle-school" },
+      { "label": "Student Leadership Program", "path": "/student-leadership-program" },
+      { "label": "Curriculum", "path": "/curriculum-choices" },
+      { "label": "Weekly Test", "path": "/weekly-test-curriculum" },
+      { "label": "Subject Enrichment Activities", "path": "/subject-enrichment-activities" },
+      { "label": "IGCSE", "path": "/best-igcse-cambridge-school-in-kuwait" } ] },
+    { "title": "ADMISSIONS", "path": "/fees-schedules", "links": [
+      { "label": "Fees & Schedules", "path": "/fees-schedules" },
+      { "label": "Admission Process", "path": "/admission-process" } ] },
+    { "title": "SCHOOL LIFE", "path": "/clubs", "links": [
+      { "label": "Clubs", "path": "/clubs" },
+      { "label": "Student Article / Magazine", "path": "/student-article-magazine" },
+      { "label": "Health & Wellness", "path": "/health-wellness" },
+      { "label": "After School Activities", "path": "/after-school-activities" },
+      { "label": "Achievements", "path": "/achievements" },
+      { "label": "Celebrations", "path": "/celebrations" },
+      { "label": "Assembly", "path": "/assembly" },
+      { "label": "School Timings", "path": "/aspire-indian-international-school-timings" },
+      { "label": "Special Assemblies", "path": "/special-assemblies" },
+      { "label": "School Anthem", "path": "/school-anthem" } ] },
+    { "title": "AMENITIES", "path": "/classrooms", "links": [
+      { "label": "Classrooms", "path": "/classrooms" },
+      { "label": "Auditorium", "path": "/auditorium" },
+      { "label": "Open Play Ground", "path": "/open-ground" },
+      { "label": "Swimming Pool", "path": "/swimming-pool" },
+      { "label": "Indoor Gymnasium", "path": "/gymnasium" },
+      { "label": "KG Play Area", "path": "/play-area" },
+      { "label": "Badminton", "path": "/badminton", "parent": "Sports" },
+      { "label": "Cricket", "path": "/cricket", "parent": "Sports" },
+      { "label": "Basketball", "path": "/basket-ball", "parent": "Sports" },
+      { "label": "Soccer", "path": "/soccer", "parent": "Sports" } ] }
+  ],
+  "quickLinks": { "title": "QUICK LINKS", "path": "/form/aiis-online-admissions", "links": [
+    { "label": "Admission Enquiry", "path": "/form/aiis-online-admissions" },
+    { "label": "Online Registration", "path": "https://aiis.schoolmanageronline.com", "external": true },
+    { "label": "Career", "path": "/aiis-career-new" },
+    { "label": "Contact Us", "path": "/form/contact-the-best-indian-school-in-kuwait" },
+    { "label": "Gallery", "path": "/web/gallery" } ] },
+  "newsCards": { "label": "News and Events", "path": "/news-events" },
+  "footer": [
+    { "label": "Admission Process", "path": "/admission-process" },
+    { "label": "Fee Structure", "path": "/fees-schedules" },
+    { "label": "Weekly Test", "path": "/weekly-test" },
+    { "label": "Careers", "path": "/career-opportunities-at-aiis-kuwait" },
+    { "label": "Contact Us", "path": "/form/contact-the-best-indian-school-in-kuwait" },
+    { "label": "Calendar", "path": "/calendar" }
+  ],
+  "closingButton": { "label": "Take the Next Step", "path": "/form/aiis-online-admissions" },
+  "closing": [
+    { "label": "Enquire", "path": "/form/aiis-online-admissions" },
+    { "label": "Book a School Visit", "path": "/form/contact-the-best-indian-school-in-kuwait" },
+    { "label": "Apply", "path": "/admission-process" }
+  ],
+  "divisions": [
+    { "label": "Early years", "path": "/kindergarten-school" },
+    { "label": "Primary", "path": "/primary-school" },
+    { "label": "Middle and secondary", "path": "#" }
+  ],
+  "logo": { "label": "Aspire Indian International School home", "path": "/" },
+  "origin": "https://www.aiiskwt.com",
+  "labels": { "home": "Home", "inSection": "In this section", "moreOnCampus": "More on campus",
+    "formNotice": "This form is not connected yet", "previous": "Previous", "next": "Next", "close": "Close",
+    "ctaSmall": "IT'S TIME TO", "ctaBig": "START YOUR JOURNEY" },
+  "pending": ["/web/category/*", "/web/single-galleries/*"]
+}

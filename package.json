@@ -1,0 +1,13 @@
+{
+  "name": "aiis-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-concurrency=4 tests/*.test.mjs",
+    "build:single": "node tools/bundle.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "playwright": "^1.49.1"
+  }
+}
