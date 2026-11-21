@@ -3,8 +3,10 @@ title: "Middle School"
 blocks:
   - type: richtext
     body: "<p>The middle school years at AIIS (Grades 6 to 8) are where foundational skills are built — the ones a learner needs to understand, apply, analyse and create across every subject they will go on to study.</p>\n"
+    raw: true
   - type: richtext
     body: "<p>Learning here isn't confined to the classroom. Theatre, hands-on projects and exhibitions sit alongside the curriculum, and a recent introduction of robotics has added an exciting new dimension. State-of-the-art science and computer labs bring experiments and enquiry to life, and field trips extend that learning beyond the school gates.</p>\n"
+    raw: true
   - type: image
     description: "Middle School students collaborating on a hands-on project at AIIS"
     src: null

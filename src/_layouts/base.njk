@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ title or "Aspire Indian International School" }}</title>
-  <!-- Keep the page out of search engines while it still shows temporary media. Remove this tag at launch. -->
-  <meta name="robots" content="noindex, nofollow">
+{% if headNoindexComment != false %}  <!-- Keep the page out of search engines while it still shows temporary media. Remove this tag at launch. -->
+{% endif %}  <meta name="robots" content="noindex, nofollow">
   <script>
-    /* Intro decision, made before first paint. data-intro = full (first visit) | replay (repeat visit: hero entrance only) | none (?nointro, reduced motion). */
-    (function () {
+{% if headIntroComment != false %}    /* Intro decision, made before first paint. data-intro = full (first visit) | replay (repeat visit: hero entrance only) | none (?nointro, reduced motion). */
+{% endif %}    (function () {
       var d = document.documentElement, m = 'full';
       try { if (/[?&]nointro(=|&|$)/.test(location.search)) m = 'none'; } catch (e) {}
       try { if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) m = 'none'; } catch (e) {}
@@ -16,15 +16,15 @@
       d.setAttribute('data-intro', m);
       if (m !== 'none') d.classList.add('hero-pre', 'intro-active');
       if (m === 'full') d.classList.add('intro-playing');
-      /* safety nets if the entry module never runs. 4 s: the module has not signalled that it started (a slow or blocked third-party
+{% if headSafetyNetsComment != false %}      /* safety nets if the entry module never runs. 4 s: the module has not signalled that it started (a slow or blocked third-party
          script holds it back), so reveal the content and cancel the intro. Once it has started, the intro's own timeline governs;
          12 s: last resort if that timeline stalls. */
-      setTimeout(function () {
+{% endif %}      setTimeout(function () {
         if (window.__aiisStarted) return;
         d.setAttribute('data-intro', 'none');
         d.classList.add('reveal-now', 'intro-done'); d.classList.remove('hero-pre', 'intro-playing', 'intro-active');
       }, 4000);
-      var hold = window.__aiisTestHold === true; /* set only by the test harness before load, never by a URL: intro.js freezes the intro, so no safety net */
+      var hold = window.__aiisTestHold === true;{% if headTestHarnessComment != false %} /* set only by the test harness before load, never by a URL: intro.js freezes the intro, so no safety net */{% endif %}
       if (!hold) setTimeout(function () { d.classList.remove('hero-pre', 'intro-playing', 'intro-active'); d.classList.add('intro-done'); }, 12000);
     })();
   </script>

@@ -1,6 +1,9 @@
 ---
 title: "Fees &amp; Schedules"
 lead: "CBSE fee structure, academic year 2026&ndash;2027"
+headIntroComment: false
+headSafetyNetsComment: false
+headTestHarnessComment: false
 blocks:
   - type: richtext
     body: "## Tuition fees (KD)"
@@ -8,12 +11,16 @@ blocks:
     body: "Fees are payable in three instalments across the academic year: 1 April, 1 September and 1 December."
   - type: richtext
     body: "<div style=\"overflow-x:auto\">\n            <table style=\"width:100%; border-collapse:collapse; font-size:inherit\">\n              <thead>\n                <tr style=\"border-bottom:2px solid var(--c-navy)\">\n                  <th style=\"text-align:left; padding:10px 8px; color:var(--c-navy)\">Class</th>\n                  <th style=\"text-align:right; padding:10px 8px; color:var(--c-navy)\">1st Instalment</th>\n                  <th style=\"text-align:right; padding:10px 8px; color:var(--c-navy)\">2nd Instalment</th>\n                  <th style=\"text-align:right; padding:10px 8px; color:var(--c-navy)\">3rd Instalment</th>\n                  <th style=\"text-align:right; padding:10px 8px; color:var(--c-navy)\">Total</th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr style=\"border-bottom:1px solid var(--c-grey-2)\"><td style=\"padding:8px\">LKG</td><td style=\"text-align:right; padding:8px\">195</td><td style=\"text-align:right; padding:8px\">190</td><td style=\"text-align:right; padding:8px\">190</td><td style=\"text-align:right; padding:8px\"><strong>575</strong></td></tr>\n                <tr style=\"border-bottom:1px solid var(--c-grey-2)\"><td style=\"padding:8px\">UKG</td><td style=\"text-align:right; padding:8px\">195</td><td style=\"text-align:right; padding:8px\">190</td><td style=\"text-align:right; padding:8px\">190</td><td style=\"text-align:right; padding:8px\"><strong>575</strong></td></tr>\n                <tr style=\"border-bottom:1px solid var(--c-grey-2)\"><td style=\"padding:8px\">Grade 1&ndash;4</td><td style=\"text-align:right; padding:8px\">240</td><td style=\"text-align:right; padding:8px\">230</td><td style=\"text-align:right; padding:8px\">230</td><td style=\"text-align:right; padding:8px\"><strong>700</strong></td></tr>\n                <tr style=\"border-bottom:1px solid var(--c-grey-2)\"><td style=\"padding:8px\">Grade 5&ndash;8</td><td style=\"text-align:right; padding:8px\">280</td><td style=\"text-align:right; padding:8px\">260</td><td style=\"text-align:right; padding:8px\">260</td><td style=\"text-align:right; padding:8px\"><strong>800</strong></td></tr>\n                <tr style=\"border-bottom:1px solid var(--c-grey-2)\"><td style=\"padding:8px\">Grade 9&ndash;12</td><td style=\"text-align:right; padding:8px\">330</td><td style=\"text-align:right; padding:8px\">330</td><td style=\"text-align:right; padding:8px\">330</td><td style=\"text-align:right; padding:8px\"><strong>990</strong></td></tr>\n              </tbody>\n            </table>\n          </div>\n"
+    raw: true
   - type: richtext
     body: "<strong>Note:</strong> Grades 9&ndash;12 receive a KD 100 discount, adjusted in the third instalment. If admission is cancelled before the student has attended a single day of term, the school retains the KD 50 registration fee."
   - type: richtext
     body: "## Transportation fees (KD)"
+    blankLineBefore: true
   - type: richtext
     body: "<div style=\"overflow-x:auto\">\n            <table style=\"width:100%; border-collapse:collapse; font-size:inherit\">\n              <thead>\n                <tr style=\"border-bottom:2px solid var(--c-navy)\">\n                  <th style=\"text-align:left; padding:10px 8px; color:var(--c-navy)\">Area</th>\n                  <th style=\"text-align:right; padding:10px 8px; color:var(--c-navy)\">Total</th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr style=\"border-bottom:1px solid var(--c-grey-2)\"><td style=\"padding:8px\">Abbasiya / Jleeb / Ishbiliya</td><td style=\"text-align:right; padding:8px\">120</td></tr>\n                <tr style=\"border-bottom:1px solid var(--c-grey-2)\"><td style=\"padding:8px\">Farwaniya / Khaitan / Omariya / Jaber Al Ahmad</td><td style=\"text-align:right; padding:8px\">170</td></tr>\n                <tr style=\"border-bottom:1px solid var(--c-grey-2)\"><td style=\"padding:8px\">Salmiya / Sabah Al Salem / Abdullah Mubarak</td><td style=\"text-align:right; padding:8px\">200</td></tr>\n                <tr style=\"border-bottom:1px solid var(--c-grey-2)\"><td style=\"padding:8px\">Hawally / Jabriya / Fintas / Mangaf / Fahaheel</td><td style=\"text-align:right; padding:8px\">230</td></tr>\n              </tbody>\n            </table>\n          </div>\n"
+    raw: true
   - type: richtext
     body: "<ul>\n            <li>Transport fees are paid in advance for the term and are non-refundable.</li>\n            <li>Using the bus even once in a term means the full term&rsquo;s transport fee is due &mdash; no partial discount applies.</li>\n            <li>Dropping transport requires a month&rsquo;s written notice to the Registration Office; verbal or messaging notice to drivers or staff is not accepted.</li>\n          </ul>\n"
+    raw: true
 ---

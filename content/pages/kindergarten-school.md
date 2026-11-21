@@ -20,6 +20,7 @@ blocks:
         text: "Children are given room to choose and explore, building independence from the very first year."
   - type: richtext
     body: "<p>Our curriculum is visualised and integrated across subjects, so a single theme — animals, seasons, colours — is explored through stories, art, numbers and movement in the same week, enhancing creativity and curiosity rather than isolating one skill at a time.</p>\n"
+    raw: true
   - type: richtext
     body: "## Our teaching methods"
   - type: richtext

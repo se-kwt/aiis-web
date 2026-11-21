@@ -207,6 +207,13 @@ function decodeTitleEntities(str) {
     .replace(/&amp;/g, "&");
 }
 
+// Returns `{ title, headTitle }`. `headTitle` is only set (to the baseline's
+// literal, un-filtered `<title>` tag text) for the one page where the
+// `<title>` tag and `<h1>` are genuinely two different strings, not just
+// different escaping of the same one (`soccer`: "Soccer" vs "Football") --
+// `page.njk`'s `headTitle` front-matter field (see page.njk/base.njk) lets
+// the `<title>` tag override the normal title for exactly that case, while
+// `<h1>`/breadcrumb keep using `title` unchanged.
 function resolveTitle(html, h1Title, slug) {
   const titleTagMatch = html.match(/<title>([\s\S]*?) \| Aspire Indian International School<\/title>/);
   if (!titleTagMatch) throw new Error(`${slug}: could not find <title> tag`);
@@ -221,29 +228,25 @@ function resolveTitle(html, h1Title, slug) {
   // satisfies *both* consumers byte-for-byte wins.
   for (const candidate of [h1Title, decodeTitleEntities(h1Title)]) {
     if (markdownInline(candidate) === h1Title && candidate === titleTagText) {
-      return candidate;
+      return { title: candidate, headTitle: undefined };
     }
   }
 
-  // Genuinely can't satisfy both consumers from one field value (e.g.
-  // `soccer`, whose `<title>` tag says "Soccer" but whose `<h1>` says
-  // "Football" -- two different strings, not just different escaping of the
-  // same one). page.njk has no second field to hold a distinct `<title>`
-  // override, so this is flagged rather than guessed around; see
-  // task-11-report.md. Falling back to the h1's own literal text keeps the
-  // `<h1>`/breadcrumb correct, at the cost of the `<title>` tag for this page.
+  // Genuinely can't satisfy both consumers from one field value: use the
+  // h1's own text for `title` (so `<h1>`/breadcrumb stay correct) and the
+  // literal `<title>` tag text as `headTitle`, which page.njk/base.njk now
+  // render in the `<title>` tag with no filter applied at all, verbatim.
   console.error(
-    `WARNING: ${slug}: could not resolve a single \`title\` value that matches both the <title> tag ` +
-      `(${JSON.stringify(titleTagText)}) and the <h1> (${JSON.stringify(h1Title)}) byte-for-byte. ` +
-      `Using the <h1> text; the <title> tag will not match the baseline for this page.`,
+    `NOTE: ${slug}: <title> tag (${JSON.stringify(titleTagText)}) and <h1> (${JSON.stringify(h1Title)}) ` +
+      `are genuinely different strings; using \`headTitle\` to override the <title> tag only.`,
   );
-  return h1Title;
+  return { title: h1Title, headTitle: titleTagText };
 }
 
 function extractHero(html, slug) {
   const titleMatch = html.match(/<h1 class="page-hero__title">([\s\S]*?)<\/h1>/);
   if (!titleMatch) throw new Error(`${slug}: could not find page-hero__title`);
-  const title = resolveTitle(html, titleMatch[1], slug);
+  const { title, headTitle } = resolveTitle(html, titleMatch[1], slug);
 
   const crumbMatch = html.match(/<p class="page-hero__crumb">([\s\S]*?)<\/p>/);
   if (!crumbMatch) throw new Error(`${slug}: could not find page-hero__crumb`);
@@ -257,7 +260,29 @@ function extractHero(html, slug) {
   const leadMatch = html.match(/<p class="page-hero__lead">([\s\S]*?)<\/p>/);
   const lead = leadMatch ? leadMatch[1] : null;
 
-  return { title, crumbLabel, lead };
+  return { title, headTitle, crumbLabel, lead };
+}
+
+// --- head boilerplate flags --------------------------------------------------
+
+// `src/_layouts/base.njk`'s `<head>` hardcodes 4 optional fragments (a
+// noindex HTML comment, an "Intro decision" JS comment, a 3-line "safety
+// nets" JS comment, and an inline "set only by the test harness" JS comment)
+// that turn out, surveying all 37 baseline inner pages, not to be present on
+// every page -- 4 independent variants exist in the wild. Each is now gated
+// in base.njk behind a same-named boolean front-matter flag (default true,
+// i.e. show the fragment, so pages that already have the full "1111" variant
+// -- most pages, plus the homepage/our-story/chairmans-message, which don't
+// go through this script at all -- need no front matter for this and render
+// exactly as before). Detected here directly from the baseline bytes, not
+// assumed from the earlier variant survey.
+function computeHeadFlags(html) {
+  const flags = {};
+  if (!html.includes("<!-- Keep the page out of search engines")) flags.headNoindexComment = false;
+  if (!html.includes("/* Intro decision, made before first paint.")) flags.headIntroComment = false;
+  if (!html.includes("/* safety nets if the entry module never runs.")) flags.headSafetyNetsComment = false;
+  if (!html.includes("/* set only by the test harness")) flags.headTestHarnessComment = false;
+  return flags;
 }
 
 // --- page-content: split into top-level elements ---------------------------
@@ -269,7 +294,9 @@ function splitTopLevelElements(content, slug) {
   let pos = 0;
   const len = content.length;
   while (pos < len) {
+    const wsStart = pos;
     while (pos < len && /\s/.test(content[pos])) pos++;
+    const gapBefore = content.slice(wsStart, pos);
     if (pos >= len) break;
     const rest = content.slice(pos);
     let kind, closeTag;
@@ -306,7 +333,7 @@ function splitTopLevelElements(content, slug) {
     const closeIdx = rest.indexOf(closeTag);
     if (closeIdx === -1) throw new Error(`${slug}: unterminated ${kind} element: ${JSON.stringify(rest.slice(0, 80))}`);
     const end = closeIdx + closeTag.length;
-    elements.push({ kind, raw: rest.slice(0, end) });
+    elements.push({ kind, raw: rest.slice(0, end), gapBefore });
     pos += end;
   }
   return elements;
@@ -338,7 +365,7 @@ function processFigure(raw, slug) {
   }
   // Doesn't match the image block type's hardcoded indentation -- carry the
   // exact baseline markup through as a richtext block instead.
-  return { type: "richtext", body: rawHtmlBlockBody(raw) };
+  return { type: "richtext", body: rawHtmlBlockBody(raw), raw: true };
 }
 
 // --- features / points ------------------------------------------------------
@@ -366,7 +393,7 @@ function processFeatures(raw, slug) {
   // Doesn't match the features block type's hardcoded indentation (not
   // observed across any of the 36 pages, but checked defensively) -- carry
   // the exact baseline markup through as a richtext block instead.
-  return { type: "richtext", body: rawHtmlBlockBody(raw) };
+  return { type: "richtext", body: rawHtmlBlockBody(raw), raw: true };
 }
 
 // page.njk's dedicated `points` block type renders with this exact hardcoded
@@ -390,7 +417,7 @@ function processPoints(raw, slug) {
   // SCHOOL LIFE-section pages and `classrooms` hand-authored this at
   // 10/12/10 instead) -- carry the exact baseline markup through as a
   // richtext block instead.
-  return { type: "richtext", body: rawHtmlBlockBody(raw) };
+  return { type: "richtext", body: rawHtmlBlockBody(raw), raw: true };
 }
 
 // --- p / h2 / h3 -------------------------------------------------------------
@@ -426,7 +453,7 @@ function processHeading(raw, level) {
   if (markdownBlock(candidate) === `${raw}\n`) {
     return { type: "richtext", body: candidate };
   }
-  return { type: "richtext", body: rawHtmlBlockBody(raw) };
+  return { type: "richtext", body: rawHtmlBlockBody(raw), raw: true };
 }
 
 function processParagraph(raw) {
@@ -439,14 +466,15 @@ function processParagraph(raw) {
   // Either has attributes (e.g. data-placeholder) or the plain-text
   // reconstruction doesn't round-trip byte-for-byte -- carry the exact tag
   // through instead.
-  return { type: "richtext", body: rawHtmlBlockBody(raw) };
+  return { type: "richtext", body: rawHtmlBlockBody(raw), raw: true };
 }
 
 // --- per-page conversion -----------------------------------------------------
 
 function convertPage(slug) {
   const html = readBaseline(slug);
-  const { title, crumbLabel, lead } = extractHero(html, slug);
+  const { title, headTitle, crumbLabel, lead } = extractHero(html, slug);
+  const headFlags = computeHeadFlags(html);
 
   const articleMatch = html.match(/<article class="page-content">([\s\S]*?)<\/article>/);
   if (!articleMatch) throw new Error(`${slug}: could not find <article class="page-content">`);
@@ -472,13 +500,31 @@ function convertPage(slug) {
         // Plain (unclassed) lists and the fee-schedule table wrapper don't fit
         // any of the documented block types; carry the exact baseline markup
         // through as a richtext block (CommonMark HTML-block passthrough).
-        return { type: "richtext", body: rawHtmlBlockBody(el.raw) };
+        return { type: "richtext", body: rawHtmlBlockBody(el.raw), raw: true };
       default:
         throw new Error(`${slug}: unhandled element kind ${el.kind}`);
     }
   });
 
-  return { title, crumbLabel, lead, blocks };
+  // A handful of baseline pages hand-type a blank line between an element and
+  // a following `<h2>` (admission-process, mandatory-public-disclosure,
+  // fees-schedules, vision-mission). markdown-it's renderer never reproduces
+  // an inter-block blank line on its own (CommonMark HTML blocks -- and
+  // markdown-it's rendering generally -- are terminated by, not re-emit, a
+  // blank line), so `page.njk` needs an explicit `blankLineBefore` flag on the
+  // affected block to emit one (see the `our-story.njk` precedent for the
+  // same "conditionally emit one literal blank line" idiom). Detected here --
+  // not assumed -- from the *actual* baseline whitespace between top-level
+  // elements (2+ newlines = a blank line), for every page, not just the four
+  // known ones, so a page that turns out to need this but wasn't in the
+  // original survey still gets it.
+  elements.forEach((el, i) => {
+    if (i === 0) return; // whitespace before the first element is just <article>'s own indentation, not an inter-block blank line
+    const newlineCount = (el.gapBefore.match(/\n/g) || []).length;
+    if (newlineCount >= 2) blocks[i].blankLineBefore = true;
+  });
+
+  return { title, headTitle, crumbLabel, lead, blocks, ...headFlags };
 }
 
 // --- YAML front matter emission ---------------------------------------------
@@ -500,16 +546,32 @@ function yamlString(value) {
   return `"${escaped}"`;
 }
 
-function buildFrontMatter({ title, crumbLabel, lead, blocks }) {
+function buildFrontMatter({
+  title,
+  headTitle,
+  crumbLabel,
+  lead,
+  blocks,
+  headNoindexComment,
+  headIntroComment,
+  headSafetyNetsComment,
+  headTestHarnessComment,
+}) {
   const lines = ["---"];
   lines.push(`title: ${yamlString(title)}`);
+  if (headTitle !== undefined) lines.push(`headTitle: ${yamlString(headTitle)}`);
   if (crumbLabel) lines.push(`crumbLabel: ${yamlString(crumbLabel)}`);
   if (lead) lines.push(`lead: ${yamlString(lead)}`);
+  if (headNoindexComment === false) lines.push("headNoindexComment: false");
+  if (headIntroComment === false) lines.push("headIntroComment: false");
+  if (headSafetyNetsComment === false) lines.push("headSafetyNetsComment: false");
+  if (headTestHarnessComment === false) lines.push("headTestHarnessComment: false");
   lines.push("blocks:");
   for (const block of blocks) {
     if (block.type === "richtext") {
       lines.push("  - type: richtext");
       lines.push(`    body: ${yamlString(block.body)}`);
+      if (block.raw) lines.push("    raw: true");
     } else if (block.type === "image") {
       lines.push("  - type: image");
       lines.push(`    description: ${yamlString(block.description)}`);
@@ -530,6 +592,10 @@ function buildFrontMatter({ title, crumbLabel, lead, blocks }) {
     } else {
       throw new Error(`Unknown block type: ${block.type}`);
     }
+    // Applies to any block type, though in practice (see convertPage) it's
+    // only ever set on a richtext block, since every detected blank line in
+    // the 37 baseline pages precedes an <h2>.
+    if (block.blankLineBefore) lines.push("    blankLineBefore: true");
   }
   lines.push("---");
   return lines.join("\n") + "\n";

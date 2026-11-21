@@ -5,6 +5,7 @@ blocks:
     body: "The Primary School curriculum at AIIS is child-centred and activity-based, so that learning stays enjoyable while building the social, cognitive, emotional and physical skills every child needs at this age."
   - type: richtext
     body: "<p>Primary education is the foundation on which a child's character and curiosity are built, and we treat it that way — favouring broad-based, enquiring learning over memorisation.</p>\n"
+    raw: true
   - type: image
     description: "Teachers guiding a Primary School class through an activity at AIIS"
     src: null
@@ -28,4 +29,5 @@ blocks:
         text: "Working together builds self-confidence and stronger communication skills."
   - type: richtext
     body: "<p>Our teachers bring varying strategies together to meet each student individually, and the goal throughout is to build a strong, well-supported foundation that carries a child's curiosity well beyond Primary School.</p>\n"
+    raw: true
 ---

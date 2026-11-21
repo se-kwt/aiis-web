@@ -1,7 +1,7 @@
 {% extends "./base.njk" %}
 {% set pageTitle = title %}
 {% set crumbText = crumbLabel or pageTitle %}
-{% set title = (title + " | Aspire Indian International School") | safe %}
+{% set title = ((headTitle or title) + " | Aspire Indian International School") | safe %}
 {% block content %}  <!-- build:page --><div class="page" data-section="page" data-k="page-root">
 
     <section class="page-hero">
@@ -15,7 +15,8 @@
     <section class="page-body">
       <div class="page__wrap page-grid">
         <article class="page-content">
-{% for block in blocks %}{% if block.type == "richtext" %}          {{ block.body | markdown | safe }}{% elif block.type == "image" %}{% if block.src %}        <figure class="tp"><img src="{{ block.src }}" alt="{{ block.description | safe }}" loading="lazy"></figure>
+{% for block in blocks %}{% if block.blankLineBefore %}
+{% endif %}{% if block.type == "richtext" %}{% if block.raw %}          {{ block.body | safe }}{% else %}          {{ block.body | markdown | safe }}{% endif %}{% elif block.type == "image" %}{% if block.src %}        <figure class="tp"><img src="{{ block.src }}" alt="{{ block.description | safe }}" loading="lazy"></figure>
 {% else %}        <figure class="tp" data-temp-photo>
           <span class="sr">{{ block.description | safe }}</span>
         </figure>

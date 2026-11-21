@@ -3,6 +3,7 @@ title: "Principal's Message"
 blocks:
   - type: richtext
     body: "<figure class=\"tp\" data-temp-photo><span class=\"sr\">Portrait of the AIIS Principal, Dr. Geetika Ahuja</span></figure>\n"
+    raw: true
   - type: richtext
     body: "<em>&ldquo;Every child carries the potential to light up the world.&rdquo;</em>"
   - type: richtext

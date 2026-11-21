@@ -3,6 +3,7 @@ title: "Curriculum"
 blocks:
   - type: richtext
     body: "<p>AIIS follows the CBSE and Cambridge IGCSE curricula side by side, weaving academics, sport and extracurricular activity into one holistic framework. Our CBSE programme is built on the National Curriculum Framework, giving students a clear path through a comprehensive syllabus, teaching approach and assessment structure — all aimed at nurturing thinkers who are ready for real-world challenges, not just exams.</p>\n"
+    raw: true
   - type: image
     description: "Students taking part in a Cambridge IGCSE learning activity at AIIS"
     src: null
