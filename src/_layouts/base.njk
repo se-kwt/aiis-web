@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aspire Indian International School</title>
+  <!-- Keep the page out of search engines while it still shows temporary media. Remove this tag at launch. -->
+  <meta name="robots" content="noindex, nofollow">
+  <script>
+    /* Intro decision, made before first paint. data-intro = full (first visit) | replay (repeat visit: hero entrance only) | none (?nointro, reduced motion). */
+    (function () {
+      var d = document.documentElement, m = 'full';
+      try { if (/[?&]nointro(=|&|$)/.test(location.search)) m = 'none'; } catch (e) {}
+      try { if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) m = 'none'; } catch (e) {}
+      if (m === 'full') { try { if (sessionStorage.getItem('aiis-intro-seen')) m = 'replay'; } catch (e) {} }
+      d.setAttribute('data-intro', m);
+      if (m !== 'none') d.classList.add('hero-pre', 'intro-active');
+      if (m === 'full') d.classList.add('intro-playing');
+      /* safety nets if the entry module never runs. 4 s: the module has not signalled that it started (a slow or blocked third-party
+         script holds it back), so reveal the content and cancel the intro. Once it has started, the intro's own timeline governs;
+         12 s: last resort if that timeline stalls. */
+      setTimeout(function () {
+        if (window.__aiisStarted) return;
+        d.setAttribute('data-intro', 'none');
+        d.classList.add('reveal-now', 'intro-done'); d.classList.remove('hero-pre', 'intro-playing', 'intro-active');
+      }, 4000);
+      var hold = window.__aiisTestHold === true; /* set only by the test harness before load, never by a URL: intro.js freezes the intro, so no safety net */
+      if (!hold) setTimeout(function () { d.classList.remove('hero-pre', 'intro-playing', 'intro-active'); d.classList.add('intro-done'); }, 12000);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Geologica:wght@100..900&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Geologica:wght@100..900&display=swap"></noscript>
+{% for s in styles %}  <link rel="stylesheet" href="css/{{ s }}.css">
+{% endfor %}  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="intro" data-section="intro" data-k="intro-root" aria-hidden="true">
+    <div class="intro__circle"></div>
+    <div class="intro__rings" data-k="intro-lottie">
+      <svg viewBox="0 0 1304 1000" preserveAspectRatio="xMidYMid meet" fill="none" stroke="#2C2B7A" stroke-width="2" vector-effect="non-scaling-stroke">
+        <circle cx="652" cy="500" r="170" pathLength="1"/>
+        <circle cx="652" cy="500" r="225" pathLength="1"/>
+        <circle cx="652" cy="500" r="280" pathLength="1"/>
+      </svg>
+    </div>
+    <div class="intro__seal" data-k="intro-seal"><img data-k="intro-seal-img" src="assets/logos/crest-web.png" alt="" width="254" height="193"></div>
+  </div>
+  <!-- build:header -->{% include "header.njk" %}<!-- /build:header -->
+  <!-- build:menu -->{% include "menu.njk" %}<!-- /build:menu -->
+  <div class="hdr__blur" aria-hidden="true"></div>
+  <main id="main" tabindex="-1">
+{% block content %}{% endblock %}  </main>
+  <!-- build:footer -->{% include "footer.njk" %}<!-- /build:footer -->
+</body>
+</html>
