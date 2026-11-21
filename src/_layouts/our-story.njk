@@ -5,12 +5,12 @@
 
     <!-- 1. title band + full-bleed photo -->
     <section class="story-hero" aria-labelledby="story-hero-title">
-      <p class="story-hero__eyebrow">About Us</p>
-      <h1 id="story-hero-title" class="story-hero__title">Our Story</h1>
+      <p class="story-hero__eyebrow">{{ ourStory.hero.eyebrow | safe }}</p>
+      <h1 id="story-hero-title" class="story-hero__title">{{ ourStory.hero.title | safe }}</h1>
       <div class="story-hero__frame">
         <span class="story-hero__notch" aria-hidden="true"></span>
         <figure class="tp" data-temp-photo>
-          <span class="sr">Placeholder — a photo of the AIIS campus is not yet in place</span>
+          <span class="sr">Placeholder — a photo of {{ ourStory.hero.photoDescription | safe }} is not yet in place</span>
         </figure>
       </div>
     </section>
@@ -18,9 +18,9 @@
     <!-- 2. lead headline + copy + callout -->
     <section class="story-lead">
       <div class="story__wrap">
-        <h2 class="story-lead__title animate-text"><span class="hl" data-hl>We Nurture</span> Tomorrow&rsquo;s Global <span class="hl" data-hl>Citizens</span></h2>
-        <p class="story-lead__copy">Aspire Indian International School is one of Kuwait&rsquo;s leading CBSE schools for Pre-KG through Grade 10, offering an <strong>academically rigorous, values-led education</strong> shaped around every child&rsquo;s <strong>confidence, curiosity and character</strong>.</p>
-        <p class="story-lead__callout" data-placeholder="illustrative founding story, not confirmed AIIS history">Founded to give Kuwait&rsquo;s Indian community a school as ambitious as the futures its students would go on to build, AIIS opened with a handful of classrooms and one guiding promise: that every child would be known, encouraged and challenged by name. That promise still shapes the school we are today.</p>
+        <h2 class="story-lead__title animate-text">{{ ourStory.lead.title | hl | markdownInline | safe }}</h2>
+        <p class="story-lead__copy">{{ ourStory.lead.copy | markdownInline | safe }}</p>
+        <p class="story-lead__callout"{{ ourStory.lead.callout | placeholderAttr | safe }}>{{ ourStory.lead.callout.text | markdownInline | safe }}</p>
       </div>
     </section>
 
@@ -34,14 +34,9 @@
       <h2 id="story-facts-title" class="story-facts__heading">Quick Facts</h2>
       <div class="story__wrap story-facts__viewport">
         <ul class="story-facts__track" data-facts-track>
-          <li class="story-facts__card"><span class="story-facts__num" data-placeholder="illustrative figure">1,400+</span><p class="story-facts__label">Students</p></li>
-          <li class="story-facts__card"><span class="story-facts__num" data-placeholder="illustrative figure">15+</span><p class="story-facts__label">Nationalities</p></li>
-          <li class="story-facts__card"><span class="story-facts__num" data-placeholder="illustrative figure">1:18</span><p class="story-facts__label">Classroom Ratio</p></li>
-          <li class="story-facts__card"><span class="story-facts__num" data-placeholder="illustrative figure">Pre&#8209;KG&#8211;10</span><p class="story-facts__label">Grades Offered</p></li>
-          <li class="story-facts__card"><span class="story-facts__num" data-placeholder="illustrative figure">120+</span><p class="story-facts__label">Teachers &amp; Staff</p></li>
-          <li class="story-facts__card"><span class="story-facts__num" data-placeholder="illustrative figure">40+</span><p class="story-facts__label">Clubs &amp; Activities</p></li>
-          <li class="story-facts__card"><span class="story-facts__num" data-placeholder="illustrative figure">20+</span><p class="story-facts__label">Sports Teams</p></li>
-          <li class="story-facts__card"><span class="story-facts__num" data-placeholder="illustrative figure">15+</span><p class="story-facts__label">Years in Kuwait</p></li>
+          {%- for fact in ourStory.quickFacts %}
+          <li class="story-facts__card"><span class="story-facts__num"{{ fact | placeholderAttr | safe }}>{{ fact.figure | safe }}</span><p class="story-facts__label">{{ fact.label | markdownInline | safe }}</p></li>
+          {%- endfor %}
         </ul>
         <div class="story-facts__nav">
           <button class="story-facts__arrow" type="button" data-facts-prev aria-label="Previous facts"><svg aria-hidden="true" width="18" height="12" viewBox="0 0 18 12" fill="none"><path d="M17 6H1m5-5L1 6l5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -53,79 +48,61 @@
     <!-- 4. mission statement -->
     <section class="story-mission">
       <div class="story__wrap">
-        <p class="story-mission__eyebrow">Our Mission</p>
-        <h2 class="story-mission__title animate-text" data-placeholder="illustrative mission statement, not confirmed AIIS wording">Aspire Indian International School inspires every learner to <span class="hl" data-hl>question boldly</span>, <span class="hl" data-hl>care deeply</span>, and <span class="hl" data-hl>lead with integrity</span>.</h2>
+        <p class="story-mission__eyebrow">{{ ourStory.mission.eyebrow | safe }}</p>
+        <h2 class="story-mission__title animate-text"{{ ourStory.mission.title | placeholderAttr | safe }}>{{ ourStory.mission.title.text | hl | markdownInline | safe }}</h2>
         <div class="story-mission__cols">
+          {%- for col in ourStory.mission.cols %}
           <div class="story-mission__col">
-            <h3>What Guides Us</h3>
-            <p data-placeholder="illustrative values, not confirmed AIIS wording">Respect, honesty and discipline sit alongside kindness and curiosity as the values every classroom at AIIS is built on, lived out in how students treat one another as much as in what they learn.</p>
+            <h3>{{ col.heading | safe }}</h3>
+            <p{{ col.text | placeholderAttr | safe }}>{{ col.text.text | markdownInline | safe }}</p>
           </div>
-          <div class="story-mission__col">
-            <h3>Looking Forward</h3>
-            <p data-placeholder="illustrative vision, not confirmed AIIS wording">As Kuwait&rsquo;s community keeps growing, so do we &mdash; investing in our campus, our teachers and our programmes so every student leaves AIIS ready for a world that rewards adaptability as much as knowledge.</p>
-          </div>
+          {%- endfor %}
         </div>
       </div>
     </section>
 
     <!-- 5. alternating story blocks -->
     <div class="story-blocks">
+      {%- for block in ourStory.storyBlocks %}{% if not loop.first %}
+{% endif %}
       <article class="story-block">
         <svg class="story-block__swirl" viewBox="0 0 100 100" fill="none" aria-hidden="true" focusable="false"><path d="M50 90c-22 0-36-16-36-36 0-18 14-32 32-32 15 0 27 11 27 25 0 12-9 21-21 21-9 0-16-7-16-16 0-7 6-12 12-12" stroke="currentColor" stroke-width="2"/></svg>
         <div class="story__wrap story-block__grid">
+          {%- if loop.index % 2 == 1 %}
           <div class="story-block__copy">
-            <h3 class="story-block__heading">A Community That Knows Every Child</h3>
-            <p data-placeholder="illustrative copy, not confirmed AIIS wording">Small class sizes and attentive teachers mean no student is just a face in the crowd. At AIIS, learning is relational: teachers know each child&rsquo;s strengths, stretch their thinking and notice when they need support.</p>
-            <a class="story-block__link" href="/vision-mission">Read Our Vision &amp; Mission<svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <h3 class="story-block__heading">{{ block.heading | safe }}</h3>
+            <p{{ block.copy | placeholderAttr | safe }}>{{ block.copy.text | markdownInline | safe }}</p>
+            <a class="story-block__link" href="{{ block.linkHref }}">{{ block.linkLabel | markdownInline | safe }}<svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
           <div class="story-block__media">
             <figure class="tp" data-temp-photo>
-              <span class="sr">Placeholder — a photo of a teacher with students is not yet in place</span>
+              <span class="sr">Placeholder — a photo of {{ block.photoDescription | safe }} is not yet in place</span>
             </figure>
           </div>
-        </div>
-      </article>
-
-      <article class="story-block">
-        <svg class="story-block__swirl" viewBox="0 0 100 100" fill="none" aria-hidden="true" focusable="false"><path d="M50 90c-22 0-36-16-36-36 0-18 14-32 32-32 15 0 27 11 27 25 0 12-9 21-21 21-9 0-16-7-16-16 0-7 6-12 12-12" stroke="currentColor" stroke-width="2"/></svg>
-        <div class="story__wrap story-block__grid">
+          {%- else %}
           <div class="story-block__media">
             <figure class="tp" data-temp-photo>
-              <span class="sr">Placeholder — a photo of students from different backgrounds together is not yet in place</span>
+              <span class="sr">Placeholder — a photo of {{ block.photoDescription | safe }} is not yet in place</span>
             </figure>
           </div>
           <div class="story-block__copy">
-            <h3 class="story-block__heading">A Richly Diverse Classroom</h3>
-            <p data-placeholder="illustrative copy, not confirmed AIIS wording">Our students come from across Kuwait&rsquo;s Indian community and beyond, bringing languages, festivals and perspectives that make every classroom a place to understand the world, not just read about it.</p>
-            <a class="story-block__link" href="/clubs">Explore School Life<svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <h3 class="story-block__heading">{{ block.heading | safe }}</h3>
+            <p{{ block.copy | placeholderAttr | safe }}>{{ block.copy.text | markdownInline | safe }}</p>
+            <a class="story-block__link" href="{{ block.linkHref }}">{{ block.linkLabel | markdownInline | safe }}<svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
+          {%- endif %}
         </div>
       </article>
-
-      <article class="story-block">
-        <svg class="story-block__swirl" viewBox="0 0 100 100" fill="none" aria-hidden="true" focusable="false"><path d="M50 90c-22 0-36-16-36-36 0-18 14-32 32-32 15 0 27 11 27 25 0 12-9 21-21 21-9 0-16-7-16-16 0-7 6-12 12-12" stroke="currentColor" stroke-width="2"/></svg>
-        <div class="story__wrap story-block__grid">
-          <div class="story-block__copy">
-            <h3 class="story-block__heading">Ready for a Changing World</h3>
-            <p data-placeholder="illustrative copy, not confirmed AIIS wording">Alongside a strong CBSE foundation, students build the digital literacy, problem-solving and communication skills that prepare them for whatever comes after AIIS &mdash; in Kuwait or anywhere their ambitions take them.</p>
-            <a class="story-block__link" href="/curriculum-choices">See Our Curriculum<svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </div>
-          <div class="story-block__media">
-            <figure class="tp" data-temp-photo>
-              <span class="sr">Placeholder — a photo of a student presenting project work is not yet in place</span>
-            </figure>
-          </div>
-        </div>
-      </article>
+      {%- endfor %}
     </div>
 
     <!-- 6. closing destination bars -->
     <section class="story-closing" aria-label="Keep exploring AIIS">
       <div class="story__wrap">
         <ul class="story-closing__list">
-          <li><a class="story-closing__link" href="/admission-process">Admissions Process</a></li>
-          <li><a class="story-closing__link" href="/fees-schedules">Fees &amp; Schedules</a></li>
-          <li><a class="story-closing__link" href="/form/contact-the-best-indian-school-in-kuwait">Plan a Visit</a></li>
+          {%- for link in ourStory.closing %}
+          <li><a class="story-closing__link" href="{{ link.path }}">{{ link.label | markdownInline | safe }}</a></li>
+          {%- endfor %}
         </ul>
       </div>
     </section>
