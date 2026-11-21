@@ -133,7 +133,6 @@ function initDesktopNav() {
       const open = !item.classList.contains('is-dismissed') && (item.matches(':hover') || item.matches(':focus-within'));
       link.setAttribute('aria-expanded', String(open));
     };
-    item.querySelectorAll('.hdr__sub').forEach(wireSub);
     item.addEventListener('pointerenter', sync);
     item.addEventListener('pointerleave', () => { item.classList.remove('is-dismissed'); sync(); });
     item.addEventListener('focusin', sync);
@@ -151,12 +150,3 @@ function initDesktopNav() {
   }
 }
 
-// nested submenu button (Amenities > Sports): aria-expanded follows hover / focus
-function wireSub(sub) {
-  const btn = sub.querySelector('.hdr__sub-toggle');
-  const sync = () => btn.setAttribute('aria-expanded', String(sub.matches(':hover') || sub.matches(':focus-within')));
-  sub.addEventListener('pointerenter', sync);
-  sub.addEventListener('pointerleave', sync);
-  sub.addEventListener('focusin', sync);
-  sub.addEventListener('focusout', () => requestAnimationFrame(sync));
-}

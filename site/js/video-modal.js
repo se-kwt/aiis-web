@@ -4,7 +4,7 @@
 export const name = 'video-modal';
 export const section = null;
 
-let dialog = null, stage = null, video = null, playBtn = null, titleEl = null, lastTrigger = null, uid = 0;
+let dialog = null, stage = null, video = null, playBtn = null, closeBtn = null, titleEl = null, lastTrigger = null, uid = 0;
 
 function build() {
   const id = `video-modal-title-${++uid}`;
@@ -26,8 +26,9 @@ function build() {
   stage = dialog.querySelector('.video-modal__stage');
   video = dialog.querySelector('video');
   playBtn = dialog.querySelector('.video-modal__play');
+  closeBtn = dialog.querySelector('.video-modal__close');
   titleEl = dialog.querySelector('.video-modal__title');
-  dialog.querySelector('.video-modal__close').addEventListener('click', () => closeVideoModal());
+  closeBtn.addEventListener('click', () => closeVideoModal());
   playBtn.addEventListener('click', () => {
     video.controls = true;
     video.play().catch(() => {});

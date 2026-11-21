@@ -23,7 +23,7 @@ main:focus { outline: none; } /* the skip link moves focus here; it is not an in
 /* Temp photo wrapper: keeps its CSS box even when the hotlinked image fails */
 .tp { position: relative; margin: 0; overflow: hidden; background: var(--c-grey-1); }
 .tp > img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.tp::after {
+.tp[data-temp-photo]::after {
   content: "Temp photo";
   position: absolute; right: 0; bottom: 0; z-index: 2;
   padding: 3px 6px;

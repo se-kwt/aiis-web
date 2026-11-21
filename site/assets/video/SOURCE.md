@@ -1,0 +1,5 @@
+# Video sources
+
+- `hero.mp4`: the hero reel / "Watch full video" modal source. Pre-existing, unchanged here.
+- `learning.mp4`: the looping background clip in the "learning" section (`[data-k="learning-video-frame"]`), replacing the old hotlinked `shadyside`/finalsite placeholder (`LearningThatMovesLOOP0312251.mp4`). Downloaded from `https://youtu.be/xK9t9CNeDno` (AIIS facility/campus tour, 3:55 full length, used in full rather than trimmed). Re-encoded from the 720p video-only stream: H.264, 1280x720, 24fps, CRF 26, audio dropped (the element is always `muted` and has no modal/lightbox use, unlike the hero video), `+faststart`. About 33 MB, ~1.18 Mbps, versus the source's 52 MB.
+- `learning-poster.jpg`: poster frame for `learning.mp4`, extracted at 00:01:15 (the "Art" segment — a teacher and students at a hands-on painting activity). Like the rest of the source clip it has the school's logo watermark and a lower-third caption burned in from the original tour video; no clean, caption-free frame exists anywhere in the source.

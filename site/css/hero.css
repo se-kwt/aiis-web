@@ -1,25 +1,41 @@
-/* Hero. Sizes from the reference measurements; motion from the reference measurements items 1 and 3.
-   Breakpoints as on the reference site: 1000px (desktop), 800px (some sizes). Yellow accents -> Orange (colour map). */
+/* Hero. An AIIS-original composition, not the Shady Side reference layout: a headline that spells itself in, a
+   video in a rounded resting frame that wipes into view then (desktop, motion allowed) grows to fill the screen
+   as the visitor scrolls past it, and the site's own "watch full video" badge, straddling the video's resting
+   top-right corner at every width. Breakpoints: 1000px (desktop), 800px (some sizes), matching the rest of the site. */
 main { padding-top: 96px; }
 @media (min-width: 1000px) { main { padding-top: 150px; } }
 
 .hero {
   --frame-h: clamp(280px, 100vh, 512px);
+  --video-top: 420px; /* fallback until js/hero.js measures the real resting position; drives the desktop badge below */
   position: relative; overflow-x: clip; /* a wider fallback font must not create page-level horizontal scroll */
-  padding: 0 20px;
+  padding: 0 20px; /* below 1000px: the same side inset the rest of the page's sections use at this width */
   font: 400 14px/21px var(--f-sans);
   color: var(--c-text);
 }
 @media (min-width: 800px) { .hero { --frame-h: clamp(280px, 100vh, 720px); } }
 @media (min-width: 1000px) { .hero { padding: 0 60px; font-size: 18px; line-height: 27px; } }
 
-/* off-white band from the top of the page to half-way down the video frame */
+/* off-white band from the top of the page to half-way down the resting video frame */
 .hero__band {
   position: absolute; left: 0; right: 0; z-index: -1; pointer-events: none;
   top: -96px; bottom: calc(var(--frame-h) / 2);
   background: var(--c-bg-alt);
 }
 @media (min-width: 1000px) { .hero__band { top: -150px; } }
+
+/* intro text block (eyebrow + title + description). The badge sits on the video's corner at every width (below),
+   so this is just breathing room under the fixed header. padding, not margin: a margin here collapses with
+   .hero's own top (both start at the same box edge with nothing between them), which silently erases the gap. */
+.hero__intro { position: relative; z-index: 2; padding-top: 24px; }
+@media (min-width: 800px) { .hero__intro { padding-top: 32px; } }
+@media (min-width: 1000px) { .hero__intro { padding-top: 28px; } }
+
+.hero__eyebrow {
+  margin: 0 0 10px; text-align: center; text-transform: uppercase;
+  font: 700 12px/1.4 var(--f-sans); letter-spacing: .08em; color: var(--c-accent-700);
+}
+@media (min-width: 1000px) { .hero__eyebrow { margin-bottom: 16px; font-size: 15px; letter-spacing: .1em; } }
 
 .hero__title {
   margin: 0 0 20px; text-align: center;
@@ -28,36 +44,52 @@ main { padding-top: 96px; }
 }
 @media (min-width: 800px) { .hero__title { font-size: 100px; line-height: 100px; } }
 @media (min-width: 1000px) {
-  /* one line at every desktop width: 160px at 1440 (the reference), scaled down fluidly below; AIIS copy is 1332px wide at 160px, so at 1440 it spills ~6px into the 60px gutter */
+  /* one line at every desktop width: 160px at 1440 (the reference), scaled down fluidly below */
   .hero__title { font-size: min(160px, calc((100vw - 108px) * .1202)); line-height: 1; white-space: nowrap; }
 }
-.hero__title .word { display: inline-block; transition: opacity 1s ease, transform 1s ease; }
-.hero__title .word:nth-child(2) { transition-delay: .3s; }
-.hero__title .word:nth-child(3) { transition-delay: .6s; }
+.hero__title .word { display: inline-block; }
+/* each letter rises and fades in on its own delay (js/hero.js splits the words into these) -- the "spell" reveal */
+.hero__title .letter { display: inline-block; transition: opacity .7s ease, transform .7s cubic-bezier(.2, .8, .2, 1); transition-delay: calc(var(--i, 0) * 28ms); }
 
-/* decorative line art (the reference: ::before / ::after backgrounds), strokes Orange */
-.hero__lines { position: absolute; z-index: 2; pointer-events: none; background: no-repeat 0 0 / cover; transition: opacity .5s ease; }
-.hero__lines--left { left: 0; top: 70px; width: 161px; height: 90px; background-image: url("../assets/art/hero-lines-left.svg"); }
-.hero__lines--right { right: 0; top: 80px; width: 70px; height: 140px; background-image: url("../assets/art/hero-lines-right.svg"); }
-@media (min-width: 600px) { .hero__lines--left { top: 10px; } .hero__lines--right { top: 40px; } }
-@media (min-width: 800px) {
-  .hero__lines--left { width: 278px; height: 156px; }
-  .hero__lines--right { width: 104px; height: 208px; }
+.hero__desc {
+  margin: 20px auto 0; max-width: 480px; text-align: center;
+  font: 400 16px/1.5 var(--f-sans); color: var(--c-text-2);
+}
+@media (min-width: 1000px) { .hero__desc { margin-top: 28px; max-width: 640px; font-size: 19px; } }
+
+/* video reel: a resting rounded box that wipes in on load (.hero__reel-wipe), then on desktop grows to fill the
+   screen as .hero__reel-track scrolls past (js/hero.js scrubs .hero__reel-mask's clip-path open via ScrollTrigger).
+   margin-top is a deliberate gap so the intro text block has fully scrolled off before the grow starts, and the
+   track's own height is kept short (one third of a viewport of scroll) so the grow itself is quick, not a long pin. */
+.hero__reel-track { position: relative; width: 100vw; margin-top: 24px; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
+@media (min-width: 800px) { .hero__reel-track { margin-top: 32px; } }
+@media (min-width: 1000px) {
+  .hero__reel-track { margin-top: 50px; height: calc(100vh + 35vh); } /* 100vh stage + 35vh scrub distance */
+}
+
+.hero__reel-stage { position: relative; height: var(--frame-h); }
+@media (min-width: 1000px) { .hero__reel-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; } }
+
+.hero__reel-mask {
+  position: relative; height: 100%; margin: 0 20px; /* matches .hero's own below-1000px side inset, above */
+  border-radius: 20px; overflow: hidden;
 }
 @media (min-width: 1000px) {
-  .hero__lines--left { top: 20px; width: 320px; height: 180px; }
-  .hero__lines--right { top: 80px; width: 130px; height: 260px; }
+  .hero__reel-mask {
+    position: absolute; inset: 0; margin: 0;
+    /* a frame-h-tall, 60px-inset rounded box centred in the sticky 100vh stage -- the resting shape js/hero.js grows from */
+    clip-path: inset(calc((100vh - var(--frame-h)) / 2) 60px round 24px);
+  }
 }
 
-/* framed video */
-.hero__frame {
-  position: relative; height: var(--frame-h);
-  line-height: 0; /* as on the reference: the frame carries no line box */
-  transition: opacity 1s ease, transform 1s ease;
+.hero__reel-wipe {
+  position: absolute; inset: 0;
+  clip-path: inset(0 0 0% 0);
+  transition: clip-path 1.2s cubic-bezier(.22, .61, .36, 1);
 }
-.hero__frame .tp { height: 100%; }
-.hero__frame .tp::after { right: auto; left: 0; } /* keep the Temp photo tag clear of the corner shape */
-.hero__frame video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.hero__reel-wipe .tp, .hero__reel-wipe video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.hero__reel-wipe .tp::after { right: auto; left: 0; } /* keep the Temp photo tag clear of the corner shape */
+
 .hero__shape {
   position: absolute; right: 0; bottom: 0; z-index: 3;
   width: 50px; height: 40px;
@@ -83,24 +115,33 @@ main { padding-top: 96px; }
 .hero__ctl:hover .hero__ctl-disc { transform: scale(1.1); }
 .hero__ctl:focus-visible, .hero__badge:focus-visible { outline: 3px solid var(--c-accent); outline-offset: 3px; }
 
-/* rotating badge (holder is pinned for the first 420 px of scroll on desktop; see hero.js) */
-.hero__badge-pin { position: absolute; z-index: 4; left: 10px; top: 200px; transform: translateY(var(--pin, 0px)); }
-@media (min-width: 1000px) { .hero__badge-pin { left: 20px; top: 270px; } }
+/* right-side badge: the site's own "watch full video" ring, straddling the video's resting top-right corner at
+   every width -- right (matching .hero's own side inset at that width) and top: var(--video-top) (set by
+   js/hero.js from the video's measured resting edge) line the badge's un-shifted edges up with the mask's own
+   insets, and translate() pulls it up-left from there. Not a full 50% (which would centre the badge exactly on
+   the corner): the mask's corner is rounded off, so centring there leaves a wedge of bare background between the
+   badge and the video: 19% instead settles the badge mostly onto the video's flat surface, just clear of the notch. */
 .hero__badge {
-  position: relative; display: block; width: 91px; height: 91px;
+  display: none; /* temporarily hidden on all devices -- markup/JS left intact to re-enable later */
+  position: absolute; z-index: 4; right: 20px; top: var(--video-top);
+  width: 80px; height: 80px;
   font: 900 14px/21px var(--f-sans); color: var(--c-navy); text-decoration: none;
-  transition: opacity 1s ease, transform 1s ease;
+  transition: opacity .9s ease, transform .9s cubic-bezier(.34, 1.56, .64, 1);
+  transform: translate(19%, -19%);
 }
-@media (min-width: 1000px) { .hero__badge { width: 160px; height: 160px; font-size: 18px; line-height: 27px; } }
+@media (min-width: 800px) { .hero__badge { width: 110px; height: 110px; } }
+@media (min-width: 1000px) {
+  .hero__badge { right: 60px; width: 130px; height: 130px; font-size: 18px; line-height: 27px; }
+}
 .hero__disc {
   position: absolute; inset: 0; background: var(--c-navy);
   -webkit-mask: url("../assets/art/badge-disc.svg") center / 100% 100% no-repeat;
   mask: url("../assets/art/badge-disc.svg") center / 100% 100% no-repeat;
   transition: background-color .3s ease, transform .3s ease;
 }
-/* ring box: centred on the badge (its real rendered box); the child spins in place */
-.hero__ring { position: absolute; left: 50%; top: 50%; width: 71px; height: 71px; transform: translate(-50%, -50%); pointer-events: none; }
-@media (min-width: 1000px) { .hero__ring { width: 120px; height: 120px; } }
+/* ring box: centred on the badge, sized as a share of it (not fixed px) so it stays in proportion at every one
+   of the badge's three breakpoint sizes above; the child spins in place */
+.hero__ring { position: absolute; left: 50%; top: 50%; width: 78%; height: 78%; transform: translate(-50%, -50%); pointer-events: none; }
 .hero__ring-spin {
   position: absolute; inset: 0;
   color: var(--c-accent-light); transition: color .3s ease;
@@ -110,23 +151,25 @@ main { padding-top: 96px; }
 .hero__ring text { fill: currentColor; font: 700 11px var(--f-sans); letter-spacing: 1.2px; }
 .hero__icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--c-navy); }
 .hero__icon svg { color: var(--c-accent); transition: color .3s ease; }
-.hero__icon svg { width: 26px; height: auto; }
-@media (min-width: 1000px) { .hero__icon svg { width: 40px; } }
+.hero__icon svg { width: 27%; height: auto; }
 .hero__badge:hover .hero__disc, .hero__badge:focus-visible .hero__disc { background: var(--c-accent); transform: scale(1.02); }
 .hero__badge:hover .hero__ring-spin, .hero__badge:focus-visible .hero__ring-spin,
 .hero__badge:hover .hero__icon svg, .hero__badge:focus-visible .hero__icon svg { color: var(--c-navy); }
 @keyframes infinite-spinning { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-/* entrance states (class set by the inline script in <head>, released by js/intro.js; desktop-only parts as on the reference) */
-html.hero-pre .hero:not(.is-frame) .hero__frame { opacity: 0; transform: translateY(50%); }
+/* entrance states (class set by the inline script in <head>, released by js/intro.js) */
+html.hero-pre .hero:not(.is-frame) .hero__reel-wipe { clip-path: inset(0 0 100% 0); }
 @media (min-width: 1000px) {
-  html.hero-pre .hero:not(.is-title) .hero__title .word { opacity: 0; transform: translateY(-80%); }
-  html.hero-pre .hero:not(.is-badge) .hero__badge { opacity: 0; transform: translateX(-50%); }
-  html.hero-pre .hero:not(.is-art) .hero__lines { opacity: 0; }
+  .hero__eyebrow, .hero__desc { transition: opacity .8s ease, transform .8s ease; }
+  html.hero-pre .hero:not(.is-title) .hero__title .letter { opacity: 0; transform: translateY(60%); }
+  html.hero-pre .hero:not(.is-title) .hero__eyebrow,
+  html.hero-pre .hero:not(.is-title) .hero__desc { opacity: 0; transform: translateY(20px); }
+  html.hero-pre .hero:not(.is-badge) .hero__badge { opacity: 0; transform: translate(19%, -19%) scale(.4); }
 }
 
 /* the 4 s safety net in <head> reveals the hero at once (no fade) when the entry module never started */
-html.reveal-now .hero__frame, html.reveal-now .hero__title .word, html.reveal-now .hero__badge, html.reveal-now .hero__lines { transition: none; }
+html.reveal-now .hero__reel-wipe, html.reveal-now .hero__title .letter, html.reveal-now .hero__badge,
+html.reveal-now .hero__eyebrow, html.reveal-now .hero__desc { transition: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero *, .hero *::before, .hero *::after { animation: none !important; transition: none !important; }

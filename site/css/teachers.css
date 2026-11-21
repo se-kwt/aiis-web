@@ -40,12 +40,7 @@
   .teachers__slider { height: 560px; }
   .teachers__slide { width: 410px; height: 560px; }
 }
-.teachers__photo { width: 100%; height: 100%; background: none; transition: height .5s ease, margin-top .5s ease; }
-.teachers__photo::after { right: auto; bottom: auto; top: 0; left: 0; } /* the Temp photo tag sits top left: the caption occupies the bottom edge */
-.teachers__photo > img { background: var(--c-grey-1); }
-.teachers__photo > img { -webkit-user-drag: none; transition: transform .5s ease, filter .5s ease; }
-.teachers__slide:hover .teachers__photo > img, .teachers__slide:focus-within .teachers__photo > img { transform: scale(1.1); }
-[data-carousel][data-state] .teachers__slide:not(.is-current) .teachers__photo > img { filter: grayscale(1); }
+.teachers__photo { width: 100%; height: 100%; background: var(--c-accent); transition: height .5s ease, margin-top .5s ease; }
 /* the side cards are shorter than the centred card, trimmed equally top and bottom, and their photo is re-fitted to the shorter box (measured on the reference: 330 of 420 px below 800 px, 380 of 560 px above) */
 [data-carousel][data-state] .teachers__slide:not(.is-current) .teachers__photo { height: calc(100% - 90px); margin-top: 45px; }
 @media (min-width: 800px) { [data-carousel][data-state] .teachers__slide:not(.is-current) .teachers__photo { height: calc(100% - 180px); margin-top: 90px; } }
@@ -109,8 +104,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .teachers__track, .teachers__photo > img, .teachers__disc, .teachers__disc::before, .teachers__caption, .teachers__arrow, .teachers__photo { transition: none; }
+  .teachers__track, .teachers__disc, .teachers__disc::before, .teachers__caption, .teachers__arrow, .teachers__photo { transition: none; }
 }
-
-/* keep the "Temp photo" tag readable above the caption's inverse corner */
-.teachers__photo::after { z-index: 5; }
