@@ -83,6 +83,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy("src/admin");
   // src/assets contains plain-prose *.md documentation files (asset
   // provenance notes, not content pages) that would otherwise be picked up
   // and rendered as Nunjucks/Markdown templates since they live under the

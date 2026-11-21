@@ -1,0 +1,344 @@
+backend:
+  name: github
+  repo: se-kwt/aiis-web      # update if the real repo slug differs; not used while local_backend is on
+  branch: main
+local_backend: true
+media_folder: "src/assets/photos"
+public_folder: "/assets/photos"
+collections:
+  - name: homepage
+    label: Homepage
+    files:
+      - name: homepage
+        label: Homepage
+        file: content/homepage.json
+        fields:
+          - label: Hero
+            name: hero
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: string, required: false }] }
+              - { label: Heading, name: heading, widget: string }
+              - { label: Description, name: desc, widget: object, fields: [{ label: Text, name: text, widget: text }, { label: Placeholder, name: placeholder, widget: string, required: false }] }
+              - { label: "Video URL", name: videoUrl, widget: string }
+              - { label: Video, name: video, widget: file }
+              - { label: "Video title", name: videoTitle, widget: string }
+              - { label: "Video alt text", name: videoAlt, widget: string }
+          - label: News
+            name: news
+            widget: object
+            fields:
+              - label: Items
+                name: items
+                widget: list
+                fields:
+                  - { label: Headline, name: headline, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: string, required: false }] }
+              - label: Social
+                name: social
+                widget: list
+                fields:
+                  - { label: Headline, name: headline, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: string, required: false }] }
+          - label: Promises
+            name: promises
+            widget: list
+            fields:
+              - { label: Lead, name: lead, widget: text }
+              - { label: Photo, name: photo, widget: object, fields: [{ label: Image, name: src, widget: image, required: false }, { label: "Alt text", name: alt, widget: string }] }
+              - { label: Heading, name: heading, widget: string }
+              - { label: "Heading data-k hook (do not edit)", name: headingDataK, widget: hidden }
+              - { label: Figure, name: figure, widget: object, fields: [{ label: Image, name: src, widget: image, required: false }, { label: "Alt text", name: alt, widget: string }] }
+          - label: Divisions
+            name: divisions
+            widget: object
+            fields:
+              - label: Heading
+                name: heading
+                widget: object
+                fields:
+                  - { label: Small, name: small, widget: list, field: { label: Line, name: line, widget: string } }
+                  - { label: Big, name: big, widget: list, field: { label: Line, name: line, widget: string } }
+              - label: Cards
+                name: cards
+                widget: list
+                fields:
+                  - { label: Photo, name: photo, widget: object, fields: [{ label: Image, name: src, widget: image, required: false }, { label: "Alt text", name: alt, widget: string }] }
+                  - { label: Verb, name: verb, widget: string }
+                  - { label: Grades, name: grades, widget: string }
+                  - { label: School, name: school, widget: string }
+                  - { label: Lead, name: lead, widget: string }
+                  - { label: Trail, name: trail, widget: string }
+          - label: Learning
+            name: learning
+            widget: object
+            fields:
+              - { label: Heading, name: heading, widget: string }
+              - { label: "Heading data-k hook (do not edit)", name: headingDataK, widget: hidden }
+              - { label: Title, name: title, widget: object, fields: [{ label: Lead, name: lead, widget: string }, { label: Emphasis, name: emphasis, widget: string }, { label: Trail, name: trail, widget: string }] }
+              - { label: Video, name: video, widget: file }
+              - { label: Poster, name: poster, widget: image, required: false }
+              - { label: "Video alt text", name: videoAlt, widget: string }
+              - label: Columns
+                name: columns
+                widget: list
+                fields:
+                  - { label: Icon, name: icon, widget: object, fields: [{ label: Image, name: src, widget: image, required: false }, { label: "Alt text", name: alt, widget: string }] }
+                  - { label: Title, name: title, widget: string }
+                  - { label: "Lead in", name: leadIn, widget: string }
+                  - { label: Trail, name: trail, widget: string }
+          - label: Teachers
+            name: teachers
+            widget: object
+            fields:
+              - { label: Heading, name: heading, widget: string }
+              - { label: "Heading data-k hook (do not edit)", name: headingDataK, widget: hidden }
+              - label: Slides
+                name: slides
+                widget: list
+                fields:
+                  - { label: Role, name: role, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: string, required: false }] }
+                  - { label: Name, name: name, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: string, required: false }] }
+                  - { label: "Play label", name: playLabel, widget: object, fields: [{ label: Placeholder, name: placeholder, widget: string, required: false }] }
+                  - { label: Video, name: video, widget: string }
+                  - { label: "Video title", name: videoTitle, widget: string }
+          - label: Values
+            name: values
+            widget: object
+            fields:
+              - label: Cards
+                name: cards
+                widget: list
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Photo, name: photo, widget: object, fields: [{ label: Image, name: src, widget: image, required: false }, { label: "Alt text", name: alt, widget: string }] }
+              - label: Heading
+                name: heading
+                widget: object
+                fields:
+                  - { label: Lead, name: lead, widget: string }
+                  - { label: Small 1, name: small1, widget: string }
+                  - { label: Mid, name: mid, widget: string }
+                  - { label: Small 2, name: small2, widget: string }
+                  - { label: Trail, name: trail, widget: string }
+          - label: Closing
+            name: closing
+            widget: object
+            fields:
+              - label: Heading
+                name: heading
+                widget: object
+                fields:
+                  - { label: Small, name: small, widget: string }
+                  - { label: Big, name: big, widget: list, field: { label: Line, name: line, widget: string } }
+              - { label: "Button label", name: buttonLabel, widget: string }
+              - { label: "Button path", name: buttonPath, widget: string }
+              - label: Links
+                name: links
+                widget: list
+                fields:
+                  - { label: Label, name: label, widget: string }
+                  - { label: Path, name: path, widget: string }
+  - name: our_story
+    label: Our Story
+    files:
+      - name: our-story
+        label: Our Story
+        file: content/our-story.json
+        fields:
+          - label: Hero
+            name: hero
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: "Photo description", name: photoDescription, widget: string }
+          - label: Lead
+            name: lead
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Copy, name: copy, widget: text }
+              - label: Callout
+                name: callout
+                widget: object
+                fields:
+                  - { label: Text, name: text, widget: text }
+                  - { label: Placeholder, name: placeholder, widget: string, required: false }
+          - label: "Quick facts"
+            name: quickFacts
+            widget: list
+            fields:
+              - { label: Figure, name: figure, widget: string }
+              - { label: Label, name: label, widget: string }
+              - { label: Placeholder, name: placeholder, widget: string, required: false }
+          - label: Mission
+            name: mission
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - label: Title
+                name: title
+                widget: object
+                fields:
+                  - { label: Text, name: text, widget: text }
+                  - { label: Placeholder, name: placeholder, widget: string, required: false }
+              - label: Columns
+                name: cols
+                widget: list
+                fields:
+                  - { label: Heading, name: heading, widget: string }
+                  - label: Text
+                    name: text
+                    widget: object
+                    fields:
+                      - { label: Text, name: text, widget: text }
+                      - { label: Placeholder, name: placeholder, widget: string, required: false }
+          - label: "Story blocks"
+            name: storyBlocks
+            widget: list
+            fields:
+              - { label: Heading, name: heading, widget: string }
+              - label: Copy
+                name: copy
+                widget: object
+                fields:
+                  - { label: Text, name: text, widget: text }
+                  - { label: Placeholder, name: placeholder, widget: string, required: false }
+              - { label: "Link label", name: linkLabel, widget: string }
+              - { label: "Link href", name: linkHref, widget: string }
+              - { label: "Photo description", name: photoDescription, widget: string }
+          - label: Closing
+            name: closing
+            widget: list
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Path, name: path, widget: string }
+  - name: settings
+    label: Site Settings
+    files:
+      - name: settings
+        label: Inner-page Sidebar
+        file: content/settings.json
+        fields:
+          - { label: About, name: about, widget: text }
+          - label: "Quick links"
+            name: quickLinks
+            widget: list
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Path, name: path, widget: string }
+          - label: Address
+            name: address
+            widget: object
+            fields:
+              - { label: Lines, name: lines, widget: list, field: { label: Line, name: line, widget: string } }
+              - { label: Phones, name: phones, widget: list, field: { label: Phone, name: phone, widget: string } }
+  - name: navigation
+    label: Navigation
+    files:
+      - name: site
+        label: Nav, Footer & Quick Links
+        file: content/site.json
+        fields:
+          - label: Menu
+            name: menu
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Path, name: path, widget: string }
+              - label: Links
+                name: links
+                widget: list
+                fields:
+                  - { label: Label, name: label, widget: string }
+                  - { label: Path, name: path, widget: string }
+                  - { label: Parent, name: parent, widget: string, required: false }
+          - label: "Quick links"
+            name: quickLinks
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Path, name: path, widget: string }
+              - label: Links
+                name: links
+                widget: list
+                fields:
+                  - { label: Label, name: label, widget: string }
+                  - { label: Path, name: path, widget: string }
+                  - { label: External, name: external, widget: boolean, required: false, default: false }
+          - label: "News cards"
+            name: newsCards
+            widget: object
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Path, name: path, widget: string }
+          - label: Footer
+            name: footer
+            widget: list
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Path, name: path, widget: string }
+          - label: Divisions
+            name: divisions
+            widget: list
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Path, name: path, widget: string }
+          - label: Logo
+            name: logo
+            widget: object
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Path, name: path, widget: string }
+          - { label: Origin, name: origin, widget: string }
+          - label: Labels
+            name: labels
+            widget: object
+            fields:
+              - { label: Home, name: home, widget: string }
+              - { label: "In section", name: inSection, widget: string }
+              - { label: "More on campus", name: moreOnCampus, widget: string }
+              - { label: "Form notice", name: formNotice, widget: string }
+              - { label: Previous, name: previous, widget: string }
+              - { label: Next, name: next, widget: string }
+              - { label: Close, name: close, widget: string }
+          - { label: "Pending paths", name: pending, widget: list, field: { label: Pattern, name: pattern, widget: string } }
+  - name: pages
+    label: Inner Pages
+    folder: content/pages
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: "Head title override (hidden, soccer.md only)", name: headTitle, widget: hidden, required: false }
+      - { label: "Breadcrumb label", name: crumbLabel, widget: string, required: false }
+      - { label: Lead, name: lead, widget: string, required: false }
+      - { label: "Head: noindex comment (hidden)", name: headNoindexComment, widget: hidden, required: false }
+      - { label: "Head: intro comment (hidden)", name: headIntroComment, widget: hidden, required: false }
+      - { label: "Head: safety-nets comment (hidden)", name: headSafetyNetsComment, widget: hidden, required: false }
+      - { label: "Head: test-harness comment (hidden)", name: headTestHarnessComment, widget: hidden, required: false }
+      - label: Blocks
+        name: blocks
+        widget: list
+        types:
+          - label: "Rich text"
+            name: richtext
+            fields:
+              - { label: Body, name: body, widget: markdown }
+              - { label: "Raw HTML (hidden)", name: raw, widget: hidden, required: false }
+              - { label: "Blank line before (hidden)", name: blankLineBefore, widget: hidden, required: false }
+          - label: Image
+            name: image
+            fields:
+              - { label: Description, name: description, widget: string }
+              - { label: Photo, name: src, widget: image, required: false }
+          - label: "Feature cards"
+            name: features
+            fields:
+              - label: Items
+                name: items
+                widget: list
+                fields: [{ label: Heading, name: heading, widget: string }, { label: Text, name: text, widget: text }]
+          - label: "Point list"
+            name: points
+            fields: [{ label: Items, name: items, widget: list, field: { label: Point, name: point, widget: string } }]
