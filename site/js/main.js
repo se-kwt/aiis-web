@@ -12,6 +12,7 @@ import * as reveals from './reveals.js';
 import * as learning from './learning.js';
 import * as carousel from './carousel.js';
 import * as values from './values.js';
+import * as ourStory from './our-story.js';
 // Register a feature module: add one import above and one entry below.
 // Each module exports { name, section (data-section value or null), init() (sync or async) }.
 
@@ -31,4 +32,5 @@ runModules([
   learning,
   carousel,
   values,
+  ourStory,
 ]);

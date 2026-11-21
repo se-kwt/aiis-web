@@ -2,6 +2,7 @@
   "_source": "AIIS Website Sitemap, August 2026 (owner's document), navigation list supplied by the owner in November 2026. Labels and root-relative paths are used verbatim; the site is expected to live at aiiskwt.com. In a group, a link with a `group` sits under that sub-heading; a link with a `parent` sits in that nested submenu (Sports). A group's top link goes to its first link.",
   "menu": [
     { "title": "ABOUT US", "path": "/chairmans-message", "links": [
+      { "label": "Our Story", "path": "/our-story" },
       { "label": "Chairman's Message", "path": "/chairmans-message" },
       { "label": "Principal's Message", "path": "/principals-message" },
       { "label": "Vision and Mission", "path": "/vision-mission" },
