@@ -3,14 +3,22 @@
 //
 // Usage: node tools/compare-output.mjs <relativePath> [ref=baseline-static-site]
 //
-// Reads `_site/<relativePath>` from disk and `site/<relativePath>` as it
-// existed at git ref `ref` (default: the `baseline-static-site` tag), compares
-// them as Buffers, and exits 0 silently on a match or prints a short diff
-// summary and exits 1 on a mismatch. This is the test oracle every later task
-// in the Eleventy/Decap migration plan uses to confirm the new build produces
+// Reads the built output from disk and `site/<relativePath>` as it existed at
+// git ref `ref` (default: the `baseline-static-site` tag), compares them as
+// Buffers, and exits 0 silently on a match or prints a short diff summary and
+// exits 1 on a mismatch. This is the test oracle every later task in the
+// Eleventy/Decap migration plan uses to confirm the new build produces
 // byte-identical output to the original hand-built site.
+//
+// The baseline side is always the flat `site/<relativePath>` file, unchanged.
+// The built side tries `_site/<relativePath>` first; if that doesn't exist and
+// `relativePath` ends in `.html`, it falls back to
+// `_site/<relativePath without .html>/index.html` — this lets a page built
+// with an extensionless-URL permalink (e.g. `/our-story/index.html`, which
+// Eleventy writes to `_site/our-story/index.html`) still be checked with the
+// same flat `<name>.html` argument used for every other page.
 
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 
 const [relativePath, ref = "baseline-static-site"] = process.argv.slice(2);
@@ -20,11 +28,17 @@ if (!relativePath) {
   process.exit(1);
 }
 
+let builtPath = `_site/${relativePath}`;
+if (!existsSync(builtPath) && relativePath.endsWith(".html")) {
+  const fallbackPath = `_site/${relativePath.slice(0, -".html".length)}/index.html`;
+  if (existsSync(fallbackPath)) builtPath = fallbackPath;
+}
+
 let actual;
 try {
-  actual = readFileSync(`_site/${relativePath}`);
+  actual = readFileSync(builtPath);
 } catch (err) {
-  console.error(`Could not read built output _site/${relativePath}: ${err.message}`);
+  console.error(`Could not read built output ${builtPath}: ${err.message}`);
   process.exit(1);
 }
 
@@ -45,7 +59,7 @@ const actualLines = actual.toString("utf8").split("\n");
 const expectedLines = expected.toString("utf8").split("\n");
 const maxLines = Math.max(actualLines.length, expectedLines.length);
 
-console.error(`Mismatch: _site/${relativePath} differs from ${ref}:site/${relativePath}`);
+console.error(`Mismatch: ${builtPath} differs from ${ref}:site/${relativePath}`);
 console.error(`  built: ${actual.length} bytes, ${actualLines.length} lines`);
 console.error(`  baseline: ${expected.length} bytes, ${expectedLines.length} lines`);
 
