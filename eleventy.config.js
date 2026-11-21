@@ -1,4 +1,41 @@
+import fs from "node:fs";
+import path from "node:path";
 import MarkdownIt from "markdown-it";
+
+// Inner-page content lives in `content/pages/*.md` — a plain directory Decap
+// CMS (wired up in a later task) can edit directly, not nested under `src/`.
+// Eleventy only scans its configured `input` directory ("src") for templates,
+// so each content file is registered as a *virtual* template (added in
+// Eleventy 3.0, `addTemplate(virtualInputPath, content, data)`) rather than
+// relying on a symlink into `src/`. `content/pages/pages.json` still plays
+// the same role a real Eleventy directory-data file would — it's read once
+// here and its `layout`/`styles`/`permalink` fields are applied to every
+// `.md` file in the directory, exactly like Eleventy's own directory-data
+// cascade would, just computed by hand instead of discovered on disk.
+const PAGES_DIR = "content/pages";
+const PAGES_CONFIG_FILE = "pages.json";
+
+function registerContentPages(eleventyConfig) {
+  const configPath = path.join(PAGES_DIR, PAGES_CONFIG_FILE);
+  const pagesConfig = JSON.parse(fs.readFileSync(configPath, "utf8"));
+
+  const files = fs.readdirSync(PAGES_DIR).filter((filename) => filename.endsWith(".md"));
+  for (const filename of files) {
+    const raw = fs.readFileSync(path.join(PAGES_DIR, filename), "utf8");
+    // The virtual path is relative to the `input` dir ("src"), so this
+    // resolves to the same "src/pages/<slug>.md" identity the old symlink
+    // produced — `page.fileSlug` (used by `pagesConfig.permalink`'s
+    // "{{ page.fileSlug }}" template) is computed from this path the same
+    // way it would be for a real on-disk file.
+    eleventyConfig.addTemplate(`pages/${filename}`, raw, { ...pagesConfig });
+  }
+
+  // `addTemplate`'s content is read once at config time, above — without an
+  // explicit watch target, editing a file in content/pages/ wouldn't trigger
+  // a rebuild in `--serve`/`--watch` mode.
+  eleventyConfig.addWatchTarget(`${PAGES_DIR}/**/*.md`);
+  eleventyConfig.addWatchTarget(configPath);
+}
 
 // `html: true` lets inner-page content author raw HTML (e.g. the literal
 // `<br>` the Chairman's Message sign-off needs); `typographer: true` turns
@@ -55,6 +92,8 @@ export default function (eleventyConfig) {
     if (str === null || str === undefined) return "";
     return reencodeTypographicEntities(markdownIt.renderInline(String(str)));
   });
+
+  registerContentPages(eleventyConfig);
 
   return {
     dir: { input: "src", includes: "_includes", layouts: "_layouts", data: "_data", output: "_site" },
