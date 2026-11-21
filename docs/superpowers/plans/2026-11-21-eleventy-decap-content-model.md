@@ -94,17 +94,18 @@ blocks:
 ## Task 1: Bring Our Story onto this branch
 
 **Files:**
-- Create: `site/our-story.html`, `site/css/our-story.css`, `site/js/our-story.js` (copied from the main checkout's working tree)
-- Modify: `content/site.json`, `site/index.html`, `site/js/main.js` (copied from the main checkout's working tree, replacing this worktree's current versions)
+- Create: `site/our-story.html`, `site/css/our-story.css`, `site/js/our-story.js` (copied from the `our-story-page-7db305` worktree's working tree)
+- Modify: `content/site.json`, `site/index.html`, `site/js/main.js` (copied from the `our-story-page-7db305` worktree's working tree, replacing this worktree's current versions)
 - Create: `docs/superpowers/specs/2026-11-21-decap-netlify-cms-design.md` (already copied into this worktree; just needs committing)
 
 **Interfaces:**
 - Produces: a working tree where the homepage links to `/our-story` (extensionless) and `our-story` is registered in `js/main.js`'s `runModules([...])` list, matching the spec's described end state.
+- Ruling: source every file from the `our-story-page-7db305` worktree, not the main checkout. Both have identical uncommitted edits to `content/site.json` and `site/js/main.js`, but the main checkout's `site/index.html` still carries the `.html`-suffixed links from its own local-preview workaround (confirmed by diffing the two working trees) — exactly what the spec's anti-goals rule out. `our-story-page-7db305` already has the correct extensionless links everywhere, so it is the only valid source for `site/index.html`.
 
 - [ ] **Step 1: Copy the files**
 
 ```bash
-SRC="/Users/amal/Documents/Stellar Edu/1 - Projects/aiis_web"
+SRC="/Users/amal/Documents/Stellar Edu/1 - Projects/aiis_web/.claude/worktrees/our-story-page-7db305"
 cp "$SRC/site/our-story.html" site/our-story.html
 cp "$SRC/site/css/our-story.css" site/css/our-story.css
 cp "$SRC/site/js/our-story.js" site/js/our-story.js
