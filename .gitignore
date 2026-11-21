@@ -2,6 +2,7 @@ node_modules/
 .superpowers/
 .DS_Store
 .compare-tmp/
+_site/
 
 # Local working material: screenshots of another school's site (never publish)
 docs/reference/screenshots/
