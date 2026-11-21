@@ -69,6 +69,16 @@ function reencodeTypographicEntities(html) {
   return html.replace(TYPOGRAPHIC_ENTITIES_RE, (ch) => TYPOGRAPHIC_ENTITIES[ch]);
 }
 
+// Minimal HTML-escaping shared by the `hl`/`words` filters below. They must
+// do their own escaping (rather than relying on Nunjucks autoescape) because
+// every call site applies `| safe` to the filter's return value, trusting it
+// already escaped any plain text it emits.
+const HTML_ESCAPES = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+const HTML_ESCAPE_RE = /[&<>"']/g;
+function escapeHtml(str) {
+  return String(str).replace(HTML_ESCAPE_RE, (ch) => HTML_ESCAPES[ch]);
+}
+
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/js");
@@ -92,6 +102,57 @@ export default function (eleventyConfig) {
     if (str === null || str === undefined) return "";
     return reencodeTypographicEntities(markdownIt.renderInline(String(str)));
   });
+
+  // Highlights a sub-phrase within a sentence, for prose like the homepage
+  // promise headings ("...so your child can ==discover== who they want to
+  // ==become==."). `input` is a plain string an editor can type with no
+  // HTML knowledge: text is split on `==...==` pairs, every literal segment
+  // is HTML-escaped, and each marked phrase becomes a
+  // `<span class="hl" data-hl>` (matching the baseline markup exactly). The
+  // optional `dataK` is applied, uniformly, as a `data-k` attribute on every
+  // `<span>` this call produces — the baseline repeats the same `data-k` on
+  // each highlighted word within one heading (e.g. both "discover" and
+  // "become" carry `data-k="promise1-highlight1"`). Caller applies `| safe`,
+  // since this filter has already escaped everything it returns.
+  eleventyConfig.addFilter("hl", (input, dataK) => {
+    if (input === null || input === undefined) return "";
+    const dataKAttr = dataK ? ` data-k="${escapeHtml(dataK)}"` : "";
+    // Splitting on a regex with one capture group yields
+    // [plain, marked, plain, marked, ..., plain] — even indices are literal
+    // text, odd indices are the `==...==` phrases themselves (markers already
+    // stripped by the capture group).
+    return String(input)
+      .split(/==(.+?)==/g)
+      .map((part, i) => (i % 2 === 1 ? `<span class="hl"${dataKAttr} data-hl>${escapeHtml(part)}</span>` : escapeHtml(part)))
+      .join("");
+  });
+
+  // Wraps every space-separated word of `input` in its own
+  // `<span class="word">`, for headings the baseline reveals word-by-word
+  // (e.g. the hero's `<span class="word">IGNITING</span> <span
+  // class="word">YOUNG</span> <span class="word">MINDS</span>`). Unlike
+  // `hl`, there is no partial selection: every word is wrapped, none is
+  // "plain". The optional `firstWordDataK` attaches a `data-k` to the FIRST
+  // word's span only, matching the one baseline heading (the hero title)
+  // that tags just its first `.word` span this way. Caller applies `| safe`.
+  eleventyConfig.addFilter("words", (input, firstWordDataK) => {
+    if (input === null || input === undefined) return "";
+    return String(input)
+      .split(" ")
+      .filter((word) => word.length > 0)
+      .map((word, i) => {
+        const attr = i === 0 && firstWordDataK ? ` data-k="${escapeHtml(firstWordDataK)}"` : "";
+        return `<span class="word"${attr}>${escapeHtml(word)}</span>`;
+      })
+      .join(" ");
+  });
+
+  // Renders a content field's `data-placeholder="<reason>"` hook exactly
+  // where the baseline has one, for a field authored as `{text, placeholder}`
+  // rather than a plain string. Used as `{{ field | placeholderAttr | safe }}`
+  // immediately after the tag name; a plain string (no `.placeholder`) is a
+  // no-op, so this is safe to apply uniformly across every field.
+  eleventyConfig.addFilter("placeholderAttr", (field) => (field && field.placeholder ? ` data-placeholder="${field.placeholder}"` : ""));
 
   registerContentPages(eleventyConfig);
 
