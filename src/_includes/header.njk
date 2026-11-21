@@ -1,10 +1,10 @@
 {%- macro amp(s) -%}{{ s | escape | replace("&#39;", "'") | safe }}{%- endmacro -%}
 <header class="hdr" data-section="header" data-k="header-root">
     <div class="hdr__inner">
-      <a class="hdr__logo-m" href="/" aria-label="Aspire Indian International School home"><img src="assets/logos/wordmark-web.png" alt="" width="900" height="197"></a>
+      <a class="hdr__logo-m" href="/" aria-label="Aspire Indian International School home"><img src="/assets/logos/wordmark-web.png" alt="" width="900" height="197"></a>
       <div class="hdr__wrap">
         <div class="hdr__logo-d" data-k="header-logo">
-          <a href="/" aria-label="Aspire Indian International School home"><img data-k="header-logo-img" src="assets/logos/wordmark-web.png" alt="Aspire Indian International School" width="900" height="197"></a>
+          <a href="/" aria-label="Aspire Indian International School home"><img data-k="header-logo-img" src="/assets/logos/wordmark-web.png" alt="Aspire Indian International School" width="900" height="197"></a>
         </div>
         <nav class="hdr__nav" data-k="header-nav" aria-label="Main">
           <ul>{% for section in site.menu %}

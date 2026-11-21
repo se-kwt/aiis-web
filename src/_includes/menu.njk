@@ -1,7 +1,7 @@
 {%- macro amp(s) -%}{{ s | escape | replace("&#39;", "'") | safe }}{%- endmacro -%}{%- set nestedGroupCounter = 0 -%}
 <div class="hdr-menu" id="site-menu" data-k="header-menu-panel" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
       <div class="hdr-menu__top">
-        <a class="hdr-menu__logo" href="/" data-k="header-menu-logo" aria-label="Aspire Indian International School home"><img src="assets/logos/crest-web.png" alt="" width="31" height="24"></a>
+        <a class="hdr-menu__logo" href="/" data-k="header-menu-logo" aria-label="Aspire Indian International School home"><img src="/assets/logos/crest-web.png" alt="" width="31" height="24"></a>
         <button class="hdr-menu__close" type="button" data-menu-close data-k="header-menu-close"><span class="sr">Close Menu</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 15L15 1M1 1l14 14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></button>
       </div>
       <nav class="hdr-menu__main" aria-label="Main menu">
