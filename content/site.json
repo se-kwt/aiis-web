@@ -1,15 +1,12 @@
 {
-  "_source": "AIIS Website Sitemap, August 2026 (owner's document), navigation list supplied by the owner in November 2026. Labels and root-relative paths are used verbatim; the site is expected to live at aiiskwt.com. In a group, a link with a `group` sits under that sub-heading; a link with a `parent` sits in that nested submenu (Sports). A group's top link goes to its first link.",
+  "_source": "AIIS Website Sitemap, August 2026 (owner's document), navigation list supplied by the owner in November 2026. Labels and root-relative paths are used verbatim; the site is expected to live at aiiskwt.com. A link with a `parent` sits in that section's nested submenu (Sports, under AMENITIES). Corrected 2026-11-21 during Task 7: the owner's sitemap modeled Community as a `group` nested under ABOUT US, but the live baseline (git tag baseline-static-site) renders COMMUNITY as its own independent top-level nav section with no nested relationship to ABOUT US — this file now matches the live baseline structure, which is what this migration must reproduce byte-for-byte; the labels/paths themselves are unchanged from the owner's document.",
   "menu": [
     { "title": "ABOUT US", "path": "/chairmans-message", "links": [
       { "label": "Our Story", "path": "/our-story" },
       { "label": "Chairman's Message", "path": "/chairmans-message" },
       { "label": "Principal's Message", "path": "/principals-message" },
       { "label": "Vision and Mission", "path": "/vision-mission" },
-      { "label": "Vice Principal's Message", "path": "/vice-principal-message" },
-      { "label": "Events", "path": "/das-trailblazer", "group": "Community" },
-      { "label": "CSR Reports", "path": "/csr-reports", "group": "Community" },
-      { "label": "Mandatory Public Disclosure", "path": "/mandatory-public-disclosure", "group": "Community" } ] },
+      { "label": "Vice Principal's Message", "path": "/vice-principal-message" } ] },
     { "title": "ACADEMICS", "path": "/kindergarten-school", "links": [
       { "label": "Kindergarten", "path": "/kindergarten-school" },
       { "label": "Primary School", "path": "/primary-school" },
@@ -43,7 +40,11 @@
       { "label": "Badminton", "path": "/badminton", "parent": "Sports" },
       { "label": "Cricket", "path": "/cricket", "parent": "Sports" },
       { "label": "Basketball", "path": "/basket-ball", "parent": "Sports" },
-      { "label": "Soccer", "path": "/soccer", "parent": "Sports" } ] }
+      { "label": "Soccer", "path": "/soccer", "parent": "Sports" } ] },
+    { "title": "COMMUNITY", "path": "/das-trailblazer", "links": [
+      { "label": "Events", "path": "/das-trailblazer" },
+      { "label": "CSR Reports", "path": "/csr-reports" },
+      { "label": "Mandatory Public Disclosure", "path": "/mandatory-public-disclosure" } ] }
   ],
   "quickLinks": { "title": "QUICK LINKS", "path": "/form/aiis-online-admissions", "links": [
     { "label": "Admission Enquiry", "path": "/form/aiis-online-admissions" },
