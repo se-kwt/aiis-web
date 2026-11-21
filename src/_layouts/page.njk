@@ -1,0 +1,57 @@
+{% extends "./base.njk" %}
+{% set pageTitle = title %}
+{% set crumbText = crumbLabel or pageTitle %}
+{% set title = (title + " | Aspire Indian International School") | safe %}
+{% block content %}  <!-- build:page --><div class="page" data-section="page" data-k="page-root">
+
+    <section class="page-hero">
+      <div class="page__wrap">
+        <p class="page-hero__crumb"><a href="/">Home</a> / {{ crumbText | markdownInline | safe }}</p>
+        <h1 class="page-hero__title">{{ pageTitle | markdownInline | safe }}</h1>
+{% if lead %}        <p class="page-hero__lead">{{ lead | markdownInline | safe }}</p>
+{% endif %}      </div>
+    </section>
+
+    <section class="page-body">
+      <div class="page__wrap page-grid">
+        <article class="page-content">
+{% for block in blocks %}{% if block.type == "richtext" %}          {{ block.body | markdown | safe }}{% elif block.type == "image" %}{% if block.src %}        <figure class="tp"><img src="{{ block.src }}" alt="{{ block.description }}" loading="lazy"></figure>
+{% else %}        <figure class="tp" data-temp-photo>
+          <span class="sr">{{ block.description }}</span>
+        </figure>
+{% endif %}{% elif block.type == "features" %}        <ul class="page-features">
+{% for item in block.items %}          <li class="page-features__item"><h3>{{ item.heading }}</h3><p>{{ item.text }}</p></li>
+{% endfor %}        </ul>
+{% elif block.type == "points" %}        <ul class="page-points">
+{% for item in block.items %}          <li class="page-points__item">{{ item }}</li>
+{% endfor %}        </ul>
+{% endif %}{% endfor %}        </article>
+        <aside class="page-sidebar">
+          <div class="page-sidebar__card">
+            <h3>About Us</h3>
+            <p>AIIS is where your child can discover what they love and grow into who they want to be. We focus on academic progress alongside emotional, social and creative growth, building a school where every student is encouraged to reach their full potential.</p>
+          </div>
+          <div class="page-sidebar__card">
+            <h3>Quick Links</h3>
+            <ul class="page-sidebar__links">
+              <li><a href="/admission-process">Admission Process</a></li>
+              <li><a href="/fees-schedules">Fees &amp; Schedules</a></li>
+              <li><a href="/weekly-test-curriculum">Weekly Test</a></li>
+            </ul>
+          </div>
+          <div class="page-sidebar__card">
+            <h3>Address</h3>
+            <address class="page-sidebar__contact">
+              Aspire Indian International School<br>
+              Street 100, Block 1,<br>
+              Abbasiya School Complex, Kuwait<br>
+              <a href="tel:+96555195455">+965 551 95455</a><br>
+              <a href="tel:+96550927287">+965 509 27287</a>
+            </address>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+  </div><!-- /build:page -->
+{% endblock %}
