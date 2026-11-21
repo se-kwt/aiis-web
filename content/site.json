@@ -61,12 +61,6 @@
     { "label": "Contact Us", "path": "/form/contact-the-best-indian-school-in-kuwait" },
     { "label": "Calendar", "path": "/calendar" }
   ],
-  "closingButton": { "label": "Take the Next Step", "path": "/form/aiis-online-admissions" },
-  "closing": [
-    { "label": "Enquire", "path": "/form/aiis-online-admissions" },
-    { "label": "Book a School Visit", "path": "/form/contact-the-best-indian-school-in-kuwait" },
-    { "label": "Apply", "path": "/admission-process" }
-  ],
   "divisions": [
     { "label": "Early years", "path": "/kindergarten-school" },
     { "label": "Primary", "path": "/primary-school" },
@@ -75,7 +69,6 @@
   "logo": { "label": "Aspire Indian International School home", "path": "/" },
   "origin": "https://www.aiiskwt.com",
   "labels": { "home": "Home", "inSection": "In this section", "moreOnCampus": "More on campus",
-    "formNotice": "This form is not connected yet", "previous": "Previous", "next": "Next", "close": "Close",
-    "ctaSmall": "IT'S TIME TO", "ctaBig": "START YOUR JOURNEY" },
+    "formNotice": "This form is not connected yet", "previous": "Previous", "next": "Next", "close": "Close" },
   "pending": ["/web/category/*", "/web/single-galleries/*"]
 }
