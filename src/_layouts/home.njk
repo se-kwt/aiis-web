@@ -181,7 +181,7 @@
           <span class="teachers__lines teachers__lines--top" data-k="teachers-lines-top" aria-hidden="true"></span>
           <div class="teachers__slider" data-k="teachers-slider">
             <ul class="teachers__track" data-track>{% for slide in homepage.teachers.slides %}
-            <li class="teachers__slide" data-k="teachers-slide1" data-slide-index="{{ loop.index0 }}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of 7">
+            <li class="teachers__slide" data-k="teachers-slide1" data-slide-index="{{ loop.index0 }}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ homepage.teachers.slides.length }}">
               <figure class="tp teachers__photo" data-k="teachers-slide1-photo">
                 <figcaption class="teachers__caption" data-k="teachers-slide1-caption"><span class="teachers__corner teachers__corner--l" data-k="teachers-slide1-corner" aria-hidden="true"></span><span class="teachers__corner teachers__corner--r" aria-hidden="true"></span><p data-k="teachers-slide1-role"{{ slide.role | placeholderAttr | safe }}>{{ amp(slide.role.text or slide.role) }}</p><h3 data-k="teachers-slide1-name"{{ slide.name | placeholderAttr | safe }}>{{ amp(slide.name.text or slide.name) }}</h3></figcaption>
               </figure>
@@ -190,7 +190,7 @@
             </ul>
           </div>
           <div class="teachers__controls">
-            <div class="teachers__paging" data-k="teachers-paging" aria-live="polite" aria-atomic="true"><span class="sr">Card </span><span class="teachers__cur" data-k="teachers-paging-current">01</span><span class="teachers__sep" aria-hidden="true">/</span><span class="teachers__tot"><span class="sr">of </span>07</span></div>
+            <div class="teachers__paging" data-k="teachers-paging" aria-live="polite" aria-atomic="true"><span class="sr">Card </span><span class="teachers__cur" data-k="teachers-paging-current">01</span><span class="teachers__sep" aria-hidden="true">/</span><span class="teachers__tot"><span class="sr">of </span>{% if homepage.teachers.slides.length < 10 %}0{{ homepage.teachers.slides.length }}{% else %}{{ homepage.teachers.slides.length }}{% endif %}</span></div>
             <div class="teachers__arrows">
               <button class="teachers__arrow teachers__arrow--prev" type="button" data-prev data-k="teachers-prev" aria-label="Previous teacher"><svg aria-hidden="true" width="18" height="12" viewBox="0 0 18 12" fill="none"><path d="M17 6H1m5-5L1 6l5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
               <span class="teachers__sep" aria-hidden="true">/</span>
