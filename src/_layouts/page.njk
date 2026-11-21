@@ -26,30 +26,7 @@
 {% for item in block.items %}          <li class="page-points__item">{{ item | markdownInline | safe }}</li>
 {% endfor %}        </ul>
 {% endif %}{% endfor %}        </article>
-        <aside class="page-sidebar">
-          <div class="page-sidebar__card">
-            <h3>About Us</h3>
-            <p>AIIS is where your child can discover what they love and grow into who they want to be. We focus on academic progress alongside emotional, social and creative growth, building a school where every student is encouraged to reach their full potential.</p>
-          </div>
-          <div class="page-sidebar__card">
-            <h3>Quick Links</h3>
-            <ul class="page-sidebar__links">
-              <li><a href="/admission-process">Admission Process</a></li>
-              <li><a href="/fees-schedules">Fees &amp; Schedules</a></li>
-              <li><a href="/weekly-test-curriculum">Weekly Test</a></li>
-            </ul>
-          </div>
-          <div class="page-sidebar__card">
-            <h3>Address</h3>
-            <address class="page-sidebar__contact">
-              Aspire Indian International School<br>
-              Street 100, Block 1,<br>
-              Abbasiya School Complex, Kuwait<br>
-              <a href="tel:+96555195455">+965 551 95455</a><br>
-              <a href="tel:+96550927287">+965 509 27287</a>
-            </address>
-          </div>
-        </aside>
+        {% include "sidebar.njk" %}
       </div>
     </section>
 
