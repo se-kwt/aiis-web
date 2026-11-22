@@ -1,0 +1,7 @@
+# Netlify hosts ONLY the Decap CMS OAuth proxy (see netlify/functions/).
+# The public site is built and served by GitHub Pages, not by Netlify.
+[build]
+  publish = "netlify/public"
+
+[functions]
+  directory = "netlify/functions"

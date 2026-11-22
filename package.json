@@ -5,6 +5,7 @@
   "scripts": {
     "build": "eleventy",
     "dev": "eleventy --serve",
+    "test:oauth": "node --test netlify/oauth.test.mjs",
     "migrate:pages": "node tools/migrate-pages.mjs"
   },
   "devDependencies": {

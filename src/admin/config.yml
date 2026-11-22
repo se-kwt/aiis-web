@@ -1,8 +1,11 @@
 backend:
   name: github
-  repo: se-kwt/aiis-web      # update if the real repo slug differs; not used while local_backend is on
+  repo: se-kwt/se-kwt.github.io
   branch: main
-local_backend: true
+  # Set to the deployed OAuth proxy (see netlify/README.md), e.g.
+  # base_url: https://aiis-cms-auth.netlify.app
+  # Until this is set, Decap falls back to api.netlify.com and login fails.
+local_backend: true   # only takes effect when the admin is opened on localhost
 media_folder: "src/assets/photos"
 public_folder: "/assets/photos"
 collections:
