@@ -5,7 +5,7 @@ blocks:
     body: "AIIS offers a world-class Cambridge IGCSE education built around academic excellence, critical thinking, creativity and a genuine passion for lifelong learning, backed by modern, purpose-built facilities."
   - type: image
     description: "Students engaged in a Cambridge IGCSE classroom session at AIIS"
-    src: null
+    src: /assets/photos/pages/best-igcse-cambridge-school-in-kuwait.jpg
   - type: richtext
     body: "## Why choose Cambridge IGCSE at AIIS?"
   - type: features

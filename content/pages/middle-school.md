@@ -9,7 +9,7 @@ blocks:
     raw: true
   - type: image
     description: "Middle School students collaborating on a hands-on project at AIIS"
-    src: null
+    src: /assets/photos/pages/middle-school.jpg
   - type: richtext
     body: "Special assemblies give every student a stage to showcase a talent, and a dedicated school counsellor supports the emotional wellbeing that keeps students rooted and happy through these formative years."
   - type: richtext

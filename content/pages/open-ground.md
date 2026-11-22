@@ -1,9 +1,9 @@
 ---
 title: "Open Play Ground"
 blocks:
-  - type: richtext
-    body: "<figure class=\"tp\" data-temp-photo>\n            <span class=\"sr\">Students playing on the open ground at AIIS</span>\n          </figure>\n"
-    raw: true
+  - type: image
+    description: "Students playing on the open ground at AIIS"
+    src: /assets/photos/pages/open-ground.jpg
   - type: richtext
     body: "<p>The school's open ground gives students room to run, compete and test themselves outdoors, with space for a wide range of games and sports.</p>\n"
     raw: true

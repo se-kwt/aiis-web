@@ -1,9 +1,9 @@
 ---
 title: "Auditorium"
 blocks:
-  - type: richtext
-    body: "<figure class=\"tp\" data-temp-photo>\n            <span class=\"sr\">Students performing on stage in the AIIS auditorium</span>\n          </figure>\n"
-    raw: true
+  - type: image
+    description: "Students performing on stage in the AIIS auditorium"
+    src: /assets/photos/pages/auditorium.jpg
   - type: richtext
     body: "<p>AIIS's auditorium is built to host the school's larger occasions &mdash; annual day, award ceremonies, training sessions and inter-school competitions &mdash; with acoustics and seating sized for a full-school audience.</p>\n"
     raw: true

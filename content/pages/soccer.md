@@ -3,9 +3,9 @@ title: "Football"
 headTitle: "Soccer"
 crumbLabel: "Soccer"
 blocks:
-  - type: richtext
-    body: "<figure class=\"tp\" data-temp-photo>\n            <span class=\"sr\">Students playing football on the AIIS field</span>\n          </figure>\n"
-    raw: true
+  - type: image
+    description: "Students playing football on the AIIS field"
+    src: /assets/photos/pages/soccer.jpg
   - type: richtext
     body: "<p>AIIS's football program is coached to build strategy and performance in a supportive, high-energy environment.</p>\n"
     raw: true

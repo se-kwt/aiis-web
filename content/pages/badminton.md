@@ -1,9 +1,9 @@
 ---
 title: "Badminton"
 blocks:
-  - type: richtext
-    body: "<figure class=\"tp\" data-temp-photo>\n            <span class=\"sr\">Students playing badminton at AIIS</span>\n          </figure>\n"
-    raw: true
+  - type: image
+    description: "Students playing badminton at AIIS"
+    src: /assets/photos/pages/badminton.jpg
   - type: richtext
     body: "<p>AIIS's badminton program runs under qualified coaching with training built around each student's level.</p>\n"
     raw: true

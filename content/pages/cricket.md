@@ -1,9 +1,9 @@
 ---
 title: "Cricket"
 blocks:
-  - type: richtext
-    body: "<figure class=\"tp\" data-temp-photo>\n            <span class=\"sr\">The AIIS cricket team training on the field</span>\n          </figure>\n"
-    raw: true
+  - type: image
+    description: "The AIIS cricket team training on the field"
+    src: /assets/photos/pages/cricket.png
   - type: richtext
     body: "<p>The Cricket Club coaches both boys' and girls' teams through structured sessions during PE periods and after school.</p>\n"
     raw: true

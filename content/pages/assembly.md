@@ -7,9 +7,9 @@ headTestHarnessComment: false
 blocks:
   - type: richtext
     body: "Mornings at AIIS start together, not in separate classrooms. The whole school gathers for assembly &mdash; a calm, shared start to the day built around collective prayer, with each class taking a turn running a themed presentation that builds confidence and stage experience along the way."
-  - type: richtext
-    body: "<figure class=\"tp\" data-temp-photo><span class=\"sr\">Students taking part in morning assembly at AIIS</span></figure>\n"
-    raw: true
+  - type: image
+    description: "Students taking part in morning assembly at AIIS"
+    src: /assets/photos/pages/assembly.jpg
   - type: richtext
     body: "## How it runs"
   - type: richtext

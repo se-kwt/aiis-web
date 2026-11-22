@@ -6,7 +6,7 @@ blocks:
     raw: true
   - type: image
     description: "Students taking part in a themed subject enrichment activity day at AIIS"
-    src: null
+    src: /assets/photos/pages/subject-enrichment-activities.jpg
   - type: richtext
     body: "Activities run across every grade from Pre-KG through Grade 10, tied to the calendar of festivals, awareness days and curriculum topics through the school year."
   - type: richtext

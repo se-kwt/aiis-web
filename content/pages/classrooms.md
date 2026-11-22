@@ -1,9 +1,9 @@
 ---
 title: "Classrooms"
 blocks:
-  - type: richtext
-    body: "<figure class=\"tp\" data-temp-photo>\n            <span class=\"sr\">A smart classroom at AIIS, fitted with multimedia teaching equipment</span>\n          </figure>\n"
-    raw: true
+  - type: image
+    description: "A smart classroom at AIIS, fitted with multimedia teaching equipment"
+    src: /assets/photos/pages/classrooms.jpg
   - type: richtext
     body: "AIIS classrooms are built around interactive, technology-assisted teaching, pairing everyday lessons with multimedia tools that keep students engaged and help teachers see how a lesson is landing in real time."
   - type: richtext

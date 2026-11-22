@@ -5,9 +5,9 @@ headIntroComment: false
 headSafetyNetsComment: false
 headTestHarnessComment: false
 blocks:
-  - type: richtext
-    body: "<figure class=\"tp\" data-temp-photo><span class=\"sr\">DAS Academy inauguration ceremony</span></figure>\n"
-    raw: true
+  - type: image
+    description: "DAS Academy inauguration ceremony"
+    src: /assets/photos/pages/das-trailblazer.jpg
   - type: richtext
     body: "Dar Al Salam Schools &mdash; the group that includes AIIS, Indian Central School, Aspire Bilingual School and Pakistan English School &mdash; launched DAS Academy, a dedicated creative-arts and sports programme offering dance, art and sport to students and the wider community from a base inside the school complex."
   - type: richtext

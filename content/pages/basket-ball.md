@@ -1,9 +1,9 @@
 ---
 title: "Basketball"
 blocks:
-  - type: richtext
-    body: "<figure class=\"tp\" data-temp-photo>\n            <span class=\"sr\">Students playing basketball at AIIS</span>\n          </figure>\n"
-    raw: true
+  - type: image
+    description: "Students playing basketball at AIIS"
+    src: /assets/photos/pages/basket-ball.jpg
   - type: richtext
     body: "<p>AIIS's basketball program is led by a dedicated coach who works with each player individually to build their skills and confidence.</p>\n"
     raw: true

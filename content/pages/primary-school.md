@@ -8,7 +8,7 @@ blocks:
     raw: true
   - type: image
     description: "Teachers guiding a Primary School class through an activity at AIIS"
-    src: null
+    src: /assets/photos/pages/primary-school.jpg
   - type: richtext
     body: "## A five-step learning process"
   - type: richtext

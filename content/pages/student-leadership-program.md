@@ -8,7 +8,7 @@ blocks:
     raw: true
   - type: image
     description: "Student council members taking part in a leadership activity at AIIS"
-    src: null
+    src: /assets/photos/pages/student-leadership-program.jpg
   - type: richtext
     body: "## Our Student Leadership Program includes"
   - type: points

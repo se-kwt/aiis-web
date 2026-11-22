@@ -7,9 +7,9 @@ headTestHarnessComment: false
 blocks:
   - type: richtext
     body: "Writing gives students a way to think out loud. Putting ideas into an article or a magazine piece sharpens how they reason, stretches their imagination, and builds the reading habit that comes from wanting to write well. Seeing their own name on a published piece is often the spark that gets a reluctant writer going &mdash; and it tends to encourage the next student to try, too."
-  - type: richtext
-    body: "<figure class=\"tp\" data-temp-photo><span class=\"sr\">Students contributing articles to the school's student publication</span></figure>\n"
-    raw: true
+  - type: image
+    description: "Students contributing articles to the school's student publication"
+    src: /assets/photos/pages/student-article-magazine.jpg
   - type: richtext
     body: "## Where students can get published"
   - type: richtext

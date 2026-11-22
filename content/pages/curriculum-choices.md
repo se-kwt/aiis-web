@@ -6,7 +6,7 @@ blocks:
     raw: true
   - type: image
     description: "Students taking part in a Cambridge IGCSE learning activity at AIIS"
-    src: null
+    src: /assets/photos/pages/curriculum-choices.jpg
   - type: richtext
     body: "## Preschool education approach"
   - type: points

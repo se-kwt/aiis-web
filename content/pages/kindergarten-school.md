@@ -5,7 +5,7 @@ blocks:
     body: "Pre-KG and KG at AIIS is where learning starts as play. Our youngest students discover, learn and grow through a kindergarten programme built around curiosity rather than rote instruction."
   - type: image
     description: "Kindergarten children exploring a hands-on classroom activity at AIIS"
-    src: null
+    src: /assets/photos/pages/kindergarten-school.jpg
   - type: richtext
     body: "## Why Kindergarten at AIIS?"
   - type: richtext

@@ -4,9 +4,9 @@ headIntroComment: false
 headSafetyNetsComment: false
 headTestHarnessComment: false
 blocks:
-  - type: richtext
-    body: "<figure class=\"tp\" data-temp-photo><span class=\"sr\">Portrait of the AIIS Vice Principal, Husena Khedawala</span></figure>\n"
-    raw: true
+  - type: image
+    description: "Portrait of the AIIS Vice Principal, Husena Khedawala"
+    src: /assets/photos/pages/vice-principal-message.png
   - type: richtext
     body: "School life is made up of small, everyday moments &mdash; a question asked, a doubt cleared, a quiet success celebrated. Over time those moments add up to the lessons that shape the path each child walks, and that belief has guided my whole career in education."
   - type: richtext
