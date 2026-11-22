@@ -1,0 +1,86 @@
+{
+  "_source": "Our Story page copy, verbatim-ported from the baseline (git tag baseline-static-site, site/our-story.html) during Task 10. `lead.title` and `mission.title.text` feed the `hl` filter (built in Task 9) for their `==phrase==`-marked highlights, then the `markdownInline` filter (also Task 9) for **bold**/smart-quote/entity handling — chaining both filters is what lets a field carry an apostrophe that must render as the baseline's literal `&rsquo;` entity even though `hl`'s own escaping would otherwise mangle a literal entity typed directly into the JSON (see hl -> markdownInline chain in our-story.njk). Every other prose field with embedded formatting, an apostrophe, an ampersand or an em dash (`lead.copy`, `lead.callout.text`, `mission.cols[].text.text`, `storyBlocks[].copy.text`, `storyBlocks[].linkLabel`) goes through `markdownInline` alone. `quickFacts[].figure` and the `story-hero`/`story-block` placeholder photo descriptions are rendered as literal text with no filter, since the baseline's exact byte sequence there is either a raw non-breaking-hyphen/en-dash entity (`&#8209;`/`&#8211;`, which don't round-trip through the typographic re-encoder's named-entity map) or, for the photo-caption sentences, a raw UTF-8 em dash character rather than the `&mdash;` entity text used everywhere else on this page — so neither can safely go through `hl`/`markdownInline`. The closing destination bars (`story-closing`) are page-specific content, NOT a reuse of the global `site.closing` from content/site.json: that global closing array has different labels/paths entirely (Enquire/Book a School Visit/Apply, for the homepage's end-of-page CTA), confirmed against the actual baseline bytes for this page, which show Admissions Process/Fees & Schedules/Plan a Visit instead — so this file carries its own `closing` array rather than wrongly aliasing the unrelated global one.",
+  "hero": {
+    "eyebrow": "About Us",
+    "title": "Our Story",
+    "photoDescription": "the AIIS campus"
+  },
+  "lead": {
+    "title": "==We Nurture== Tomorrow’s Global ==Citizens==",
+    "copy": "Aspire Indian International School is one of Kuwait’s leading CBSE schools for Pre-KG through Grade 10, offering an **academically rigorous, values-led education** shaped around every child’s **confidence, curiosity and character**.",
+    "callout": {
+      "text": "Founded to give Kuwait’s Indian community a school as ambitious as the futures its students would go on to build, AIIS opened with a handful of classrooms and one guiding promise: that every child would be known, encouraged and challenged by name. That promise still shapes the school we are today.",
+      "placeholder": "illustrative founding story, not confirmed AIIS history"
+    }
+  },
+  "quickFacts": [
+    { "figure": "1,400+", "label": "Students", "placeholder": "illustrative figure" },
+    { "figure": "15+", "label": "Nationalities", "placeholder": "illustrative figure" },
+    { "figure": "1:18", "label": "Classroom Ratio", "placeholder": "illustrative figure" },
+    { "figure": "Pre&#8209;KG&#8211;10", "label": "Grades Offered", "placeholder": "illustrative figure" },
+    { "figure": "120+", "label": "Teachers & Staff", "placeholder": "illustrative figure" },
+    { "figure": "40+", "label": "Clubs & Activities", "placeholder": "illustrative figure" },
+    { "figure": "20+", "label": "Sports Teams", "placeholder": "illustrative figure" },
+    { "figure": "15+", "label": "Years in Kuwait", "placeholder": "illustrative figure" }
+  ],
+  "mission": {
+    "eyebrow": "Our Mission",
+    "title": {
+      "text": "Aspire Indian International School inspires every learner to ==question boldly==, ==care deeply==, and ==lead with integrity==.",
+      "placeholder": "illustrative mission statement, not confirmed AIIS wording"
+    },
+    "cols": [
+      {
+        "heading": "What Guides Us",
+        "text": {
+          "text": "Respect, honesty and discipline sit alongside kindness and curiosity as the values every classroom at AIIS is built on, lived out in how students treat one another as much as in what they learn.",
+          "placeholder": "illustrative values, not confirmed AIIS wording"
+        }
+      },
+      {
+        "heading": "Looking Forward",
+        "text": {
+          "text": "As Kuwait’s community keeps growing, so do we &mdash; investing in our campus, our teachers and our programmes so every student leaves AIIS ready for a world that rewards adaptability as much as knowledge.",
+          "placeholder": "illustrative vision, not confirmed AIIS wording"
+        }
+      }
+    ]
+  },
+  "storyBlocks": [
+    {
+      "heading": "A Community That Knows Every Child",
+      "copy": {
+        "text": "Small class sizes and attentive teachers mean no student is just a face in the crowd. At AIIS, learning is relational: teachers know each child’s strengths, stretch their thinking and notice when they need support.",
+        "placeholder": "illustrative copy, not confirmed AIIS wording"
+      },
+      "linkLabel": "Read Our Vision & Mission",
+      "linkHref": "/vision-mission",
+      "photoDescription": "a teacher with students"
+    },
+    {
+      "heading": "A Richly Diverse Classroom",
+      "copy": {
+        "text": "Our students come from across Kuwait’s Indian community and beyond, bringing languages, festivals and perspectives that make every classroom a place to understand the world, not just read about it.",
+        "placeholder": "illustrative copy, not confirmed AIIS wording"
+      },
+      "linkLabel": "Explore School Life",
+      "linkHref": "/clubs",
+      "photoDescription": "students from different backgrounds together"
+    },
+    {
+      "heading": "Ready for a Changing World",
+      "copy": {
+        "text": "Alongside a strong CBSE foundation, students build the digital literacy, problem-solving and communication skills that prepare them for whatever comes after AIIS &mdash; in Kuwait or anywhere their ambitions take them.",
+        "placeholder": "illustrative copy, not confirmed AIIS wording"
+      },
+      "linkLabel": "See Our Curriculum",
+      "linkHref": "/curriculum-choices",
+      "photoDescription": "a student presenting project work"
+    }
+  ],
+  "closing": [
+    { "label": "Admissions Process", "path": "/admission-process" },
+    { "label": "Fees & Schedules", "path": "/fees-schedules" },
+    { "label": "Plan a Visit", "path": "/form/contact-the-best-indian-school-in-kuwait" }
+  ]
+}

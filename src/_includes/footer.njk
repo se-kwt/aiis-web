@@ -1,0 +1,23 @@
+<footer class="footer" data-section="footer" data-k="footer-root">
+    <div class="footer__banner">
+      <div class="footer__logo" data-k="footer-logo"><a href="/" aria-label="Aspire Indian International School home"><img data-k="footer-logo-img" src="/assets/logos/crest-web.png" alt="Aspire Indian International School crest" width="113" height="86"></a></div>
+      <div class="footer__middle">
+        <section class="footer__locations" aria-label="Campus">
+          <div class="footer__campuses" data-k="footer-campuses">
+            <article class="footer__campus" data-k="footer-campus1">
+              <div class="footer__name" data-k="footer-campus1-name" data-placeholder="campus name (derived, not given by the school)">AIIS Abbasiya Campus</div>
+              <div class="footer__grades" data-k="footer-campus1-grades">Pre-KG to Grade 10</div>
+              <div class="footer__address" data-k="footer-campus1-address">Abbasiya, Kuwait</div>
+              <div class="footer__city"><a href="mailto:info@aiis.example" data-placeholder="sample email address">info@aiis.example</a></div>
+              <div class="footer__phone"><a href="tel:+96500000000" data-k="footer-campus1-phone" data-placeholder="sample phone number">+965 0000 0000</a></div>
+            </article>
+          </div>
+        </section>
+      </div>
+      <div class="footer__bottom">
+        <div class="footer__links" data-k="footer-links"><nav aria-label="Footer"><ul>{% for link in site.footer %}<li><a href="{{ link.path }}" data-k="footer-link1">{{ link.label | escape | replace("&#39;", "'") | safe }}</a></li>{% endfor %}</ul></nav></div>
+        <div class="footer__social" data-k="footer-social"><nav aria-label="Social media"><ul><li><a href="#" data-k="footer-social1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></span><span class="ic ic--hover"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></span><span class="sr">Instagram</span></a></li><li><a href="#" data-k="footer-social1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span><span class="ic ic--hover"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span><span class="sr">Facebook</span></a></li><li><a href="#" data-k="footer-social1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></span><span class="ic ic--hover"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></span><span class="sr">YouTube</span></a></li><li><a href="#" data-k="footer-social1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></span><span class="ic ic--hover"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></span><span class="sr">LinkedIn</span></a></li></ul></nav></div>
+      </div>
+      <div class="footer__legal"><p data-k="footer-legal"><span><em>Part of the Stellar group of schools.<br>&copy; 2026 Aspire Indian International School. All rights reserved.</em></span><br>&nbsp;</p></div>
+    </div>
+  </footer>

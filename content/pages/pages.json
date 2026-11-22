@@ -1,0 +1,5 @@
+{
+  "layout": "page.njk",
+  "styles": ["tokens", "base", "header", "intro", "hero", "page", "footer"],
+  "permalink": "/{{ page.fileSlug }}/index.html"
+}

@@ -1,0 +1,25 @@
+{%- macro amp(s) -%}{{ s | escape | replace("&#39;", "'") | safe }}{%- endmacro -%}{%- set nestedGroupCounter = 0 -%}
+<div class="hdr-menu" id="site-menu" data-k="header-menu-panel" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
+      <div class="hdr-menu__top">
+        <a class="hdr-menu__logo" href="/" data-k="header-menu-logo" aria-label="Aspire Indian International School home"><img src="/assets/logos/crest-web.png" alt="" width="31" height="24"></a>
+        <button class="hdr-menu__close" type="button" data-menu-close data-k="header-menu-close"><span class="sr">Close Menu</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 15L15 1M1 1l14 14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></button>
+      </div>
+      <nav class="hdr-menu__main" aria-label="Main menu">
+        <ul>{% for section in site.menu %}
+        <li class="hdr-menu__group" data-menu-group>
+          <a href="{{ section.path }}"{% if page.url == section.path or page.url == section.path + "/" %} aria-current="page"{% endif %}{% if loop.first %} data-k="header-menu-group1"{% endif %}><span class="inner"{% if loop.first %} data-k="header-menu-group1-title"{% endif %}><span>{{ amp(section.title) }}</span><span aria-hidden="true">{{ amp(section.title) }}</span></span></a>
+          <button class="hdr-menu__expander" type="button" aria-expanded="false" aria-controls="menu-sub-{{ loop.index }}"{% if loop.first %} data-k="header-menu-expander1"{% endif %}><span class="sr">Expand {{ amp(section.title) }} section</span><svg class="hdr-menu__glyph" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9.5 6.5L15 12l-5.5 5.5" stroke="currentColor"/></svg></button>
+          <div class="hdr-menu__sub" id="menu-sub-{{ loop.index }}"><div><ul>{% for link in (section.links | rejectattr("parent")) %}<li><a href="{{ link.path }}"{% if page.url == link.path or page.url == link.path + "/" %} aria-current="page"{% endif %}>{{ amp(link.label) }}</a></li>{% endfor %}{% for groupName, groupLinks in (section.links | selectattr("parent") | groupby("parent")) %}{% set nestedGroupCounter = nestedGroupCounter + 1 %}<li class="hdr-menu__nested"><button class="hdr-menu__nested-toggle" type="button" aria-expanded="false" aria-controls="menu-nested-{{ nestedGroupCounter }}">{{ amp(groupName) }}<svg class="hdr-menu__glyph" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9.5 6.5L15 12l-5.5 5.5" stroke="currentColor"/></svg></button><div class="hdr-menu__sub" id="menu-nested-{{ nestedGroupCounter }}"><div><ul>{% for link in groupLinks %}<li><a href="{{ link.path }}"{% if page.url == link.path or page.url == link.path + "/" %} aria-current="page"{% endif %}>{{ amp(link.label) }}</a></li>{% endfor %}</ul></div></div></li>{% endfor %}</ul></div></div>
+        </li>{% endfor %}
+        </ul>
+      </nav>
+      <nav class="hdr-menu__utility" aria-label="Quick Links">
+        <ul>
+          <li class="hdr-menu__group" data-menu-group>
+            <a href="{{ site.quickLinks.path }}"{% if page.url == site.quickLinks.path or page.url == site.quickLinks.path + "/" %} aria-current="page"{% endif %} data-k="header-menu-utility-link"><span class="inner"><span>{{ amp(site.quickLinks.title) }}</span></span></a>
+            <button class="hdr-menu__expander" type="button" aria-expanded="false" aria-controls="menu-sub-quick-links"><span class="sr">Expand {{ amp(site.quickLinks.title) }} section</span><svg class="hdr-menu__glyph" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9.5 6.5L15 12l-5.5 5.5" stroke="currentColor"/></svg></button>
+            <div class="hdr-menu__sub" id="menu-sub-quick-links"><div><ul>{% for link in site.quickLinks.links %}<li><a href="{{ link.path }}"{% if link.external %} target="_blank" rel="noopener noreferrer" aria-label="{{ amp(link.label) }} (opens in a new tab)"{% else %}{% if page.url == link.path or page.url == link.path + "/" %} aria-current="page"{% endif %}{% endif %}>{{ amp(link.label) }}</a></li>{% endfor %}</ul></div></div>
+          </li>
+        </ul>
+      </nav>
+  </div>

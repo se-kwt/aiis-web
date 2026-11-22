@@ -1,0 +1,244 @@
+{% extends "./base.njk" %}
+{% set styles = ["tokens", "base", "header", "intro", "hero", "news", "promises", "divisions", "learning", "teachers", "values", "closing", "footer", "video-modal"] %}
+{% block content %}{% macro amp(s) %}{{ s | escape | replace("&#39;", "'") | safe }}{% endmacro %}    <section class="hero" data-section="hero" data-k="hero-root">
+      <div class="hero__band" aria-hidden="true"></div>
+      <div class="hero__intro">
+        <p class="hero__eyebrow" data-k="hero-eyebrow"{{ homepage.hero.eyebrow | placeholderAttr | safe }}>{{ (homepage.hero.eyebrow.text or homepage.hero.eyebrow) | safe }}</p>
+        <h1 class="hero__title" data-k="hero-heading">{{ homepage.hero.heading | words("hero-heading-word1") | safe }}</h1>
+        <p class="hero__desc" data-k="hero-desc"{{ homepage.hero.desc | placeholderAttr | safe }}>{{ amp(homepage.hero.desc.text or homepage.hero.desc) }}</p>
+      </div>
+      <a class="hero__badge" href="{{ homepage.hero.videoUrl }}" target="_blank" rel="noopener" data-k="hero-badge" data-video-modal data-video-src="{{ homepage.hero.video }}" data-video-title="{{ amp(homepage.hero.videoTitle) }}">
+        <span class="hero__disc" aria-hidden="true"></span>
+        <span class="hero__ring" data-k="hero-badge-ring" aria-hidden="true"><span class="hero__ring-spin"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="hero-ring-path" d="M60 60m-47 0a47 47 0 1 1 94 0a47 47 0 1 1 -94 0"/></defs><text><textPath href="#hero-ring-path" textLength="290" lengthAdjust="spacing">WATCH FULL VIDEO · WATCH FULL VIDEO · </textPath></text></svg></span></span>
+        <span class="hero__icon" data-k="hero-badge-icon" aria-hidden="true"><svg viewBox="0 0 40 28" width="40" height="28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><rect x="2" y="3" width="25" height="22" rx="2"/><path d="M27 11l11-6v18l-11-6z"/></svg></span>
+        <span class="sr">{{ amp(homepage.hero.videoTitle) }}</span>
+      </a>
+      <div class="hero__reel-track" data-k="hero-reel-track">
+        <div class="hero__reel-stage">
+          <div class="hero__reel-mask" data-k="hero-reel-mask">
+            <div class="hero__reel-wipe" data-k="hero-reel-wipe">
+              <video data-k="hero-video" src="{{ homepage.hero.video }}" muted autoplay loop playsinline preload="auto" aria-label="{{ amp(homepage.hero.videoAlt) }}"></video>
+            </div>
+          </div>
+          <div class="hero__shape" data-k="hero-shape-bottom"><button class="hero__ctl" type="button" data-hero-toggle data-k="hero-video-control" aria-pressed="false"><span class="sr">Pause background video</span><span class="hero__ctl-disc" aria-hidden="true"><i></i><i></i></span></button></div>
+        </div>
+      </div>
+    </section>
+    <section class="news" data-section="news" data-k="news-root">
+      <ul class="news__list" data-k="news-list">
+          <li data-k="news-item1"><button class="news__trigger" type="button" data-news-trigger data-k="news-trigger1"><span>NEWS</span><em data-k="news-slash1"></em><span>SOCIAL</span></button><span class="news__icon" data-k="news-icon1"><span class="news__icon-art" data-k="news-icon1-art"><span></span></span><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></li>
+          <li aria-hidden="true" data-k="news-item1-loop"><button tabindex="-1" class="news__trigger" type="button" data-news-trigger data-k="news-trigger1-loop"><span>NEWS</span><em data-k="news-slash1-loop"></em><span>SOCIAL</span></button><span class="news__icon" data-k="news-icon1-loop"><span class="news__icon-art" data-k="news-icon1-art-loop"><span></span></span><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></li>
+          <li data-k="news-item1-loop" aria-hidden="true"><button class="news__trigger" type="button" data-news-trigger data-k="news-trigger1-loop" tabindex="-1"><span>NEWS</span><em data-k="news-slash1-loop"></em><span>SOCIAL</span></button><span class="news__icon" data-k="news-icon1-loop"><span class="news__icon-art" data-k="news-icon1-art-loop"><span></span></span><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></li>
+          <li data-k="news-item1-loop" aria-hidden="true"><button class="news__trigger" type="button" data-news-trigger data-k="news-trigger1-loop" tabindex="-1"><span>NEWS</span><em data-k="news-slash1-loop"></em><span>SOCIAL</span></button><span class="news__icon" data-k="news-icon1-loop"><span class="news__icon-art" data-k="news-icon1-art-loop"><span></span></span><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></li>
+      </ul>
+      <div class="news-panel" id="news-panel" role="dialog" aria-modal="true" aria-labelledby="news-panel-title" aria-hidden="true">
+        <div class="news-panel__top">
+          <h2 class="news-panel__heading" id="news-panel-title">NEWS / SOCIAL</h2>
+          <button class="news-panel__close" type="button" data-news-close><span class="sr">Close</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 15L15 1M1 1l14 14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></button>
+        </div>
+        <div class="news-panel__tabs" role="tablist" aria-label="News and social">
+          <button type="button" role="tab" id="news-tab-news" aria-selected="true" aria-controls="news-tabpanel-news" data-news-tab="news">News</button>
+          <button type="button" role="tab" id="news-tab-social" aria-selected="false" aria-controls="news-tabpanel-social" data-news-tab="social" tabindex="-1">Social</button>
+        </div>
+        <div class="news-panel__body">
+          <ul class="news-panel__cards" role="tabpanel" id="news-tabpanel-news" aria-labelledby="news-tab-news">{% for item in homepage.news.items %}<li><a class="news-panel__card" href="/news-events"><span class="news-panel__eyebrow">NEWS</span><span class="news-panel__title"{{ item.headline | placeholderAttr | safe }}>{{ amp(item.headline.text or item.headline) }}</span></a></li>{% endfor %}</ul>
+          <ul class="news-panel__cards" role="tabpanel" id="news-tabpanel-social" aria-labelledby="news-tab-social" hidden>{% for item in homepage.news.social %}<li><a class="news-panel__card" href="#"><span class="news-panel__eyebrow">SOCIAL</span><span class="news-panel__title"{{ item.headline | placeholderAttr | safe }}>{{ amp(item.headline.text or item.headline) }}</span></a></li>{% endfor %}</ul>
+        </div>
+      </div>
+    </section>
+    <section class="promises" data-section="promises" data-k="promises-root">
+      <article class="promise promise--left" data-k="promise1-container">
+        <div class="promise__grid">
+          <p class="promise__intro"><span class="promise__lead" data-k="promise1-lead">{{ amp(homepage.promises[0].lead) }}</span></p>
+        <div class="promise__media">
+          <div class="promise__inset">
+            <figure class="tp" data-k="promise1-photo"><img src="{{ homepage.promises[0].photo.src }}" alt="{{ amp(homepage.promises[0].photo.alt) }}" loading="lazy" data-parallax-image="1.3"></figure>
+          </div>
+          <h2 class="promise__title animate-text" data-k="promise1-heading"><span class="promise__spacer" aria-hidden="true"></span>{{ homepage.promises[0].heading | hl(homepage.promises[0].headingDataK) | safe }}</h2>
+        </div>
+        <div class="promise__cutout">
+          <span class="promise__lines" data-k="promise1-lines"><svg viewBox="0 0 410 320" preserveAspectRatio="xMidYMax meet" fill="none" aria-hidden="true" focusable="false"><path d="M0.0 320.0C90.0 310.0 40.0 150.0 170.0 140.0S330.0 130.0 410.0 0.0M0.0 320.0C87.6 307.2 38.8 148.4 168.4 137.6S328.8 126.0 410.0 2.4M0.0 320.0C85.2 304.4 37.6 146.8 166.8 135.2S327.6 122.0 410.0 4.8M0.0 320.0C82.8 301.6 36.4 145.2 165.2 132.8S326.4 118.0 410.0 7.2M0.0 320.0C80.4 298.8 35.2 143.6 163.6 130.4S325.2 114.0 410.0 9.6M0.0 320.0C78.0 296.0 34.0 142.0 162.0 128.0S324.0 110.0 410.0 12.0M0.0 320.0C75.6 293.2 32.8 140.4 160.4 125.6S322.8 106.0 410.0 14.4M0.0 320.0C73.2 290.4 31.6 138.8 158.8 123.2S321.6 102.0 410.0 16.8M0.0 320.0C70.8 287.6 30.4 137.2 157.2 120.8S320.4 98.0 410.0 19.2M0.0 320.0C68.4 284.8 29.2 135.6 155.6 118.4S319.2 94.0 410.0 21.6M0.0 320.0C66.0 282.0 28.0 134.0 154.0 116.0S318.0 90.0 410.0 24.0M0.0 320.0C63.6 279.2 26.8 132.4 152.4 113.6S316.8 86.0 410.0 26.4M0.0 320.0C61.2 276.4 25.6 130.8 150.8 111.2S315.6 82.0 410.0 28.8M0.0 320.0C58.8 273.6 24.4 129.2 149.2 108.8S314.4 78.0 410.0 31.2M0.0 320.0C56.4 270.8 23.2 127.6 147.6 106.4S313.2 74.0 410.0 33.6M0.0 320.0C54.0 268.0 22.0 126.0 146.0 104.0S312.0 70.0 410.0 36.0M0.0 320.0C51.6 265.2 20.8 124.4 144.4 101.6S310.8 66.0 410.0 38.4M0.0 320.0C49.2 262.4 19.6 122.8 142.8 99.2S309.6 62.0 410.0 40.8M0.0 320.0C46.8 259.6 18.4 121.2 141.2 96.8S308.4 58.0 410.0 43.2M0.0 320.0C44.4 256.8 17.2 119.6 139.6 94.4S307.2 54.0 410.0 45.6M0.0 320.0C42.0 254.0 16.0 118.0 138.0 92.0S306.0 50.0 410.0 48.0M0.0 320.0C39.6 251.2 14.8 116.4 136.4 89.6S304.8 46.0 410.0 50.4M0.0 320.0C37.2 248.4 13.6 114.8 134.8 87.2S303.6 42.0 410.0 52.8M0.0 320.0C34.8 245.6 12.4 113.2 133.2 84.8S302.4 38.0 410.0 55.2M0.0 320.0C32.4 242.8 11.2 111.6 131.6 82.4S301.2 34.0 410.0 57.6M0.0 320.0C30.0 240.0 10.0 110.0 130.0 80.0S300.0 30.0 410.0 60.0"/></svg></span>
+          <div class="promise__cutout-art" data-parallax="20">
+            <figure class="tp tp--cutout" data-k="promise1-figure"><img src="{{ homepage.promises[0].figure.src }}" alt="{{ amp(homepage.promises[0].figure.alt) }}" loading="lazy"></figure>
+          </div>
+        </div>
+        </div>
+      </article>
+      <article class="promise promise--right" data-k="promise2-container">
+        <div class="promise__grid">
+          <p class="promise__intro"><span class="promise__lead" data-k="promise2-lead">{{ amp(homepage.promises[1].lead) }}</span></p>
+        <div class="promise__cutout">
+          <span class="promise__lines" data-k="promise2-lines"><svg viewBox="0 0 410 440" preserveAspectRatio="xMidYMax meet" fill="none" aria-hidden="true" focusable="false"><path d="M410.0 440.0C320.0 430.0 370.0 250.0 240.0 235.0S80.0 215.0 0.0 40.0M410.0 440.0C322.4 426.8 371.2 247.6 241.6 231.6S81.2 209.6 0.0 42.8M410.0 440.0C324.8 423.6 372.4 245.2 243.2 228.2S82.4 204.2 0.0 45.6M410.0 440.0C327.2 420.4 373.6 242.8 244.8 224.8S83.6 198.8 0.0 48.4M410.0 440.0C329.6 417.2 374.8 240.4 246.4 221.4S84.8 193.4 0.0 51.2M410.0 440.0C332.0 414.0 376.0 238.0 248.0 218.0S86.0 188.0 0.0 54.0M410.0 440.0C334.4 410.8 377.2 235.6 249.6 214.6S87.2 182.6 0.0 56.8M410.0 440.0C336.8 407.6 378.4 233.2 251.2 211.2S88.4 177.2 0.0 59.6M410.0 440.0C339.2 404.4 379.6 230.8 252.8 207.8S89.6 171.8 0.0 62.4M410.0 440.0C341.6 401.2 380.8 228.4 254.4 204.4S90.8 166.4 0.0 65.2M410.0 440.0C344.0 398.0 382.0 226.0 256.0 201.0S92.0 161.0 0.0 68.0M410.0 440.0C346.4 394.8 383.2 223.6 257.6 197.6S93.2 155.6 0.0 70.8M410.0 440.0C348.8 391.6 384.4 221.2 259.2 194.2S94.4 150.2 0.0 73.6M410.0 440.0C351.2 388.4 385.6 218.8 260.8 190.8S95.6 144.8 0.0 76.4M410.0 440.0C353.6 385.2 386.8 216.4 262.4 187.4S96.8 139.4 0.0 79.2M410.0 440.0C356.0 382.0 388.0 214.0 264.0 184.0S98.0 134.0 0.0 82.0M410.0 440.0C358.4 378.8 389.2 211.6 265.6 180.6S99.2 128.6 0.0 84.8M410.0 440.0C360.8 375.6 390.4 209.2 267.2 177.2S100.4 123.2 0.0 87.6M410.0 440.0C363.2 372.4 391.6 206.8 268.8 173.8S101.6 117.8 0.0 90.4M410.0 440.0C365.6 369.2 392.8 204.4 270.4 170.4S102.8 112.4 0.0 93.2M410.0 440.0C368.0 366.0 394.0 202.0 272.0 167.0S104.0 107.0 0.0 96.0M410.0 440.0C370.4 362.8 395.2 199.6 273.6 163.6S105.2 101.6 0.0 98.8M410.0 440.0C372.8 359.6 396.4 197.2 275.2 160.2S106.4 96.2 0.0 101.6M410.0 440.0C375.2 356.4 397.6 194.8 276.8 156.8S107.6 90.8 0.0 104.4M410.0 440.0C377.6 353.2 398.8 192.4 278.4 153.4S108.8 85.4 0.0 107.2M410.0 440.0C380.0 350.0 400.0 190.0 280.0 150.0S110.0 80.0 0.0 110.0"/></svg></span>
+          <div class="promise__cutout-art" data-parallax="20">
+            <figure class="tp tp--cutout" data-k="promise2-figure"><img src="{{ homepage.promises[1].figure.src }}" alt="{{ amp(homepage.promises[1].figure.alt) }}" loading="lazy"></figure>
+          </div>
+        </div>
+        <div class="promise__media">
+          <div class="promise__inset">
+            <figure class="tp" data-k="promise2-photo"><img src="{{ homepage.promises[1].photo.src }}" alt="{{ amp(homepage.promises[1].photo.alt) }}" loading="lazy" data-parallax-image="1.3"></figure>
+          </div>
+          <h2 class="promise__title animate-text" data-k="promise2-heading"><span class="promise__spacer" aria-hidden="true"></span>{{ homepage.promises[1].heading | hl(homepage.promises[1].headingDataK) | safe }}</h2>
+        </div>
+        </div>
+      </article>
+      <article class="promise promise--left" data-k="promise3-container">
+        <div class="promise__grid">
+          <p class="promise__intro"><span class="promise__lead" data-k="promise3-lead">{{ amp(homepage.promises[2].lead) }}</span></p>
+        <div class="promise__media">
+          <div class="promise__inset">
+            <figure class="tp" data-k="promise3-photo"><img src="{{ homepage.promises[2].photo.src }}" alt="{{ amp(homepage.promises[2].photo.alt) }}" loading="lazy" data-parallax-image="1.3"></figure>
+          </div>
+          <h2 class="promise__title animate-text" data-k="promise3-heading"><span class="promise__spacer" aria-hidden="true"></span>{{ homepage.promises[2].heading | hl(homepage.promises[2].headingDataK) | safe }}</h2>
+        </div>
+        <div class="promise__cutout">
+          <span class="promise__lines" data-k="promise3-lines"><svg viewBox="0 0 210 420" preserveAspectRatio="xMidYMax meet" fill="none" aria-hidden="true" focusable="false"><path d="M210.0 420.0C150.0 330.0 190.0 230.0 120.0 200.0S40.0 110.0 20.0 0.0M210.0 420.0C151.6 331.6 189.2 230.8 118.8 201.0S38.8 111.6 18.8 1.6M210.0 420.0C153.2 333.2 188.4 231.6 117.6 202.0S37.6 113.2 17.6 3.2M210.0 420.0C154.8 334.8 187.6 232.4 116.4 203.0S36.4 114.8 16.4 4.8M210.0 420.0C156.4 336.4 186.8 233.2 115.2 204.0S35.2 116.4 15.2 6.4M210.0 420.0C158.0 338.0 186.0 234.0 114.0 205.0S34.0 118.0 14.0 8.0M210.0 420.0C159.6 339.6 185.2 234.8 112.8 206.0S32.8 119.6 12.8 9.6M210.0 420.0C161.2 341.2 184.4 235.6 111.6 207.0S31.6 121.2 11.6 11.2M210.0 420.0C162.8 342.8 183.6 236.4 110.4 208.0S30.4 122.8 10.4 12.8M210.0 420.0C164.4 344.4 182.8 237.2 109.2 209.0S29.2 124.4 9.2 14.4M210.0 420.0C166.0 346.0 182.0 238.0 108.0 210.0S28.0 126.0 8.0 16.0M210.0 420.0C167.6 347.6 181.2 238.8 106.8 211.0S26.8 127.6 6.8 17.6M210.0 420.0C169.2 349.2 180.4 239.6 105.6 212.0S25.6 129.2 5.6 19.2M210.0 420.0C170.8 350.8 179.6 240.4 104.4 213.0S24.4 130.8 4.4 20.8M210.0 420.0C172.4 352.4 178.8 241.2 103.2 214.0S23.2 132.4 3.2 22.4M210.0 420.0C174.0 354.0 178.0 242.0 102.0 215.0S22.0 134.0 2.0 24.0M210.0 420.0C175.6 355.6 177.2 242.8 100.8 216.0S20.8 135.6 0.8 25.6M210.0 420.0C177.2 357.2 176.4 243.6 99.6 217.0S19.6 137.2 -0.4 27.2M210.0 420.0C178.8 358.8 175.6 244.4 98.4 218.0S18.4 138.8 -1.6 28.8M210.0 420.0C180.4 360.4 174.8 245.2 97.2 219.0S17.2 140.4 -2.8 30.4M210.0 420.0C182.0 362.0 174.0 246.0 96.0 220.0S16.0 142.0 -4.0 32.0M210.0 420.0C183.6 363.6 173.2 246.8 94.8 221.0S14.8 143.6 -5.2 33.6M210.0 420.0C185.2 365.2 172.4 247.6 93.6 222.0S13.6 145.2 -6.4 35.2M210.0 420.0C186.8 366.8 171.6 248.4 92.4 223.0S12.4 146.8 -7.6 36.8M210.0 420.0C188.4 368.4 170.8 249.2 91.2 224.0S11.2 148.4 -8.8 38.4M210.0 420.0C190.0 370.0 170.0 250.0 90.0 225.0S10.0 150.0 -10.0 40.0"/></svg></span>
+          <div class="promise__cutout-art" data-parallax="20">
+            <figure class="tp tp--cutout" data-k="promise3-figure"><img src="{{ homepage.promises[2].figure.src }}" alt="{{ amp(homepage.promises[2].figure.alt) }}" loading="lazy"></figure>
+          </div>
+        </div>
+        </div>
+      </article>
+    </section>
+    <section class="divisions" data-section="divisions" data-k="divisions-root">
+      <div class="divisions__intro">
+        <h2 class="divisions__heading animate-text" data-k="divisions-heading"><em data-k="divisions-heading-small1">{{ amp(homepage.divisions.heading.small[0]) }}</em> <span class="word" data-k="divisions-heading-big1">{{ amp(homepage.divisions.heading.big[0]) }}</span> <span class="word" data-k="divisions-heading-big1">{{ amp(homepage.divisions.heading.big[1]) }}</span> <em data-k="divisions-heading-small1">{{ amp(homepage.divisions.heading.small[1]) }}</em> <span class="word" data-k="divisions-heading-big1">{{ amp(homepage.divisions.heading.big[2]) }}</span></h2>
+      </div>
+      <div class="divisions__stage">
+        <span class="divisions__lines" data-k="divisions-lines" aria-hidden="true"></span>
+        <div class="divisions__grid" data-k="divisions-grid">{% for card in homepage.divisions.cards %}
+      <div class="divisions__col">
+        <article class="flipcard" data-flip data-k="divisions-card1">
+          <div class="flipcard__flipper">
+            <div class="flipcard__front" id="division{{ loop.index }}-front" data-k="divisions-card1-front">
+              <figure class="tp flipcard__photo"><img src="{{ card.photo.src }}" alt="{{ amp(card.photo.alt) }}" loading="lazy"></figure>
+              <span class="flipcard__shade" data-k="divisions-card1-shade" aria-hidden="true"></span>
+              <header class="flipcard__title" data-k="divisions-card1-title">
+                <h3 class="flipcard__head"><strong class="flipcard__verb">{{ amp(card.verb) }}</strong> <span class="flipcard__grades">{{ amp(card.grades) }}</span></h3>
+                <div class="flipcard__more"><p class="flipcard__school">{{ amp(card.school) }}</p></div>
+              </header>
+              <span class="flipcard__corner" data-k="divisions-card1-corner" aria-hidden="true"></span>
+              <button class="flipcard__btn" type="button" data-flip-toggle aria-expanded="false" aria-controls="division{{ loop.index }}-back"><span class="sr">Read more: {{ amp(card.verb) }}, {{ amp(card.grades) }}</span></button>
+              <span class="plus" data-k="divisions-card1-toggle" aria-hidden="true"><span></span></span>
+            </div>
+            <div class="flipcard__back" id="division{{ loop.index }}-back" data-k="divisions-card1-back" inert>
+              <span class="flipcard__texture" data-k="divisions-card1-back-texture" aria-hidden="true"></span>
+              <div class="flipcard__content">
+                <h3 class="flipcard__head"><strong class="flipcard__verb">{{ amp(card.verb) }}</strong> <span class="flipcard__grades">{{ amp(card.grades) }}</span></h3>
+                <p class="flipcard__school">{{ amp(card.school) }}</p>
+                <p class="flipcard__text"><span class="flipcard__lead">{{ amp(card.lead) }}</span>{{ amp(card.trail) }}</p>
+              </div>
+              <span class="flipcard__corner" aria-hidden="true"></span>
+              <button class="flipcard__btn" type="button" data-flip-toggle aria-expanded="false" aria-controls="division{{ loop.index }}-back"><span class="sr">Close: {{ amp(card.verb) }}, {{ amp(card.grades) }}</span></button>
+              <span class="plus" aria-hidden="true"><span></span></span>
+            </div>
+          </div>
+        </article>
+      </div>{% endfor %}
+        </div>
+      </div>
+    </section>
+    <section class="learning" data-section="learning" data-k="learning-root">
+      <span class="learning__lines learning__lines--top" data-k="learning-lines-top" aria-hidden="true"></span>
+      <span class="learning__lines learning__lines--bottom" data-k="learning-lines-bottom" aria-hidden="true"></span>
+      <div class="learning__wrap">
+        <div class="learning__intro">
+          <h2 class="learning__statement animate-text" data-k="learning-heading"><span class="learning__spacer" aria-hidden="true"></span>{{ homepage.learning.heading | hl(homepage.learning.headingDataK) | safe }}</h2>
+        </div>
+        <div class="learning__panel" data-k="learning-panel">
+          <header class="learning__title" data-k="learning-title"><h2 class="animate-text" data-k="learning-title-text">{{ homepage.learning.title.lead | words | safe }} <em>{{ homepage.learning.title.emphasis | words | safe }}</em> {{ homepage.learning.title.trail | words | safe }}</h2></header>
+          <div class="learning__frame" data-k="learning-video-frame">
+            <figure class="tp"><video data-k="learning-video" src="{{ homepage.learning.video }}" poster="{{ homepage.learning.poster }}" muted loop playsinline preload="none" aria-label="{{ amp(homepage.learning.videoAlt) }}"></video></figure>
+            <button class="learning__ctl" type="button" data-learning-toggle data-k="learning-video-control" aria-pressed="false"><span class="sr">Pause video</span><i aria-hidden="true"></i><i aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="learning__cols" data-k="learning-columns">
+        <div class="learning__colwrap" data-reveal="fade-up" data-reveal-delay="50">
+          <div class="learning__col" data-k="learning-col1">
+            <figure class="tp learning__icon" data-k="learning-col1-icon"><img src="{{ homepage.learning.columns[0].icon.src }}" alt="{{ amp(homepage.learning.columns[0].icon.alt) }}" loading="lazy"></figure>
+            <div class="learning__body"><h2 data-k="learning-col1-title">{{ amp(homepage.learning.columns[0].title) }}</h2><p data-k="learning-col1-text"><span class="lead-in">{{ amp(homepage.learning.columns[0].leadIn) }}</span>{{ amp(homepage.learning.columns[0].trail) }}</p></div>
+          </div>
+        </div>
+        <div class="learning__colwrap" data-reveal="fade-up" data-reveal-delay="400">
+          <div class="learning__col" data-k="learning-col1">
+            <figure class="tp learning__icon" data-k="learning-col1-icon"><img src="{{ homepage.learning.columns[1].icon.src }}" alt="{{ amp(homepage.learning.columns[1].icon.alt) }}" loading="lazy"></figure>
+            <div class="learning__body"><h2 data-k="learning-col1-title">{{ amp(homepage.learning.columns[1].title) }}</h2><p data-k="learning-col1-text"><span class="lead-in">{{ amp(homepage.learning.columns[1].leadIn) }}</span>{{ amp(homepage.learning.columns[1].trail) }}</p></div>
+          </div>
+        </div>
+        <div class="learning__colwrap" data-reveal="fade-up" data-reveal-delay="750">
+          <div class="learning__col" data-k="learning-col1">
+            <figure class="tp learning__icon" data-k="learning-col1-icon"><img src="{{ homepage.learning.columns[2].icon.src }}" alt="{{ amp(homepage.learning.columns[2].icon.alt) }}" loading="lazy"></figure>
+            <div class="learning__body"><h2 data-k="learning-col1-title">{{ amp(homepage.learning.columns[2].title) }}</h2><p data-k="learning-col1-text"><span class="lead-in">{{ amp(homepage.learning.columns[2].leadIn) }}</span>{{ amp(homepage.learning.columns[2].trail) }}</p></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+    <section class="teachers" data-section="teachers" data-k="teachers-root">
+      <span class="teachers__lines teachers__lines--bottom" data-k="teachers-lines-bottom" aria-hidden="true"></span>
+      <div class="teachers__inner">
+        <h2 class="teachers__heading animate-text" data-k="teachers-heading"><img class="teachers__icon" data-k="teachers-heading-icon" src="/assets/logos/crest-web.png" alt="" width="96" height="73">{{ homepage.teachers.heading | hl(homepage.teachers.headingDataK) | safe }}</h2>
+        <div class="teachers__carousel" data-carousel role="region" aria-roledescription="carousel" aria-label="Meet our teachers">
+          <span class="teachers__lines teachers__lines--top" data-k="teachers-lines-top" aria-hidden="true"></span>
+          <div class="teachers__slider" data-k="teachers-slider">
+            <ul class="teachers__track" data-track>{% for slide in homepage.teachers.slides %}
+            <li class="teachers__slide" data-k="teachers-slide1" data-slide-index="{{ loop.index0 }}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ homepage.teachers.slides.length }}">
+              <figure class="tp teachers__photo" data-k="teachers-slide1-photo">
+                <figcaption class="teachers__caption" data-k="teachers-slide1-caption"><span class="teachers__corner teachers__corner--l" data-k="teachers-slide1-corner" aria-hidden="true"></span><span class="teachers__corner teachers__corner--r" aria-hidden="true"></span><p data-k="teachers-slide1-role"{{ slide.role | placeholderAttr | safe }}>{{ amp(slide.role.text or slide.role) }}</p><h3 data-k="teachers-slide1-name"{{ slide.name | placeholderAttr | safe }}>{{ amp(slide.name.text or slide.name) }}</h3></figcaption>
+              </figure>
+              <button class="teachers__play" type="button" data-temp-video data-k="teachers-slide1-play" data-video-src="{{ slide.video }}" data-video-title="{{ amp(slide.videoTitle) }}"><span class="teachers__disc" data-k="teachers-slide1-play-icon" aria-hidden="true"></span><span class="sr"{{ slide.playLabel | placeholderAttr | safe }}>Play Full Video: {{ amp(slide.name.text or slide.name) }}</span></button>
+            </li>{% endfor %}
+            </ul>
+          </div>
+          <div class="teachers__controls">
+            <div class="teachers__paging" data-k="teachers-paging" aria-live="polite" aria-atomic="true"><span class="sr">Card </span><span class="teachers__cur" data-k="teachers-paging-current">01</span><span class="teachers__sep" aria-hidden="true">/</span><span class="teachers__tot"><span class="sr">of </span>{% if homepage.teachers.slides.length < 10 %}0{{ homepage.teachers.slides.length }}{% else %}{{ homepage.teachers.slides.length }}{% endif %}</span></div>
+            <div class="teachers__arrows">
+              <button class="teachers__arrow teachers__arrow--prev" type="button" data-prev data-k="teachers-prev" aria-label="Previous teacher"><svg aria-hidden="true" width="18" height="12" viewBox="0 0 18 12" fill="none"><path d="M17 6H1m5-5L1 6l5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <span class="teachers__sep" aria-hidden="true">/</span>
+              <button class="teachers__arrow teachers__arrow--next" type="button" data-next data-k="teachers-next" aria-label="Next teacher"><svg aria-hidden="true" width="18" height="12" viewBox="0 0 18 12" fill="none"><path d="M1 6h16m-5-5l5 5-5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="values" data-section="values" data-k="values-root">
+      <div class="values__cols" data-k="values-columns">
+        <div class="values__col values__col--list">{% for card in homepage.values.cards %}
+          <div class="value-button-container" data-k="values-button1">
+            <div class="value-button">
+              <figure class="tp value-fig" data-k="values-button1-photo">
+                <figcaption><h2>{{ amp(card.title) }}</h2></figcaption>
+                <img src="{{ card.photo.src }}" alt="{{ amp(card.photo.alt) }}" loading="lazy">
+              </figure>
+              <span class="value-open" data-k="values-button1-open"></span>
+              <div class="colorblock" data-k="values-button1-corner"><span class="plus" data-k="values-button1-toggle" aria-hidden="true"><span></span></span></div>
+            </div>
+          </div>{% endfor %}
+        </div>
+        <div class="values__col values__col--words">
+          <div class="values-intro">
+            <h2 class="animate-text" data-k="values-heading">{{ homepage.values.heading.lead | words | safe }}
+              <em data-k="values-heading-small1">{{ homepage.values.heading.small1 | words | safe }}</em>
+              {{ homepage.values.heading.mid | words | safe }}
+              <em data-k="values-heading-small1">{{ homepage.values.heading.small2 | words | safe }}</em>
+              {{ homepage.values.heading.trail | words | safe }}</h2>
+            <div class="values-spiral" data-k="values-spiral"><div class="values-spiral__in"><img src="/assets/art/values-spiral.svg" alt="" width="100" height="100"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="closing" data-section="closing" data-k="closing-root">
+      <picture class="closing__spiral" data-k="closing-spiral"><img src="/assets/art/closing-spirograph.svg" alt="" width="1440" height="960"></picture>
+      <div class="closing__intro">
+        <h2 class="animate-text" data-k="closing-heading"><em data-k="closing-heading-small">{{ amp(homepage.closing.heading.small) }}</em>
+          <span class="word" data-k="closing-heading-big1">{{ amp(homepage.closing.heading.big[0]) }}</span>
+          <span class="word" data-k="closing-heading-big1">{{ amp(homepage.closing.heading.big[1]) }}</span>
+          <span class="word" data-k="closing-heading-big1">{{ amp(homepage.closing.heading.big[2]) }}</span></h2>
+        <div class="closing__foot">
+          <a class="large-button" href="{{ homepage.closing.buttonPath }}" data-k="closing-button"><span class="inner" data-k="closing-button-label"><span>{{ amp(homepage.closing.buttonLabel) }}</span><span aria-hidden="true">{{ amp(homepage.closing.buttonLabel) }}</span></span></a>
+          <ul class="closing__links" aria-label="{{ amp(homepage.closing.buttonLabel) }}">{% for link in homepage.closing.links %}
+            <li><a href="{{ link.path }}" data-k="closing-link">{{ amp(link.label) }}</a></li>{% endfor %}
+          </ul>
+        </div>
+      </div>
+    </section>
+{% endblock %}

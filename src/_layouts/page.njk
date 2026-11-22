@@ -1,0 +1,35 @@
+{% extends "./base.njk" %}
+{% set pageTitle = title %}
+{% set crumbText = crumbLabel or pageTitle %}
+{% set title = ((headTitle or title) + " | Aspire Indian International School") | safe %}
+{% block content %}  <!-- build:page --><div class="page" data-section="page" data-k="page-root">
+
+    <section class="page-hero">
+      <div class="page__wrap">
+        <p class="page-hero__crumb"><a href="/">Home</a> / {{ crumbText | markdownInline | safe }}</p>
+        <h1 class="page-hero__title">{{ pageTitle | markdownInline | safe }}</h1>
+{% if lead %}        <p class="page-hero__lead">{{ lead | markdownInline | safe }}</p>
+{% endif %}      </div>
+    </section>
+
+    <section class="page-body">
+      <div class="page__wrap page-grid">
+        <article class="page-content">
+{% for block in blocks %}{% if block.blankLineBefore %}
+{% endif %}{% if block.type == "richtext" %}{% if block.raw %}          {{ block.body | safe }}{% else %}          {{ block.body | markdown | safe }}{% endif %}{% elif block.type == "image" %}{% if block.src %}        <figure class="tp"><img src="{{ block.src }}" alt="{{ block.description | escapeHtml | safe }}" loading="lazy"></figure>
+{% else %}        <figure class="tp" data-temp-photo>
+          <span class="sr">{{ block.description | safe }}</span>
+        </figure>
+{% endif %}{% elif block.type == "features" %}        <ul class="page-features">
+{% for item in block.items %}          <li class="page-features__item"><h3>{{ item.heading | safe }}</h3><p>{{ item.text | safe }}</p></li>
+{% endfor %}        </ul>
+{% elif block.type == "points" %}        <ul class="page-points">
+{% for item in block.items %}          <li class="page-points__item">{{ item | markdownInline | safe }}</li>
+{% endfor %}        </ul>
+{% endif %}{% endfor %}        </article>
+        {% include "sidebar.njk" %}
+      </div>
+    </section>
+
+  </div><!-- /build:page -->
+{% endblock %}

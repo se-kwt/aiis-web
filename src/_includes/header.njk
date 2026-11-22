@@ -1,0 +1,31 @@
+{%- macro amp(s) -%}{{ s | escape | replace("&#39;", "'") | safe }}{%- endmacro -%}
+<header class="hdr" data-section="header" data-k="header-root">
+    <div class="hdr__inner">
+      <a class="hdr__logo-m" href="/" aria-label="Aspire Indian International School home"><img src="/assets/logos/wordmark-web.png" alt="" width="900" height="197"></a>
+      <div class="hdr__wrap">
+        <div class="hdr__logo-d" data-k="header-logo">
+          <a href="/" aria-label="Aspire Indian International School home"><img data-k="header-logo-img" src="/assets/logos/wordmark-web.png" alt="Aspire Indian International School" width="900" height="197"></a>
+        </div>
+        <nav class="hdr__nav" data-k="header-nav" aria-label="Main">
+          <ul>{% for section in site.menu %}
+          <li class="hdr__item">
+            <a class="hdr__link" href="{{ section.path }}"{% if page.url == section.path or page.url == section.path + "/" %} aria-current="page"{% endif %}{% if not loop.last %} data-k="header-nav-item1"{% endif %} aria-haspopup="true" aria-expanded="false"><span class="inner"{% if not loop.last %} data-k="header-nav-label1"{% endif %}><span>{{ amp(section.title) }}</span><span aria-hidden="true">{{ amp(section.title) }}</span></span></a>
+            {% set isFirstSection = loop.first %}<div class="hdr__panel"{% if isFirstSection %} data-k="header-dropdown-panel"{% endif %}><div class="hdr__panel-main"{% if isFirstSection %} data-k="header-dropdown-list"{% endif %}>{% for link in (section.links | rejectattr("parent")) %}<a href="{{ link.path }}"{% if page.url == link.path or page.url == link.path + "/" %} aria-current="page"{% endif %}{% if isFirstSection and link.path == section.path %} data-k="header-dropdown-link1"{% endif %}>{{ amp(link.label) }}</a>{% endfor %}</div>{% for groupName, groupLinks in (section.links | selectattr("parent") | groupby("parent")) %}<div class="hdr__panel-group"><span class="hdr__panel-label">{{ amp(groupName) }}</span>{% for link in groupLinks %}<a href="{{ link.path }}"{% if page.url == link.path or page.url == link.path + "/" %} aria-current="page"{% endif %}>{{ amp(link.label) }}</a>{% endfor %}</div>{% endfor %}</div>
+          </li>{% endfor %}
+          </ul>
+        </nav>
+        <div class="hdr__util">
+          <div class="hdr__portals">
+            <a class="hdr__login" href="{{ site.quickLinks.path }}"{% if page.url == site.quickLinks.path or page.url == site.quickLinks.path + "/" %} aria-current="page"{% endif %} data-k="header-login" aria-haspopup="true"><span class="inner">{{ amp(site.quickLinks.title) }}</span><svg aria-hidden="true" width="10" height="20" viewBox="0 0 10 20" fill="none"><path d="M3 6l4 4-4 4" stroke="currentColor" stroke-width="1.2"/></svg></a>
+            <ul class="hdr__portals-panel">{% for link in site.quickLinks.links %}<li><a href="{{ link.path }}"{% if link.external %} target="_blank" rel="noopener noreferrer" aria-label="{{ amp(link.label) }} (opens in a new tab)"{% else %}{% if page.url == link.path or page.url == link.path + "/" %} aria-current="page"{% endif %}{% endif %}>{{ amp(link.label) }}</a></li>{% endfor %}</ul>
+          </div>
+          <div class="hdr__lang">
+            <button class="hdr__icon hdr__icon--translate" type="button" data-k="header-translate" data-translate-toggle aria-expanded="false" aria-controls="hdr-lang-list"><span class="sr">Translate this page</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor"><circle cx="8" cy="8" r="7"/><ellipse cx="8" cy="8" rx="3" ry="7"/><path d="M1 8h14M2 4.5h12M2 11.5h12"/></svg></button>
+            <ul class="hdr__lang-list" id="hdr-lang-list"><li><a href="#" aria-current="true">English</a></li></ul>
+          </div>
+          <button class="hdr__icon hdr__icon--search" type="button" data-k="header-search"><span class="sr">Search</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor"><circle cx="7" cy="7" r="5.5"/><path d="M11 11l4 4"/></svg></button>
+          <button class="hdr__icon hdr__icon--toggle" type="button" data-menu-open data-k="header-menu-toggle" aria-expanded="false" aria-controls="site-menu"><span class="sr">Open Menu</span><svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path class="a" d="M1.2 12.2c0-.33.27-.6.6-.6H13c.33 0 .6.27.6.6s-.27.6-.6.6H1.8c-.33 0-.6-.27-.6-.6z" fill="currentColor"/><path class="b" d="M6.4 7.8c0-.33.27-.6.6-.6h11.2c.33 0 .6.27.6.6s-.27.6-.6.6H7c-.33 0-.6-.27-.6-.6z" fill="currentColor"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </header>
