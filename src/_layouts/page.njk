@@ -2,35 +2,46 @@
 {% set pageTitle = title %}
 {% set eyebrowText = eyebrow or (page.url | menuSection(site.menu)) %}
 {% set closingLinks = (closing or settings.closing) | exceptPath(page.url) %}
+{% set sectioned = blocks | pageSections %}
+{% set heroPhoto = heroImage if (heroImage and heroImage.src) else sectioned.hero %}
 {% set title = ((headTitle or title) + " | Aspire Indian International School") | safe %}
+{% macro renderBlock(block) %}{% if block.type == "richtext" %}{% if block.raw %}{{ block.body | replace("<table", '<div class="page-table"><table') | replace("</table>", "</table></div>") | safe }}{% else %}{{ block.body | markdown | replace("<table", '<div class="page-table"><table') | replace("</table>", "</table></div>") | safe }}{% endif %}{% elif block.type == "image" %}{% if block.src %}<figure class="tp"><img src="{{ block.src }}" alt="{{ block.description | escapeHtml | safe }}" loading="lazy"></figure>{% else %}<figure class="tp" data-temp-photo><span class="sr">{{ block.description | safe }}</span></figure>{% endif %}{% elif block.type == "features" %}<ul class="page-features">{% for item in block.items %}<li class="page-features__item"><h3>{{ item.heading | safe }}</h3><p>{{ item.text | safe }}</p></li>{% endfor %}</ul>{% elif block.type == "points" %}<ul class="page-points">{% for item in block.items %}<li class="page-points__item">{{ item | markdownInline | safe }}</li>{% endfor %}</ul>{% endif %}
+{% endmacro %}
+{% macro renderSection(sec, cls, leadText) %}
+    <section class="page-section {{ cls }}"{% if sec.heading %} aria-label="{{ sec.heading | escapeHtml | safe }}"{% endif %}>
+      <svg class="page-section__swirl" viewBox="0 0 100 100" fill="none" aria-hidden="true" focusable="false"><path d="M50 90c-22 0-36-16-36-36 0-18 14-32 32-32 15 0 27 11 27 25 0 12-9 21-21 21-9 0-16-7-16-16 0-7 6-12 12-12" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="page__wrap page-section__grid{% if sec.media %} page-section__grid--media{% endif %}">
+        <div class="page-section__copy page-content">
+{% if leadText %}          <p class="page-section__statement">{{ leadText | markdownInline | safe }}</p>
+{% endif %}{% if sec.heading %}          <h2 class="page-section__heading">{{ sec.heading | markdownInline | safe }}</h2>
+{% endif %}{% for b in sec.blocks %}          {{ renderBlock(b) }}
+{% endfor %}        </div>
+{% if sec.media %}        <div class="page-section__media">{{ renderBlock(sec.media) }}</div>
+{% endif %}      </div>
+    </section>
+{% endmacro %}
 {% block content %}  <!-- build:page --><div class="page" data-section="page" data-k="page-root">
 
+    <!-- 1. title band + full-bleed photo -->
     <section class="page-hero" aria-labelledby="page-hero-title">
 {% if eyebrowText %}      <p class="page-hero__eyebrow">{{ eyebrowText | markdownInline | safe }}</p>
 {% endif %}      <h1 id="page-hero-title" class="page-hero__title">{{ pageTitle | markdownInline | safe }}</h1>
-{% if lead %}      <p class="page-hero__lead">{{ lead | markdownInline | safe }}</p>
-{% endif %}      <span class="page-hero__notch" aria-hidden="true"></span>
+      <div class="page-hero__frame">
+        <span class="page-hero__notch" aria-hidden="true"></span>
+{% if heroPhoto %}        <figure class="tp"><img src="{{ heroPhoto.src }}" alt="{{ (heroPhoto.alt or heroPhoto.description) | escapeHtml | safe }}"></figure>
+{% else %}        <figure class="tp" data-temp-photo>
+          <span class="sr">Placeholder — a photo for {{ pageTitle | striptags | safe }} is not yet in place</span>
+        </figure>
+{% endif %}      </div>
     </section>
 
-    <section class="page-body">
-      <svg class="page-body__swirl" viewBox="0 0 100 100" fill="none" aria-hidden="true" focusable="false"><path d="M50 90c-22 0-36-16-36-36 0-18 14-32 32-32 15 0 27 11 27 25 0 12-9 21-21 21-9 0-16-7-16-16 0-7 6-12 12-12" stroke="currentColor" stroke-width="2"/></svg>
-      <div class="page__wrap">
-        <article class="page-content">
-{% for block in blocks %}{% if block.blankLineBefore %}
-{% endif %}{% if block.type == "richtext" %}{% if block.raw %}          {{ block.body | safe }}{% else %}          {{ block.body | markdown | safe }}{% endif %}{% elif block.type == "image" %}{% if block.src %}        <figure class="tp"><img src="{{ block.src }}" alt="{{ block.description | escapeHtml | safe }}" loading="lazy"></figure>
-{% else %}        <figure class="tp" data-temp-photo>
-          <span class="sr">{{ block.description | safe }}</span>
-        </figure>
-{% endif %}{% elif block.type == "features" %}        <ul class="page-features">
-{% for item in block.items %}          <li class="page-features__item"><h3>{{ item.heading | safe }}</h3><p>{{ item.text | safe }}</p></li>
-{% endfor %}        </ul>
-{% elif block.type == "points" %}        <ul class="page-points">
-{% for item in block.items %}          <li class="page-points__item">{{ item | markdownInline | safe }}</li>
-{% endfor %}        </ul>
-{% endif %}{% endfor %}        </article>
-      </div>
-    </section>
+    <!-- 2. lead statement + intro copy -->
+{% if lead or sectioned.intro.blocks.length or sectioned.intro.media %}{{ renderSection(sectioned.intro, "page-section--intro", lead) }}{% endif %}
+    <!-- 3. alternating sections -->
+    <div class="page-sections">
+{% for sec in sectioned.sections %}{{ renderSection(sec, "page-section--flip" if loop.index % 2 == 0 else "") }}{% endfor %}    </div>
 {% if closingLinks.length %}
+    <!-- 4. closing destination bars -->
     <section class="page-closing" aria-label="Keep exploring AIIS">
       <div class="page__wrap">
         <ul class="page-closing__list">
