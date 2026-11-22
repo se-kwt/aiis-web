@@ -1,9 +1,14 @@
 {
-  "_source": "Homepage section copy, verbatim-ported from the baseline (git tag baseline-static-site, site/index.html) during Task 9. `heading`/`headingDataK` pairs feed the `hl` Nunjucks filter (partial-phrase highlight within a sentence); `hero.heading` feeds the `words` filter (every word individually wrapped). `divisions.heading` and `closing.heading` are genuinely filter-free one-offs: the baseline mixes `<em>` and `.word` spans with inconsistent `data-k` placement across words, so home.njk hardcodes that structure directly from their `.small`/`.big` fields via the `amp()` macro, with no `hl`/`words` call at all. `learning.title` and `values.heading` are a related but different one-off: they ARE run through the `words` filter — just once per single-word/short-phrase sub-field (`learning.title.lead`/`.emphasis`/`.trail`; `values.heading.lead`/`.small1`/`.mid`/`.small2`/`.trail`) rather than once for the whole heading, because the baseline interleaves literal `<em>` wrappers between `.word` spans in a fixed pattern that a single filter call over the full string can't reproduce.",
   "hero": {
-    "eyebrow": { "text": "Pre-KG to Grade 10 &middot; Abbasiya, Kuwait", "placeholder": "sample eyebrow copy (not confirmed by the school)" },
+    "eyebrow": {
+      "text": "Pre-KG to Grade 12 &middot; Abbasiya, Kuwait",
+      "placeholder": "sample eyebrow copy (not confirmed by the school)"
+    },
     "heading": "IGNITING YOUNG MINDS",
-    "desc": { "text": "A CBSE and Cambridge IGCSE school where every child is known by name, and every lesson connects curiosity to character.", "placeholder": "sample hero description (not confirmed by the school)" },
+    "desc": {
+      "text": "A CBSE and Cambridge IGCSE school where every child is known by name, and every lesson connects curiosity to character.",
+      "placeholder": "sample hero description (not confirmed by the school)"
+    },
     "videoUrl": "https://youtu.be/qNLXMzmsoG8",
     "video": "assets/video/hero.mp4",
     "videoTitle": "Watch full video",
@@ -11,91 +16,356 @@
   },
   "news": {
     "items": [
-      { "headline": { "text": "Science fair celebrates young inventors", "placeholder": "sample news headline (not real AIIS news)" } },
-      { "headline": { "text": "Grade 5 learning walk", "placeholder": "sample news headline (not real AIIS news)" } },
-      { "headline": { "text": "Sports day highlights", "placeholder": "sample news headline (not real AIIS news)" } },
-      { "headline": { "text": "Welcome back to a new term", "placeholder": "sample news headline (not real AIIS news)" } }
+      {
+        "headline": {
+          "text": "Science fair celebrates young inventors",
+          "placeholder": "sample news headline (not real AIIS news)"
+        }
+      },
+      {
+        "headline": {
+          "text": "Grade 5 learning walk",
+          "placeholder": "sample news headline (not real AIIS news)"
+        }
+      },
+      {
+        "headline": {
+          "text": "Sports day highlights",
+          "placeholder": "sample news headline (not real AIIS news)"
+        }
+      },
+      {
+        "headline": {
+          "text": "Welcome back to a new term",
+          "placeholder": "sample news headline (not real AIIS news)"
+        }
+      }
     ],
     "social": [
-      { "headline": { "text": "Instagram", "placeholder": "social channel card name (AIIS channels not confirmed)" } },
-      { "headline": { "text": "Facebook", "placeholder": "social channel card name (AIIS channels not confirmed)" } },
-      { "headline": { "text": "YouTube", "placeholder": "social channel card name (AIIS channels not confirmed)" } },
-      { "headline": { "text": "LinkedIn", "placeholder": "social channel card name (AIIS channels not confirmed)" } }
+      {
+        "headline": {
+          "text": "Instagram",
+          "placeholder": "social channel card name (AIIS channels not confirmed)"
+        }
+      },
+      {
+        "headline": {
+          "text": "Facebook",
+          "placeholder": "social channel card name (AIIS channels not confirmed)"
+        }
+      },
+      {
+        "headline": {
+          "text": "YouTube",
+          "placeholder": "social channel card name (AIIS channels not confirmed)"
+        }
+      },
+      {
+        "headline": {
+          "text": "LinkedIn",
+          "placeholder": "social channel card name (AIIS channels not confirmed)"
+        }
+      }
     ]
   },
   "promises": [
     {
       "lead": "We believe learning should be joyful and purposeful…",
-      "photo": { "src": "assets/photos/promises/promise1-photo.jpg", "alt": "A teacher sharing a warm moment with two young students in class" },
+      "photo": {
+        "src": "assets/photos/promises/promise1-photo.jpg",
+        "alt": "A teacher sharing a warm moment with two young students in class"
+      },
       "heading": "…so your child can ==discover== who they want to ==become==.",
       "headingDataK": "promise1-highlight1",
-      "figure": { "src": "assets/photos/promises/promise1-figure.png", "alt": "A teacher with two students wearing honor sashes" }
+      "figure": {
+        "src": "assets/photos/promises/promise1-figure.png",
+        "alt": "A teacher with two students wearing honor sashes"
+      }
     },
     {
       "lead": "Our teachers know every child by name…",
-      "figure": { "src": "assets/photos/promises/promise2-figure.png", "alt": "A student in a festive white and gold dress" },
-      "photo": { "src": "assets/photos/promises/promise2-photo.jpg", "alt": "A teacher helping a student one-on-one at his desk" },
+      "figure": {
+        "src": "assets/photos/promises/promise2-figure.png",
+        "alt": "A student in a festive white and gold dress"
+      },
+      "photo": {
+        "src": "assets/photos/promises/promise2-photo.jpg",
+        "alt": "A teacher helping a student one-on-one at his desk"
+      },
       "heading": "…so every classroom feels like a place to ==belong==.",
       "headingDataK": "promise2-highlight1"
     },
     {
       "lead": "We connect knowledge with values…",
-      "photo": { "src": "assets/photos/promises/promise3-photo.jpg", "alt": "Students dressed in traditional attire for a school celebration" },
+      "photo": {
+        "src": "assets/photos/promises/promise3-photo.jpg",
+        "alt": "Students dressed in traditional attire for a school celebration"
+      },
       "heading": "…so your child grows with ==character== and ==confidence==.",
       "headingDataK": "promise3-highlight1",
-      "figure": { "src": "assets/photos/promises/promise3-figure.png", "alt": "A student dressed as a nurse for a role-play activity" }
+      "figure": {
+        "src": "assets/photos/promises/promise3-figure.png",
+        "alt": "A student dressed as a nurse for a role-play activity"
+      }
     }
   ],
   "divisions": {
-    "heading": { "small": ["YOU WILL", "AND"], "big": ["DISCOVER,", "GROW,", "FLOURISH."] },
+    "heading": {
+      "small": [
+        "YOU WILL",
+        "AND"
+      ],
+      "big": [
+        "DISCOVER,",
+        "GROW,",
+        "FLOURISH."
+      ]
+    },
     "cards": [
-      { "photo": { "src": "assets/photos/divisions/discover-photo.jpg", "alt": "Young students doing a craft activity with their teacher" }, "verb": "DISCOVER", "grades": "Pre-KG to KG", "school": "EARLY YEARS", "lead": "YOUR CHILD WILL PLAY, QUESTION AND DISCOVER", "trail": " in a caring setting where a love of learning begins." },
-      { "photo": { "src": "assets/photos/divisions/grow-photo.jpg", "alt": "Primary students lined up together at a school assembly" }, "verb": "GROW", "grades": "Grades 1–5", "school": "PRIMARY", "lead": "YOUR CHILD WILL BUILD STRONG FOUNDATIONS", "trail": " in literacy, numeracy and the confidence to ask big questions." },
-      { "photo": { "src": "assets/photos/divisions/flourish-photo.jpg", "alt": "A teacher helping a middle school student with his work" }, "verb": "FLOURISH", "grades": "Grades 6–12", "school": "MIDDLE AND SECONDARY", "lead": "YOUR CHILD WILL PREPARE FOR WHAT'S NEXT", "trail": " through CBSE and Cambridge IGCSE pathways." }
+      {
+        "photo": {
+          "src": "assets/photos/divisions/discover-photo.jpg",
+          "alt": "Young students doing a craft activity with their teacher"
+        },
+        "verb": "DISCOVER",
+        "grades": "Pre-KG to KG",
+        "school": "EARLY YEARS",
+        "lead": "YOUR CHILD WILL PLAY, QUESTION AND DISCOVER",
+        "trail": " in a caring setting where a love of learning begins."
+      },
+      {
+        "photo": {
+          "src": "assets/photos/divisions/grow-photo.jpg",
+          "alt": "Primary students lined up together at a school assembly"
+        },
+        "verb": "GROW",
+        "grades": "Grades 1–5",
+        "school": "PRIMARY",
+        "lead": "YOUR CHILD WILL BUILD STRONG FOUNDATIONS",
+        "trail": " in literacy, numeracy and the confidence to ask big questions."
+      },
+      {
+        "photo": {
+          "src": "assets/photos/divisions/flourish-photo.jpg",
+          "alt": "A teacher helping a middle school student with his work"
+        },
+        "verb": "FLOURISH",
+        "grades": "Grades 6–12",
+        "school": "MIDDLE AND SECONDARY",
+        "lead": "YOUR CHILD WILL PREPARE FOR WHAT'S NEXT",
+        "trail": " through CBSE and Cambridge IGCSE pathways."
+      }
     ]
   },
   "learning": {
     "heading": "Curiosity is where every ==lesson== begins.",
     "headingDataK": "learning-highlight1",
-    "title": { "lead": "LEARNING", "emphasis": "THAT", "trail": "CONNECTS." },
+    "title": {
+      "lead": "LEARNING",
+      "emphasis": "THAT",
+      "trail": "CONNECTS."
+    },
     "video": "assets/video/learning.mp4",
     "poster": "assets/video/learning-poster.jpg",
     "videoAlt": "A tour of campus life and classrooms at AIIS",
     "columns": [
-      { "icon": { "src": "assets/photos/learning/icon-lightbulb.jpg", "alt": "A glowing lightbulb" }, "title": "CURIOSITY THAT CONNECTS", "leadIn": "OUR STUDENTS ASK, TEST AND EXPLAIN", "trail": "—inquiry and critical thinking shape every lesson, so ideas turn into understanding." },
-      { "icon": { "src": "assets/photos/learning/icon-compass.jpg", "alt": "A compass" }, "title": "PURPOSE THAT CONNECTS", "leadIn": "WE GIVE LEARNING A REASON", "trail": " through real-world problems and cross-subject projects that matter beyond the classroom." },
-      { "icon": { "src": "assets/photos/learning/icon-notebook.png", "alt": "A notebook and pen" }, "title": "PATHWAYS THAT CONNECT", "leadIn": "LEARNING OPENS DOORS", "trail": " through CBSE and Cambridge IGCSE pathways, partnerships and experiences beyond school." }
+      {
+        "icon": {
+          "src": "assets/photos/learning/icon-lightbulb.jpg",
+          "alt": "A glowing lightbulb"
+        },
+        "title": "CURIOSITY THAT CONNECTS",
+        "leadIn": "OUR STUDENTS ASK, TEST AND EXPLAIN",
+        "trail": "—inquiry and critical thinking shape every lesson, so ideas turn into understanding."
+      },
+      {
+        "icon": {
+          "src": "assets/photos/learning/icon-compass.jpg",
+          "alt": "A compass"
+        },
+        "title": "PURPOSE THAT CONNECTS",
+        "leadIn": "WE GIVE LEARNING A REASON",
+        "trail": " through real-world problems and cross-subject projects that matter beyond the classroom."
+      },
+      {
+        "icon": {
+          "src": "assets/photos/learning/icon-notebook.png",
+          "alt": "A notebook and pen"
+        },
+        "title": "PATHWAYS THAT CONNECT",
+        "leadIn": "LEARNING OPENS DOORS",
+        "trail": " through CBSE and Cambridge IGCSE pathways, partnerships and experiences beyond school."
+      }
     ]
   },
   "teachers": {
     "heading": "Meet the people who ==ignite== young minds.",
     "headingDataK": "teachers-heading-mark",
     "slides": [
-      { "role": { "text": "Kindergarten Team", "placeholder": "sample teacher role" }, "name": { "text": "MS. PRIYA & MS. ANITHA", "placeholder": "sample teacher name" }, "playLabel": { "placeholder": "sample teacher name in the play button label" }, "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1741807826/shadyside/xiy8fkmhfhrxiewyshhq/RelationalTeaching_MelandNick1.mp4", "videoTitle": "MS. PRIYA and MS. ANITHA, Kindergarten Team" },
-      { "role": { "text": "Mathematics Teacher", "placeholder": "sample teacher role" }, "name": { "text": "MR. RAHUL", "placeholder": "sample teacher name" }, "playLabel": { "placeholder": "sample teacher name in the play button label" }, "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1745609649/shadyside/wk1m1zuvscoprpnlha2i/JeffPerlis_50MB.mp4", "videoTitle": "MR. RAHUL, Mathematics Teacher" },
-      { "role": { "text": "Science Teacher", "placeholder": "sample teacher role" }, "name": { "text": "MS. FATIMA", "placeholder": "sample teacher name" }, "playLabel": { "placeholder": "sample teacher name in the play button label" }, "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1741807811/shadyside/hh2apcbaifw1llxsjkfu/RelationalTeaching_Karen.mp4", "videoTitle": "MS. FATIMA, Science Teacher" },
-      { "role": { "text": "English Teacher", "placeholder": "sample teacher role" }, "name": { "text": "MS. SARAH", "placeholder": "sample teacher name" }, "playLabel": { "placeholder": "sample teacher name in the play button label" }, "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1741807824/shadyside/kr3ml4h26f89lcmdgjmr/RelationalTeaching_Lauren.mp4", "videoTitle": "MS. SARAH, English Teacher" },
-      { "role": { "text": "Visual Arts Teacher", "placeholder": "sample teacher role" }, "name": { "text": "MR. JOSEPH", "placeholder": "sample teacher name" }, "playLabel": { "placeholder": "sample teacher name in the play button label" }, "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1741807826/shadyside/kidbfiizhzxmurzle6wb/RelationalTeaching_Tony.mp4", "videoTitle": "MR. JOSEPH, Visual Arts Teacher" },
-      { "role": { "text": "Physical Education", "placeholder": "sample teacher role" }, "name": { "text": "MR. ARJUN", "placeholder": "sample teacher name" }, "playLabel": { "placeholder": "sample teacher name in the play button label" }, "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1765304086/shadyside/qah2ptw3oxwxb1k4frbe/NatashaLopez.mp4", "videoTitle": "MR. ARJUN, Physical Education" },
-      { "role": { "text": "Music Teacher", "placeholder": "sample teacher role" }, "name": { "text": "MS. MEERA", "placeholder": "sample teacher name" }, "playLabel": { "placeholder": "sample teacher name in the play button label" }, "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1765303814/shadyside/son90nouwuxp2yu0mo36/ChloeTorrence.mp4", "videoTitle": "MS. MEERA, Music Teacher" }
+      {
+        "role": {
+          "text": "Kindergarten Team",
+          "placeholder": "sample teacher role"
+        },
+        "name": {
+          "text": "MS. PRIYA & MS. ANITHA",
+          "placeholder": "sample teacher name"
+        },
+        "playLabel": {
+          "placeholder": "sample teacher name in the play button label"
+        },
+        "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1741807826/shadyside/xiy8fkmhfhrxiewyshhq/RelationalTeaching_MelandNick1.mp4",
+        "videoTitle": "MS. PRIYA and MS. ANITHA, Kindergarten Team"
+      },
+      {
+        "role": {
+          "text": "Mathematics Teacher",
+          "placeholder": "sample teacher role"
+        },
+        "name": {
+          "text": "MR. RAHUL",
+          "placeholder": "sample teacher name"
+        },
+        "playLabel": {
+          "placeholder": "sample teacher name in the play button label"
+        },
+        "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1745609649/shadyside/wk1m1zuvscoprpnlha2i/JeffPerlis_50MB.mp4",
+        "videoTitle": "MR. RAHUL, Mathematics Teacher"
+      },
+      {
+        "role": {
+          "text": "Science Teacher",
+          "placeholder": "sample teacher role"
+        },
+        "name": {
+          "text": "MS. FATIMA",
+          "placeholder": "sample teacher name"
+        },
+        "playLabel": {
+          "placeholder": "sample teacher name in the play button label"
+        },
+        "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1741807811/shadyside/hh2apcbaifw1llxsjkfu/RelationalTeaching_Karen.mp4",
+        "videoTitle": "MS. FATIMA, Science Teacher"
+      },
+      {
+        "role": {
+          "text": "English Teacher",
+          "placeholder": "sample teacher role"
+        },
+        "name": {
+          "text": "MS. SARAH",
+          "placeholder": "sample teacher name"
+        },
+        "playLabel": {
+          "placeholder": "sample teacher name in the play button label"
+        },
+        "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1741807824/shadyside/kr3ml4h26f89lcmdgjmr/RelationalTeaching_Lauren.mp4",
+        "videoTitle": "MS. SARAH, English Teacher"
+      },
+      {
+        "role": {
+          "text": "Visual Arts Teacher",
+          "placeholder": "sample teacher role"
+        },
+        "name": {
+          "text": "MR. JOSEPH",
+          "placeholder": "sample teacher name"
+        },
+        "playLabel": {
+          "placeholder": "sample teacher name in the play button label"
+        },
+        "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1741807826/shadyside/kidbfiizhzxmurzle6wb/RelationalTeaching_Tony.mp4",
+        "videoTitle": "MR. JOSEPH, Visual Arts Teacher"
+      },
+      {
+        "role": {
+          "text": "Physical Education",
+          "placeholder": "sample teacher role"
+        },
+        "name": {
+          "text": "MR. ARJUN",
+          "placeholder": "sample teacher name"
+        },
+        "playLabel": {
+          "placeholder": "sample teacher name in the play button label"
+        },
+        "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1765304086/shadyside/qah2ptw3oxwxb1k4frbe/NatashaLopez.mp4",
+        "videoTitle": "MR. ARJUN, Physical Education"
+      },
+      {
+        "role": {
+          "text": "Music Teacher",
+          "placeholder": "sample teacher role"
+        },
+        "name": {
+          "text": "MS. MEERA",
+          "placeholder": "sample teacher name"
+        },
+        "playLabel": {
+          "placeholder": "sample teacher name in the play button label"
+        },
+        "video": "https://resources.finalsite.net/videos/t_video_mp4_480/v1765303814/shadyside/son90nouwuxp2yu0mo36/ChloeTorrence.mp4",
+        "videoTitle": "MS. MEERA, Music Teacher"
+      }
     ]
   },
   "values": {
     "cards": [
-      { "title": "CARING TEACHERS", "photo": { "src": "assets/photos/values/caring-teachers-photo.jpg", "alt": "A teacher standing with two students in lab coats in the school science lab" } },
-      { "title": "GLOBAL OUTLOOK", "photo": { "src": "assets/photos/values/global-outlook-photo.jpg", "alt": "Students presenting at a World Heritage Day assembly, with a globe backdrop" } },
-      { "title": "VALUES-LED LEARNING", "photo": { "src": "assets/photos/values/values-learning-photo.jpg", "alt": "A teacher with an arm around a row of sash-wearing students at a moral-values assembly" } }
+      {
+        "title": "CARING TEACHERS",
+        "photo": {
+          "src": "assets/photos/values/caring-teachers-photo.jpg",
+          "alt": "A teacher standing with two students in lab coats in the school science lab"
+        }
+      },
+      {
+        "title": "GLOBAL OUTLOOK",
+        "photo": {
+          "src": "assets/photos/values/global-outlook-photo.jpg",
+          "alt": "Students presenting at a World Heritage Day assembly, with a globe backdrop"
+        }
+      },
+      {
+        "title": "VALUES-LED LEARNING",
+        "photo": {
+          "src": "assets/photos/values/values-learning-photo.jpg",
+          "alt": "A teacher with an arm around a row of sash-wearing students at a moral-values assembly"
+        }
+      }
     ],
-    "heading": { "lead": "WE IGNITE", "small1": "YOUNG", "mid": "MINDS", "small2": "SO", "trail": "YOU CAN SHINE." }
+    "heading": {
+      "lead": "WE IGNITE",
+      "small1": "YOUNG",
+      "mid": "MINDS",
+      "small2": "SO",
+      "trail": "YOU CAN SHINE."
+    }
   },
   "closing": {
-    "heading": { "small": "IT'S TIME TO", "big": ["START", "YOUR", "JOURNEY"] },
+    "heading": {
+      "small": "IT'S TIME TO",
+      "big": [
+        "START",
+        "YOUR",
+        "JOURNEY"
+      ]
+    },
     "buttonLabel": "Take the Next Step",
     "buttonPath": "/form/aiis-online-admissions",
     "links": [
-      { "label": "Enquire", "path": "/form/aiis-online-admissions" },
-      { "label": "Book a School Visit", "path": "/form/contact-the-best-indian-school-in-kuwait" },
-      { "label": "Apply", "path": "/admission-process" }
+      {
+        "label": "Enquire",
+        "path": "/form/aiis-online-admissions"
+      },
+      {
+        "label": "Book a School Visit",
+        "path": "/form/contact-the-best-indian-school-in-kuwait"
+      },
+      {
+        "label": "Apply",
+        "path": "/admission-process"
+      }
     ]
-  }
+  },
+  "_source": "Homepage section copy, verbatim-ported from the baseline (git tag baseline-static-site, site/index.html) during Task 9. `heading`/`headingDataK` pairs feed the `hl` Nunjucks filter (partial-phrase highlight within a sentence); `hero.heading` feeds the `words` filter (every word individually wrapped). `divisions.heading` and `closing.heading` are genuinely filter-free one-offs: the baseline mixes `<em>` and `.word` spans with inconsistent `data-k` placement across words, so home.njk hardcodes that structure directly from their `.small`/`.big` fields via the `amp()` macro, with no `hl`/`words` call at all. `learning.title` and `values.heading` are a related but different one-off: they ARE run through the `words` filter — just once per single-word/short-phrase sub-field (`learning.title.lead`/`.emphasis`/`.trail`; `values.heading.lead`/`.small1`/`.mid`/`.small2`/`.trail`) rather than once for the whole heading, because the baseline interleaves literal `<em>` wrappers between `.word` spans in a fixed pattern that a single filter call over the full string can't reproduce."
 }
