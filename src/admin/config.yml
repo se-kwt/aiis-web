@@ -2,9 +2,9 @@ backend:
   name: github
   repo: se-kwt/se-kwt.github.io
   branch: main
-  # Set to the deployed OAuth proxy (see netlify/README.md), e.g.
-  # base_url: https://aiis-cms-auth.netlify.app
-  # Until this is set, Decap falls back to api.netlify.com and login fails.
+  # Our own OAuth proxy (see netlify/README.md). Without base_url, Decap falls
+  # back to api.netlify.com and login fails with "Not Found".
+  base_url: https://aiis-cms-auth.netlify.app
 local_backend: true   # only takes effect when the admin is opened on localhost
 media_folder: "src/assets/photos"
 public_folder: "/assets/photos"
