@@ -1,7 +1,9 @@
-/* Shared "inner page" template, in the same visual language as the Our Story page (our-story.css): a centred title band (eyebrow +
-   big display title + optional lead) with the diagonal notch, full-width prose with serif headings and a blue rule, the feature-card
-   grid and point list for program-style pages, a decorative swirl, and a closing row of navy destination bars. Used by every page
-   built from content/pages/*.md alongside tokens/base/header/footer.css. Breakpoints match the rest of the site: 800 / 1000 / 1200px. */
+/* Shared "inner page" template, laid out exactly like the Our Story page (our-story.css): a title band (eyebrow + display title) that
+   cuts into a full-bleed photo with the diagonal notch, a lead statement + intro copy, then one section per "## Heading" with
+   alternating tinted / white backgrounds, a serif heading over a blue rule, the swirl accent in alternating corners and, where the
+   section has a photo, a text/photo split that alternates sides; finished by the row of navy destination bars. page.njk builds
+   those sections from the page's flat block list. Used by every page in content/pages/*.md alongside tokens/base/header/footer.css.
+   Breakpoints match the rest of the site: 800 / 1000 / 1200px. */
 
 .page { font: 400 14px/21px var(--f-sans); color: var(--c-text); }
 @media (min-width: 1000px) { .page { font-size: 18px; line-height: 27px; } }
@@ -10,54 +12,81 @@
 @media (min-width: 800px) { .page__wrap { padding: 0 40px; } }
 @media (min-width: 1000px) { .page__wrap { padding: 0 60px; } }
 
-/* ---- title band ----------------------------------------------------------------------------------- */
-.page-hero { position: relative; padding: 32px 20px 40px; text-align: center; background: var(--c-bg-alt); }
-@media (min-width: 800px) { .page-hero { padding: 48px 40px 56px; } }
-@media (min-width: 1200px) { .page-hero { padding: 56px 60px 72px; } }
+/* ---- 1. title band + full-bleed photo ------------------------------------------------------------- */
+.page-hero { position: relative; padding-top: 32px; background: var(--c-bg-alt); }
+@media (min-width: 1000px) { .page-hero { padding-top: 48px; } }
 
 .page-hero__eyebrow {
-  margin: 0 0 8px; text-transform: uppercase; font: 700 12px/1.4 var(--f-sans); letter-spacing: .1em; color: var(--c-accent-700);
+  margin: 0 0 8px; padding: 0 20px; text-align: center; text-transform: uppercase;
+  font: 700 12px/1.4 var(--f-sans); letter-spacing: .1em; color: var(--c-accent-700);
 }
 .page-hero__title {
-  max-width: 1100px; margin: 0 auto; text-transform: uppercase; text-wrap: balance;
-  font: 400 clamp(36px, 7vw, 56px) / 1.05 var(--f-display); color: var(--c-navy);
+  max-width: 1100px; margin: 0 auto; padding: 0 20px 32px; text-align: center; text-transform: uppercase; text-wrap: balance;
+  font: 400 40px/1.02 var(--f-display); color: var(--c-navy);
 }
-@media (min-width: 800px) { .page-hero__title { font-size: 72px; } }
-@media (min-width: 1200px) { .page-hero__title { font-size: 88px; } }
+@media (min-width: 800px) { .page-hero__title { font-size: 64px; padding-bottom: 40px; } }
+@media (min-width: 1200px) { .page-hero__title { font-size: 84px; padding-bottom: 56px; } }
 
-.page-hero__lead {
-  max-width: 60ch; margin: 20px auto 0; font: 700 20px/1.4 var(--f-serif); color: var(--c-accent-700);
-}
-@media (min-width: 800px) { .page-hero__lead { margin-top: 24px; font-size: 24px; } }
+.page-hero__frame { position: relative; }
+.page-hero__frame .tp { width: 100%; margin: 0; aspect-ratio: 4 / 3; background: var(--c-grey-1); }
+@media (min-width: 800px) { .page-hero__frame .tp { aspect-ratio: 16 / 9; } }
+@media (min-width: 1200px) { .page-hero__frame .tp { aspect-ratio: 21 / 9; } }
+.page-hero__frame .tp img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
-/* the diagonal notch hanging off the band's bottom-right corner, desktop only (same shape as the Our Story hero) */
+/* the diagonal cut where the title band meets the photo, desktop only */
 .page-hero__notch { display: none; }
 @media (min-width: 800px) {
   .page-hero__notch {
-    display: block; position: absolute; z-index: 1; right: 0; bottom: -59px;
+    display: block; position: absolute; z-index: 1; right: 0; top: -1px;
     width: 120px; height: 60px; background: var(--c-bg-alt);
     clip-path: polygon(0 0, 100% 0, 100% 100%);
   }
 }
-@media (min-width: 1200px) { .page-hero__notch { bottom: -79px; width: 160px; height: 80px; } }
+@media (min-width: 1200px) { .page-hero__notch { width: 160px; height: 80px; } }
 
-/* ---- body ----------------------------------------------------------------------------------------- */
-.page-body { position: relative; overflow: hidden; padding: 40px 0 56px; }
-@media (min-width: 800px) { .page-body { padding: 72px 0 80px; } }
-@media (min-width: 1000px) { .page-body { padding: 96px 0 96px; } }
+/* ---- 2 + 3. sections: the lead-in, then one per heading ------------------------------------------ */
+.page-section { position: relative; overflow: hidden; padding: 56px 0; }
+@media (min-width: 800px) { .page-section { padding: 80px 0; } }
 
-.page-body__swirl { position: absolute; z-index: 0; right: -40px; bottom: -30px; width: 180px; height: 180px; color: var(--c-accent); opacity: .6; pointer-events: none; }
-@media (max-width: 999.98px) { .page-body__swirl { display: none; } }
-.page-body .page__wrap { position: relative; z-index: 1; }
+/* the lead-in sits straight under the photo, like the Our Story lead */
+.page-section--intro { padding: 40px 0 24px; }
+@media (min-width: 800px) { .page-section--intro { padding: 56px 0 32px; } }
+@media (min-width: 1000px) { .page-section--intro { padding: 72px 0 40px; } }
 
-/* ---- prose content ---- */
-.page-content > p, .page-content > ul:not(.page-features):not(.page-points), .page-content > ol, .page-content > h2, .page-content > h3 { max-width: 820px; }
+/* sections after the lead-in alternate tinted / white, starting tinted (same as the Our Story story blocks) */
+.page-sections > .page-section:nth-child(odd) { background: var(--c-bg-alt); }
 
-.page-content h2 {
-  display: inline-block; margin: 48px 0 16px; padding-top: 16px; border-top: 2px solid var(--c-highlight);
+.page-section__grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; }
+@media (min-width: 1000px) { .page-section__grid--media { grid-template-columns: 1fr 1fr; gap: 60px; } }
+.page-section--flip .page-section__media { order: 0; }
+@media (min-width: 1000px) { .page-section--flip .page-section__media { order: -1; } }
+
+.page-section__swirl { position: absolute; z-index: 0; width: 180px; height: 180px; color: var(--c-accent); opacity: .6; pointer-events: none; }
+.page-sections > .page-section:nth-child(odd) .page-section__swirl { left: -40px; top: -30px; }
+.page-sections > .page-section:nth-child(even) .page-section__swirl { right: -40px; bottom: -30px; }
+.page-section--intro .page-section__swirl { display: none; }
+@media (max-width: 999.98px) { .page-section__swirl { display: none; } }
+
+/* the lead statement: the serif line that opens the page (the Our Story mission headline) */
+.page-section__statement {
+  max-width: 920px; margin: 0 0 32px; font: 700 clamp(24px, 3.6vw, 40px) / 1.25 var(--f-serif); color: var(--c-navy);
+}
+
+.page-section__heading {
+  display: inline-block; margin: 0 0 20px; padding-top: 16px; border-top: 2px solid var(--c-highlight);
   font: 700 clamp(24px, 3.6vw, 36px) / 1.2 var(--f-serif); color: var(--c-navy);
 }
-.page-content h2:first-child { margin-top: 0; }
+
+.page-section__media { position: relative; }
+.page-section__media .tp { width: 100%; aspect-ratio: 4 / 5; max-width: 420px; margin: 0 auto; background: var(--c-grey-1); }
+@media (min-width: 1000px) { .page-section__media .tp { max-width: none; aspect-ratio: 3 / 4; margin: 0; } }
+.page-section__media .tp img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ---- prose inside a section ---- */
+.page-content > p, .page-content > ul:not(.page-features):not(.page-points), .page-content > ol, .page-content > h3 { max-width: 820px; }
+.page-section__grid--media .page-content > p, .page-section__grid--media .page-content > ul:not(.page-features):not(.page-points),
+.page-section__grid--media .page-content > ol { max-width: 560px; }
+
 .page-content h3 { margin: 32px 0 12px; font: 700 clamp(20px, 2.6vw, 26px) / 1.3 var(--f-serif); color: var(--c-navy); }
 .page-content p { margin: 0 0 20px; }
 .page-content ul, .page-content ol { margin: 0 0 20px; padding-left: 1.2em; }
@@ -65,17 +94,19 @@
 .page-content strong { color: var(--c-navy); }
 .page-content a { color: var(--c-navy); text-underline-offset: 2px; }
 .page-content a:hover, .page-content a:focus-visible { color: var(--c-accent-700); }
+.page-content > :last-child { margin-bottom: 0; }
 .page-content figure.tp { margin: 0 0 40px; aspect-ratio: 16 / 9; background: var(--c-grey-1); }
 @media (min-width: 1200px) { .page-content figure.tp { aspect-ratio: 21 / 9; } }
 .page-content figure.tp img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
-/* tables written as raw HTML in a richtext block */
-.page-content table { width: 100%; margin: 0 0 32px; border-collapse: collapse; font-size: .9em; }
+/* tables written as raw HTML in a richtext block; page.njk wraps each in .page-table so wide ones scroll sideways on phones */
+.page-table { max-width: 100%; margin: 0 0 32px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.page-content table { width: 100%; min-width: 520px; margin: 0; border-collapse: collapse; font-size: .9em; }
 .page-content th, .page-content td { padding: 12px 14px; border: 1px solid var(--c-grey-2); text-align: left; vertical-align: top; }
 .page-content th { background: var(--c-bg-alt); font: 700 .85em/1.4 var(--f-sans); text-transform: uppercase; letter-spacing: .04em; color: var(--c-navy); }
 
 /* ---- feature card grid (program-style pages: "Hands-on Approach", "Interactive Learning", ...) ---- */
-.page-content .page-features { display: grid; grid-template-columns: 1fr; gap: 32px; margin: 8px 0 40px; padding: 0; list-style: none; }
+.page-content .page-features { display: grid; grid-template-columns: 1fr; gap: 32px; margin: 8px 0 32px; padding: 0; list-style: none; }
 @media (min-width: 600px) { .page-content .page-features { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1000px) { .page-content .page-features { grid-template-columns: repeat(3, 1fr); gap: 40px; } }
 .page-content .page-features__item { margin: 0; padding: 20px 0 0; border-top: 2px solid var(--c-highlight); }
@@ -83,7 +114,7 @@
 .page-features__item p { margin: 0; font-size: 15px; line-height: 1.6; }
 
 /* ---- simple fact/point list (short bullet rows, e.g. "Build Confidence", "Improve Communication skills") ---- */
-.page-content .page-points { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 0 0 40px; padding: 0; list-style: none; }
+.page-content .page-points { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 0 0 32px; padding: 0; list-style: none; }
 @media (min-width: 600px) { .page-content .page-points { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1000px) { .page-content .page-points { grid-template-columns: repeat(3, 1fr); } }
 .page-content .page-points__item {
@@ -92,9 +123,9 @@
 }
 .page-points__item::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--c-accent); }
 
-/* ---- closing destination bars (same as Our Story) ---- */
-.page-closing { padding: 0 0 56px; }
-@media (min-width: 800px) { .page-closing { padding-bottom: 80px; } }
+/* ---- 4. closing destination bars (same as Our Story) ---- */
+.page-closing { padding: 56px 0; }
+@media (min-width: 800px) { .page-closing { padding: 80px 0; } }
 
 .page-closing__list { display: flex; flex-direction: column; gap: 16px; margin: 0; padding: 0; list-style: none; }
 @media (min-width: 800px) { .page-closing__list { flex-direction: row; gap: 20px; } }

@@ -187,6 +187,47 @@ export default function (eleventyConfig) {
     return "";
   });
 
+  // Inner pages: groups a page's flat `blocks` list into the sections of the Our Story layout.
+  //  - hero:     the first photo that has a real file, shown in the full-width frame under the title (removed from the flow)
+  //  - intro:    everything before the first "## Heading" text block (the lead-in copy)
+  //  - sections: one per "## Heading" block, holding the blocks up to the next heading
+  // A section that has a photo and nothing wide in it (cards, point lists, tables) gets that photo as its `media`,
+  // shown beside the copy; otherwise the photo stays in the flow as a full-width figure.
+  const isWide = (b) =>
+    b.type === "features" || b.type === "points" || (b.type === "richtext" && /<table[\s>]/i.test(String(b.body || "")));
+  const headingOf = (b) => {
+    if (b.type !== "richtext" || b.raw) return null;
+    const m = String(b.body || "").trim().match(/^##[ \t]+([^#\n][^\n]*)\n?([\s\S]*)$/);
+    return m ? { text: m[1].trim(), rest: m[2].trim() } : null;
+  };
+  eleventyConfig.addFilter("pageSections", (blocks) => {
+    const all = (blocks || []).slice();
+    const heroAt = all.findIndex((b) => b.type === "image" && b.src);
+    const hero = heroAt >= 0 ? all.splice(heroAt, 1)[0] : null;
+    const intro = { heading: "", blocks: [] };
+    const sections = [];
+    let current = intro;
+    for (const b of all) {
+      const h = headingOf(b);
+      if (h) {
+        current = { heading: h.text, blocks: [] };
+        sections.push(current);
+        if (h.rest) current.blocks.push({ ...b, body: h.rest });
+      } else {
+        current.blocks.push(b);
+      }
+    }
+    for (const s of [intro, ...sections]) {
+      s.wide = s.blocks.some(isWide);
+      s.media = null;
+      if (!s.wide) {
+        const at = s.blocks.findIndex((b) => b.type === "image");
+        if (at >= 0) s.media = s.blocks.splice(at, 1)[0];
+      }
+    }
+    return { hero, intro, sections };
+  });
+
   // Drops the link that points at the page being rendered, so a closing bar never links a page to itself.
   eleventyConfig.addFilter("exceptPath", (links, url) => {
     const target = String(url || "").replace(/\/+$/, "");

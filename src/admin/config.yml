@@ -235,7 +235,15 @@ collections:
           - { label: Title, name: title, widget: string }
           - { label: "Head title override (hidden, soccer.md only)", name: headTitle, widget: hidden, required: false }
           - { label: Eyebrow, name: eyebrow, widget: string, required: false, hint: "Small orange label above the title. Leave empty to use the menu section the page belongs to (e.g. ABOUT US)." }
-          - { label: Lead, name: lead, widget: string, required: false }
+          - { label: Lead, name: lead, widget: string, required: false, hint: "The serif line that opens the page, under the photo." }
+          - label: "Hero photo (optional)"
+            name: heroImage
+            widget: object
+            required: false
+            hint: "The wide photo under the title. Leave empty to use the page's first photo, or a placeholder if it has none."
+            fields:
+              - { label: Photo, name: src, widget: image, required: false }
+              - { label: "Alt text", name: alt, widget: string, required: false }
           - { label: "Head: noindex comment (hidden)", name: headNoindexComment, widget: hidden, required: false }
           - { label: "Head: intro comment (hidden)", name: headIntroComment, widget: hidden, required: false }
           - { label: "Head: safety-nets comment (hidden)", name: headSafetyNetsComment, widget: hidden, required: false }

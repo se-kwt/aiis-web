@@ -69,15 +69,27 @@
   function PagePreview(props) {
     var data = props.entry.get("data").toJS();
     var closing = data.closing || [];
+    var blocks = data.blocks || [];
+    var hero = data.heroImage && data.heroImage.src ? data.heroImage : null;
+    var heroAt = -1;
+    if (!hero) {
+      blocks.forEach(function (b, i) { if (heroAt < 0 && b.type === "image" && b.src) heroAt = i; });
+      if (heroAt >= 0) hero = { src: blocks[heroAt].src, alt: blocks[heroAt].description };
+    }
     return h("div", { className: "page" },
       h("section", { className: "page-hero" },
         data.eyebrow ? html(inlineMd(data.eyebrow), "p", { className: "page-hero__eyebrow" }) : null,
         html(inlineMd(data.title), "h1", { className: "page-hero__title" }),
-        data.lead ? html(inlineMd(data.lead), "p", { className: "page-hero__lead" }) : null,
-        h("span", { className: "page-hero__notch", "aria-hidden": "true" })),
-      h("section", { className: "page-body" },
-        h("div", { className: "page__wrap" },
-          h("article", { className: "page-content" }, (data.blocks || []).map(Block)))),
+        h("div", { className: "page-hero__frame" },
+          h("span", { className: "page-hero__notch", "aria-hidden": "true" }),
+          hero
+            ? h("figure", { className: "tp" }, h("img", { src: assetUrl(hero.src), alt: hero.alt || "" }))
+            : h("figure", { className: "tp", "data-temp-photo": "" }))),
+      h("section", { className: "page-section page-section--intro" },
+        h("div", { className: "page__wrap page-section__grid" },
+          h("div", { className: "page-section__copy page-content" },
+            data.lead ? html(inlineMd(data.lead), "p", { className: "page-section__statement" }) : null,
+            blocks.map(function (b, i) { return i === heroAt ? null : Block(b, i); })))),
       closing.length ? h("section", { className: "page-closing" },
         h("div", { className: "page__wrap" },
           h("ul", { className: "page-closing__list" }, closing.map(function (link, i) {
