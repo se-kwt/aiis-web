@@ -5,7 +5,7 @@
    Hooks for other tasks:
    - html.intro-active  (set by the intro, Task 5): on desktop the bar is slid out of view above the viewport;
      removing the class slides it in (.5s, ease).
-   - body.sticky-header-active / body.scrolled-up: set by menu.js on scroll (see site/js/menu.js).
+   - body.sticky-header-active / body.scrolled-up: set by menu.js on scroll (see src/js/menu.js).
    - body.menu-open: full-screen menu open (scroll locked). */
 
 .sr {

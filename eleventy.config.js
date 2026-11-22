@@ -104,6 +104,12 @@ export default function (eleventyConfig) {
   // Eleventy input directory. Keep them as passthrough-copied static files.
   eleventyConfig.ignores.add("src/assets/**/*.md");
 
+  // Exposes the shared `escapeHtml` helper above as a filter, for call sites
+  // that build an attribute value from plain editor-entered text (e.g. an
+  // image's `alt`) under this project's `| escapeHtml | safe` convention:
+  // escape first, then mark safe, same as the `hl`/`words` filters below.
+  eleventyConfig.addFilter("escapeHtml", escapeHtml);
+
   // Block-level markdown -> HTML, for a `richtext` content block's `body`.
   eleventyConfig.addFilter("markdown", (str) => {
     if (str === null || str === undefined) return "";

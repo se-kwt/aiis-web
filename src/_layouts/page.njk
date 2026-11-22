@@ -16,7 +16,7 @@
       <div class="page__wrap page-grid">
         <article class="page-content">
 {% for block in blocks %}{% if block.blankLineBefore %}
-{% endif %}{% if block.type == "richtext" %}{% if block.raw %}          {{ block.body | safe }}{% else %}          {{ block.body | markdown | safe }}{% endif %}{% elif block.type == "image" %}{% if block.src %}        <figure class="tp"><img src="{{ block.src }}" alt="{{ block.description | safe }}" loading="lazy"></figure>
+{% endif %}{% if block.type == "richtext" %}{% if block.raw %}          {{ block.body | safe }}{% else %}          {{ block.body | markdown | safe }}{% endif %}{% elif block.type == "image" %}{% if block.src %}        <figure class="tp"><img src="{{ block.src }}" alt="{{ block.description | escapeHtml | safe }}" loading="lazy"></figure>
 {% else %}        <figure class="tp" data-temp-photo>
           <span class="sr">{{ block.description | safe }}</span>
         </figure>
