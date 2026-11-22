@@ -12,11 +12,12 @@ logo:
 media_folder: "src/assets/photos"
 public_folder: "/assets/photos"
 collections:
-  - name: homepage
-    label: Homepage
+  - name: pages
+    label: Pages
+    description: "Every page on the site in one list, in menu order: the homepage, Our Story, then each inner page. An inner page is a title band followed by blocks (text, photos, cards, point lists), top to bottom."
     files:
       - name: homepage
-        label: Homepage
+        label: "Home"
         file: content/homepage.json
         fields:
           - label: Hero
@@ -151,11 +152,8 @@ collections:
                 fields:
                   - { label: Label, name: label, widget: string }
                   - { label: Path, name: path, widget: string }
-  - name: our_story
-    label: Our Story
-    files:
       - name: our-story
-        label: Our Story
+        label: "About Us · Our Story"
         file: content/our-story.json
         fields:
           - label: Hero
@@ -230,6 +228,191 @@ collections:
             fields:
               - { label: Label, name: label, widget: string }
               - { label: Path, name: path, widget: string }
+      - name: chairmans-message
+        label: "About Us · Chairman's Message"
+        file: content/pages/chairmans-message.md
+        fields: &pageFields
+          - { label: Title, name: title, widget: string }
+          - { label: "Head title override (hidden, soccer.md only)", name: headTitle, widget: hidden, required: false }
+          - { label: "Breadcrumb label", name: crumbLabel, widget: string, required: false }
+          - { label: Lead, name: lead, widget: string, required: false }
+          - { label: "Head: noindex comment (hidden)", name: headNoindexComment, widget: hidden, required: false }
+          - { label: "Head: intro comment (hidden)", name: headIntroComment, widget: hidden, required: false }
+          - { label: "Head: safety-nets comment (hidden)", name: headSafetyNetsComment, widget: hidden, required: false }
+          - { label: "Head: test-harness comment (hidden)", name: headTestHarnessComment, widget: hidden, required: false }
+          - label: Blocks
+            name: blocks
+            widget: list
+            types:
+              - label: "Text"
+                name: richtext
+                summary: "{{fields.raw | ternary('[HTML] ', '')}}{{fields.body | truncate(70)}}"
+                fields:
+                  - { label: Body, name: body, widget: markdown, hint: "A block that starts with a < tag is hand-written HTML (lists, tables). Change the words between the tags and leave the tags themselves alone." }
+                  - { label: "Raw HTML (hidden)", name: raw, widget: hidden, required: false }
+                  - { label: "Blank line before (hidden)", name: blankLineBefore, widget: hidden, required: false }
+              - label: Image
+                name: image
+                summary: "Image: {{fields.description | truncate(60)}}"
+                fields:
+                  - { label: Description, name: description, widget: string }
+                  - { label: Photo, name: src, widget: image, required: false }
+              - label: "Feature cards"
+                name: features
+                summary: "Cards: {{fields.items.0.heading}}…"
+                fields:
+                  - label: Items
+                    name: items
+                    widget: list
+                    fields: [{ label: Heading, name: heading, widget: string }, { label: Text, name: text, widget: text }]
+              - label: "Point list"
+                name: points
+                summary: "Points: {{fields.items.0}}…"
+                fields: [{ label: Items, name: items, widget: list, field: { label: Point, name: point, widget: string } }]
+      - name: principals-message
+        label: "About Us · Principal's Message"
+        file: content/pages/principals-message.md
+        fields: *pageFields
+      - name: vision-mission
+        label: "About Us · Vision and Mission"
+        file: content/pages/vision-mission.md
+        fields: *pageFields
+      - name: vice-principal-message
+        label: "About Us · Vice Principal's Message"
+        file: content/pages/vice-principal-message.md
+        fields: *pageFields
+      - name: kindergarten-school
+        label: "Academics · Kindergarten"
+        file: content/pages/kindergarten-school.md
+        fields: *pageFields
+      - name: primary-school
+        label: "Academics · Primary School"
+        file: content/pages/primary-school.md
+        fields: *pageFields
+      - name: middle-school
+        label: "Academics · Middle School"
+        file: content/pages/middle-school.md
+        fields: *pageFields
+      - name: student-leadership-program
+        label: "Academics · Student Leadership Program"
+        file: content/pages/student-leadership-program.md
+        fields: *pageFields
+      - name: curriculum-choices
+        label: "Academics · Curriculum"
+        file: content/pages/curriculum-choices.md
+        fields: *pageFields
+      - name: weekly-test-curriculum
+        label: "Academics · Weekly Test"
+        file: content/pages/weekly-test-curriculum.md
+        fields: *pageFields
+      - name: subject-enrichment-activities
+        label: "Academics · Subject Enrichment Activities"
+        file: content/pages/subject-enrichment-activities.md
+        fields: *pageFields
+      - name: best-igcse-cambridge-school-in-kuwait
+        label: "Academics · IGCSE"
+        file: content/pages/best-igcse-cambridge-school-in-kuwait.md
+        fields: *pageFields
+      - name: fees-schedules
+        label: "Admissions · Fees & Schedules"
+        file: content/pages/fees-schedules.md
+        fields: *pageFields
+      - name: admission-process
+        label: "Admissions · Admission Process"
+        file: content/pages/admission-process.md
+        fields: *pageFields
+      - name: clubs
+        label: "School Life · Clubs"
+        file: content/pages/clubs.md
+        fields: *pageFields
+      - name: student-article-magazine
+        label: "School Life · Student Article / Magazine"
+        file: content/pages/student-article-magazine.md
+        fields: *pageFields
+      - name: health-wellness
+        label: "School Life · Health & Wellness"
+        file: content/pages/health-wellness.md
+        fields: *pageFields
+      - name: after-school-activities
+        label: "School Life · After School Activities"
+        file: content/pages/after-school-activities.md
+        fields: *pageFields
+      - name: achievements
+        label: "School Life · Achievements"
+        file: content/pages/achievements.md
+        fields: *pageFields
+      - name: celebrations
+        label: "School Life · Celebrations"
+        file: content/pages/celebrations.md
+        fields: *pageFields
+      - name: assembly
+        label: "School Life · Assembly"
+        file: content/pages/assembly.md
+        fields: *pageFields
+      - name: aspire-indian-international-school-timings
+        label: "School Life · School Timings"
+        file: content/pages/aspire-indian-international-school-timings.md
+        fields: *pageFields
+      - name: special-assemblies
+        label: "School Life · Special Assemblies"
+        file: content/pages/special-assemblies.md
+        fields: *pageFields
+      - name: school-anthem
+        label: "School Life · School Anthem"
+        file: content/pages/school-anthem.md
+        fields: *pageFields
+      - name: classrooms
+        label: "Amenities · Classrooms"
+        file: content/pages/classrooms.md
+        fields: *pageFields
+      - name: auditorium
+        label: "Amenities · Auditorium"
+        file: content/pages/auditorium.md
+        fields: *pageFields
+      - name: open-ground
+        label: "Amenities · Open Play Ground"
+        file: content/pages/open-ground.md
+        fields: *pageFields
+      - name: swimming-pool
+        label: "Amenities · Swimming Pool"
+        file: content/pages/swimming-pool.md
+        fields: *pageFields
+      - name: gymnasium
+        label: "Amenities · Indoor Gymnasium"
+        file: content/pages/gymnasium.md
+        fields: *pageFields
+      - name: play-area
+        label: "Amenities · KG Play Area"
+        file: content/pages/play-area.md
+        fields: *pageFields
+      - name: badminton
+        label: "Amenities · Sports · Badminton"
+        file: content/pages/badminton.md
+        fields: *pageFields
+      - name: cricket
+        label: "Amenities · Sports · Cricket"
+        file: content/pages/cricket.md
+        fields: *pageFields
+      - name: basket-ball
+        label: "Amenities · Sports · Basketball"
+        file: content/pages/basket-ball.md
+        fields: *pageFields
+      - name: soccer
+        label: "Amenities · Sports · Soccer"
+        file: content/pages/soccer.md
+        fields: *pageFields
+      - name: das-trailblazer
+        label: "Community · Events"
+        file: content/pages/das-trailblazer.md
+        fields: *pageFields
+      - name: csr-reports
+        label: "Community · CSR Reports"
+        file: content/pages/csr-reports.md
+        fields: *pageFields
+      - name: mandatory-public-disclosure
+        label: "Community · Mandatory Public Disclosure"
+        file: content/pages/mandatory-public-disclosure.md
+        fields: *pageFields
   - name: settings
     label: Site Settings
     files:
@@ -326,49 +509,3 @@ collections:
               - { label: Next, name: next, widget: string }
               - { label: Close, name: close, widget: string }
           - { label: "Pending paths", name: pending, widget: list, field: { label: Pattern, name: pattern, widget: string } }
-  - name: pages
-    label: Inner Pages
-    description: "Each page is a title band followed by blocks (text, photos, cards, point lists), top to bottom."
-    folder: content/pages
-    create: true
-    slug: "{{slug}}"
-    extension: md
-    summary: "{{title}}"
-    fields:
-      - { label: Title, name: title, widget: string }
-      - { label: "Head title override (hidden, soccer.md only)", name: headTitle, widget: hidden, required: false }
-      - { label: "Breadcrumb label", name: crumbLabel, widget: string, required: false }
-      - { label: Lead, name: lead, widget: string, required: false }
-      - { label: "Head: noindex comment (hidden)", name: headNoindexComment, widget: hidden, required: false }
-      - { label: "Head: intro comment (hidden)", name: headIntroComment, widget: hidden, required: false }
-      - { label: "Head: safety-nets comment (hidden)", name: headSafetyNetsComment, widget: hidden, required: false }
-      - { label: "Head: test-harness comment (hidden)", name: headTestHarnessComment, widget: hidden, required: false }
-      - label: Blocks
-        name: blocks
-        widget: list
-        types:
-          - label: "Text"
-            name: richtext
-            summary: "{{fields.raw | ternary('[HTML] ', '')}}{{fields.body | truncate(70)}}"
-            fields:
-              - { label: Body, name: body, widget: markdown, hint: "A block that starts with a < tag is hand-written HTML (lists, tables). Change the words between the tags and leave the tags themselves alone." }
-              - { label: "Raw HTML (hidden)", name: raw, widget: hidden, required: false }
-              - { label: "Blank line before (hidden)", name: blankLineBefore, widget: hidden, required: false }
-          - label: Image
-            name: image
-            summary: "Image: {{fields.description | truncate(60)}}"
-            fields:
-              - { label: Description, name: description, widget: string }
-              - { label: Photo, name: src, widget: image, required: false }
-          - label: "Feature cards"
-            name: features
-            summary: "Cards: {{fields.items.0.heading}}…"
-            fields:
-              - label: Items
-                name: items
-                widget: list
-                fields: [{ label: Heading, name: heading, widget: string }, { label: Text, name: text, widget: text }]
-          - label: "Point list"
-            name: points
-            summary: "Points: {{fields.items.0}}…"
-            fields: [{ label: Items, name: items, widget: list, field: { label: Point, name: point, widget: string } }]

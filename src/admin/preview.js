@@ -155,7 +155,23 @@
   ["tokens", "base", "page"].forEach(function (name) { CMS.registerPreviewStyle("/css/" + name + ".css"); });
   CMS.registerPreviewStyle("/admin/preview.css");
 
-  CMS.registerPreviewTemplate("pages", PagePreview);
+  // Decap looks up a preview by file name inside a files collection, so every inner page
+  // needs its own registration. Keep this list in step with the `file: content/pages/*.md`
+  // entries under the "pages" collection in config.yml.
+  var INNER_PAGES = [
+    "chairmans-message", "principals-message", "vision-mission", "vice-principal-message",
+    "kindergarten-school", "primary-school", "middle-school", "student-leadership-program",
+    "curriculum-choices", "weekly-test-curriculum", "subject-enrichment-activities",
+    "best-igcse-cambridge-school-in-kuwait", "fees-schedules", "admission-process", "clubs",
+    "student-article-magazine", "health-wellness", "after-school-activities", "achievements",
+    "celebrations", "assembly", "aspire-indian-international-school-timings",
+    "special-assemblies", "school-anthem", "classrooms", "auditorium", "open-ground",
+    "swimming-pool", "gymnasium", "play-area", "badminton", "cricket", "basket-ball", "soccer",
+    "das-trailblazer", "csr-reports", "mandatory-public-disclosure"
+  ];
+  INNER_PAGES.forEach(function (file) {
+    CMS.registerPreviewTemplate(file, PagePreview);
+  });
   ["homepage", "our-story", "settings", "site"].forEach(function (file) {
     CMS.registerPreviewTemplate(file, Outline);
   });
