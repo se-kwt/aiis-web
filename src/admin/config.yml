@@ -6,6 +6,9 @@ backend:
   # back to api.netlify.com and login fails with "Not Found".
   base_url: https://aiis-cms-auth.netlify.app
 local_backend: true   # only takes effect when the admin is opened on localhost
+logo:
+  src: /assets/logos/crest-web.png
+  show_in_login: true   # school crest instead of the Decap logo on the login screen
 media_folder: "src/assets/photos"
 public_folder: "/assets/photos"
 collections:
@@ -20,9 +23,9 @@ collections:
             name: hero
             widget: object
             fields:
-              - { label: Eyebrow, name: eyebrow, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: string, required: false }] }
+              - { label: Eyebrow, name: eyebrow, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: hidden, required: false }] }
               - { label: Heading, name: heading, widget: string }
-              - { label: Description, name: desc, widget: object, fields: [{ label: Text, name: text, widget: text }, { label: Placeholder, name: placeholder, widget: string, required: false }] }
+              - { label: Description, name: desc, widget: object, fields: [{ label: Text, name: text, widget: text }, { label: Placeholder, name: placeholder, widget: hidden, required: false }] }
               - { label: "Video URL", name: videoUrl, widget: string }
               - { label: Video, name: video, widget: file, media_folder: "/src/assets/video", public_folder: "/assets/video" }
               - { label: "Video title", name: videoTitle, widget: string }
@@ -34,16 +37,19 @@ collections:
               - label: Items
                 name: items
                 widget: list
+                summary: "{{fields.headline.text}}"
                 fields:
-                  - { label: Headline, name: headline, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: string, required: false }] }
+                  - { label: Headline, name: headline, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: hidden, required: false }] }
               - label: Social
                 name: social
                 widget: list
+                summary: "{{fields.headline.text}}"
                 fields:
-                  - { label: Headline, name: headline, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: string, required: false }] }
+                  - { label: Headline, name: headline, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: hidden, required: false }] }
           - label: Promises
             name: promises
             widget: list
+            summary: "{{fields.heading}}"
             fields:
               - { label: Lead, name: lead, widget: text }
               - { label: Photo, name: photo, widget: object, fields: [{ label: Image, name: src, widget: image, required: false, media_folder: "/src/assets/photos/promises", public_folder: "/assets/photos/promises" }, { label: "Alt text", name: alt, widget: string }] }
@@ -63,6 +69,7 @@ collections:
               - label: Cards
                 name: cards
                 widget: list
+                summary: "{{fields.verb}} · {{fields.grades}}"
                 fields:
                   - { label: Photo, name: photo, widget: object, fields: [{ label: Image, name: src, widget: image, required: false, media_folder: "/src/assets/photos/divisions", public_folder: "/assets/photos/divisions" }, { label: "Alt text", name: alt, widget: string }] }
                   - { label: Verb, name: verb, widget: string }
@@ -83,6 +90,7 @@ collections:
               - label: Columns
                 name: columns
                 widget: list
+                summary: "{{fields.title}}"
                 fields:
                   - { label: Icon, name: icon, widget: object, fields: [{ label: Image, name: src, widget: image, required: false, media_folder: "/src/assets/photos/learning", public_folder: "/assets/photos/learning" }, { label: "Alt text", name: alt, widget: string }] }
                   - { label: Title, name: title, widget: string }
@@ -97,10 +105,11 @@ collections:
               - label: Slides
                 name: slides
                 widget: list
+                summary: "{{fields.name.text}} ({{fields.role.text}})"
                 fields:
-                  - { label: Role, name: role, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: string, required: false }] }
-                  - { label: Name, name: name, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: string, required: false }] }
-                  - { label: "Play label", name: playLabel, widget: object, fields: [{ label: Placeholder, name: placeholder, widget: string, required: false }] }
+                  - { label: Role, name: role, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: hidden, required: false }] }
+                  - { label: Name, name: name, widget: object, fields: [{ label: Text, name: text, widget: string }, { label: Placeholder, name: placeholder, widget: hidden, required: false }] }
+                  - { label: "Play label", name: playLabel, widget: hidden, required: false }
                   - { label: Video, name: video, widget: string }
                   - { label: "Video title", name: videoTitle, widget: string }
           - label: Values
@@ -110,6 +119,7 @@ collections:
               - label: Cards
                 name: cards
                 widget: list
+                summary: "{{fields.title}}"
                 fields:
                   - { label: Title, name: title, widget: string }
                   - { label: Photo, name: photo, widget: object, fields: [{ label: Image, name: src, widget: image, required: false, media_folder: "/src/assets/photos/values", public_folder: "/assets/photos/values" }, { label: "Alt text", name: alt, widget: string }] }
@@ -137,6 +147,7 @@ collections:
               - label: Links
                 name: links
                 widget: list
+                summary: "{{fields.label}}"
                 fields:
                   - { label: Label, name: label, widget: string }
                   - { label: Path, name: path, widget: string }
@@ -165,14 +176,15 @@ collections:
                 widget: object
                 fields:
                   - { label: Text, name: text, widget: text }
-                  - { label: Placeholder, name: placeholder, widget: string, required: false }
+                  - { label: Placeholder, name: placeholder, widget: hidden, required: false }
           - label: "Quick facts"
             name: quickFacts
             widget: list
+            summary: "{{fields.figure}} {{fields.label}}"
             fields:
               - { label: Figure, name: figure, widget: string }
               - { label: Label, name: label, widget: string }
-              - { label: Placeholder, name: placeholder, widget: string, required: false }
+              - { label: Placeholder, name: placeholder, widget: hidden, required: false }
           - label: Mission
             name: mission
             widget: object
@@ -183,10 +195,11 @@ collections:
                 widget: object
                 fields:
                   - { label: Text, name: text, widget: text }
-                  - { label: Placeholder, name: placeholder, widget: string, required: false }
+                  - { label: Placeholder, name: placeholder, widget: hidden, required: false }
               - label: Columns
                 name: cols
                 widget: list
+                summary: "{{fields.heading}}"
                 fields:
                   - { label: Heading, name: heading, widget: string }
                   - label: Text
@@ -194,10 +207,11 @@ collections:
                     widget: object
                     fields:
                       - { label: Text, name: text, widget: text }
-                      - { label: Placeholder, name: placeholder, widget: string, required: false }
+                      - { label: Placeholder, name: placeholder, widget: hidden, required: false }
           - label: "Story blocks"
             name: storyBlocks
             widget: list
+            summary: "{{fields.heading}}"
             fields:
               - { label: Heading, name: heading, widget: string }
               - label: Copy
@@ -205,13 +219,14 @@ collections:
                 widget: object
                 fields:
                   - { label: Text, name: text, widget: text }
-                  - { label: Placeholder, name: placeholder, widget: string, required: false }
+                  - { label: Placeholder, name: placeholder, widget: hidden, required: false }
               - { label: "Link label", name: linkLabel, widget: string }
               - { label: "Link href", name: linkHref, widget: string }
               - { label: "Photo description", name: photoDescription, widget: string }
           - label: Closing
             name: closing
             widget: list
+            summary: "{{fields.label}}"
             fields:
               - { label: Label, name: label, widget: string }
               - { label: Path, name: path, widget: string }
@@ -226,6 +241,7 @@ collections:
           - label: "Quick links"
             name: quickLinks
             widget: list
+            summary: "{{fields.label}}"
             fields:
               - { label: Label, name: label, widget: string }
               - { label: Path, name: path, widget: string }
@@ -245,12 +261,14 @@ collections:
           - label: Menu
             name: menu
             widget: list
+            summary: "{{fields.title}}"
             fields:
               - { label: Title, name: title, widget: string }
               - { label: Path, name: path, widget: string }
               - label: Links
                 name: links
                 widget: list
+                summary: "{{fields.label}}"
                 fields:
                   - { label: Label, name: label, widget: string }
                   - { label: Path, name: path, widget: string }
@@ -264,6 +282,7 @@ collections:
               - label: Links
                 name: links
                 widget: list
+                summary: "{{fields.label}}"
                 fields:
                   - { label: Label, name: label, widget: string }
                   - { label: Path, name: path, widget: string }
@@ -277,12 +296,14 @@ collections:
           - label: Footer
             name: footer
             widget: list
+            summary: "{{fields.label}}"
             fields:
               - { label: Label, name: label, widget: string }
               - { label: Path, name: path, widget: string }
           - label: Divisions
             name: divisions
             widget: list
+            summary: "{{fields.label}}"
             fields:
               - { label: Label, name: label, widget: string }
               - { label: Path, name: path, widget: string }
@@ -307,10 +328,12 @@ collections:
           - { label: "Pending paths", name: pending, widget: list, field: { label: Pattern, name: pattern, widget: string } }
   - name: pages
     label: Inner Pages
+    description: "Each page is a title band followed by blocks (text, photos, cards, point lists), top to bottom."
     folder: content/pages
     create: true
     slug: "{{slug}}"
     extension: md
+    summary: "{{title}}"
     fields:
       - { label: Title, name: title, widget: string }
       - { label: "Head title override (hidden, soccer.md only)", name: headTitle, widget: hidden, required: false }
@@ -324,19 +347,22 @@ collections:
         name: blocks
         widget: list
         types:
-          - label: "Rich text"
+          - label: "Text"
             name: richtext
+            summary: "{{fields.raw | ternary('[HTML] ', '')}}{{fields.body | truncate(70)}}"
             fields:
-              - { label: Body, name: body, widget: markdown }
+              - { label: Body, name: body, widget: markdown, hint: "A block that starts with a < tag is hand-written HTML (lists, tables). Change the words between the tags and leave the tags themselves alone." }
               - { label: "Raw HTML (hidden)", name: raw, widget: hidden, required: false }
               - { label: "Blank line before (hidden)", name: blankLineBefore, widget: hidden, required: false }
           - label: Image
             name: image
+            summary: "Image: {{fields.description | truncate(60)}}"
             fields:
               - { label: Description, name: description, widget: string }
               - { label: Photo, name: src, widget: image, required: false }
           - label: "Feature cards"
             name: features
+            summary: "Cards: {{fields.items.0.heading}}…"
             fields:
               - label: Items
                 name: items
@@ -344,4 +370,5 @@ collections:
                 fields: [{ label: Heading, name: heading, widget: string }, { label: Text, name: text, widget: text }]
           - label: "Point list"
             name: points
+            summary: "Points: {{fields.items.0}}…"
             fields: [{ label: Items, name: items, widget: list, field: { label: Point, name: point, widget: string } }]

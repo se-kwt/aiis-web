@@ -2,9 +2,15 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Content Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Content Manager | Aspire Indian International School</title>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@3.18.0/dist/decap-cms.js" integrity="sha384-Vu0vdYOBhK+2KywHCtNZ9sCqpzkwx358AT6pCSg8om/clLoDzpWYF41jrtEk/WMM" crossorigin="anonymous"></script>
+  <!-- Preview support. markdown-it is copied from node_modules at build time (see eleventy.config.js)
+       so the preview renders markdown exactly like the site build does. -->
+  <script src="/admin/vendor/markdown-it.min.js"></script>
+  <script src="/admin/preview.js"></script>
 </body>
 </html>

@@ -98,6 +98,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/admin");
+  // The Decap preview renders markdown with the same library as the build.
+  eleventyConfig.addPassthroughCopy({ "node_modules/markdown-it/dist/markdown-it.min.js": "admin/vendor/markdown-it.min.js" });
   // src/assets contains plain-prose *.md documentation files (asset
   // provenance notes, not content pages) that would otherwise be picked up
   // and rendered as Nunjucks/Markdown templates since they live under the
