@@ -234,23 +234,17 @@ collections:
     label: Site Settings
     files:
       - name: settings
-        label: Inner-page Sidebar
+        label: Inner-page Closing Links
         file: content/settings.json
         fields:
-          - { label: About, name: about, widget: text }
-          - label: "Quick links"
-            name: quickLinks
+          - label: "Closing links"
+            name: closing
             widget: list
             summary: "{{fields.label}}"
+            hint: "The navy bars at the bottom of every inner page. A page that links to itself skips that bar."
             fields:
               - { label: Label, name: label, widget: string }
               - { label: Path, name: path, widget: string }
-          - label: Address
-            name: address
-            widget: object
-            fields:
-              - { label: Lines, name: lines, widget: list, field: { label: Line, name: line, widget: string } }
-              - { label: Phones, name: phones, widget: list, field: { label: Phone, name: phone, widget: string } }
   - name: navigation
     label: Navigation
     files:
@@ -337,12 +331,21 @@ collections:
     fields:
       - { label: Title, name: title, widget: string }
       - { label: "Head title override (hidden, soccer.md only)", name: headTitle, widget: hidden, required: false }
-      - { label: "Breadcrumb label", name: crumbLabel, widget: string, required: false }
+      - { label: Eyebrow, name: eyebrow, widget: string, required: false, hint: "Small orange label above the title. Leave empty to use the menu section the page belongs to (e.g. ABOUT US)." }
       - { label: Lead, name: lead, widget: string, required: false }
       - { label: "Head: noindex comment (hidden)", name: headNoindexComment, widget: hidden, required: false }
       - { label: "Head: intro comment (hidden)", name: headIntroComment, widget: hidden, required: false }
       - { label: "Head: safety-nets comment (hidden)", name: headSafetyNetsComment, widget: hidden, required: false }
       - { label: "Head: test-harness comment (hidden)", name: headTestHarnessComment, widget: hidden, required: false }
+      - label: "Closing links (optional)"
+        name: closing
+        widget: list
+        required: false
+        summary: "{{fields.label}}"
+        hint: "Replaces the site-wide closing bars on this page only. Leave empty to use the ones in Site Settings."
+        fields:
+          - { label: Label, name: label, widget: string }
+          - { label: Path, name: path, widget: string }
       - label: Blocks
         name: blocks
         widget: list

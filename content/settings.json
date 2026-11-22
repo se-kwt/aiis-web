@@ -1,17 +1,17 @@
 {
-  "_source": "Shared inner-page sidebar (About Us / Quick Links / Address), copied verbatim from the baseline (git tag baseline-static-site), which renders this identical block on every inner page built from src/_layouts/page.njk. Phone numbers are stored as the bare tel: digit-string (with leading +); sidebar.njk derives the human-readable \"+965 ...\" display text from it.",
-  "about": "AIIS is where your child can discover what they love and grow into who they want to be. We focus on academic progress alongside emotional, social and creative growth, building a school where every student is encouraged to reach their full potential.",
-  "quickLinks": [
-    { "label": "Admission Process", "path": "/admission-process" },
-    { "label": "Fees & Schedules", "path": "/fees-schedules" },
-    { "label": "Weekly Test", "path": "/weekly-test-curriculum" }
-  ],
-  "address": {
-    "lines": [
-      "Aspire Indian International School",
-      "Street 100, Block 1,",
-      "Abbasiya School Complex, Kuwait"
-    ],
-    "phones": ["+96555195455", "+96550927287"]
-  }
+  "_source": "Closing destination bars shown at the bottom of every inner page (a page's own 'closing' list overrides these; a bar that points at the page itself is dropped automatically).",
+  "closing": [
+    {
+      "label": "Admissions Process",
+      "path": "/admission-process"
+    },
+    {
+      "label": "Fees & Schedules",
+      "path": "/fees-schedules"
+    },
+    {
+      "label": "Plan a Visit",
+      "path": "/form/contact-the-best-indian-school-in-kuwait"
+    }
+  ]
 }

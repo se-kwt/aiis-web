@@ -177,6 +177,22 @@ export default function (eleventyConfig) {
   // no-op, so this is safe to apply uniformly across every field.
   eleventyConfig.addFilter("placeholderAttr", (field) => (field && field.placeholder ? ` data-placeholder="${field.placeholder}"` : ""));
 
+  // Inner pages: the title band's eyebrow defaults to the name of the top-level menu section that links to the page
+  // (e.g. "ABOUT US" above "Vision and Mission"), so editors only set `eyebrow` to override it.
+  eleventyConfig.addFilter("menuSection", (url, menu) => {
+    const target = String(url || "").replace(/\/+$/, "");
+    for (const section of menu || []) {
+      if ((section.links || []).some((link) => String(link.path || "").replace(/\/+$/, "") === target)) return section.title;
+    }
+    return "";
+  });
+
+  // Drops the link that points at the page being rendered, so a closing bar never links a page to itself.
+  eleventyConfig.addFilter("exceptPath", (links, url) => {
+    const target = String(url || "").replace(/\/+$/, "");
+    return (links || []).filter((link) => String(link.path || "").replace(/\/+$/, "") !== target);
+  });
+
   registerContentPages(eleventyConfig);
 
   // content/*.json (homepage.json, our-story.json, settings.json, site.json)

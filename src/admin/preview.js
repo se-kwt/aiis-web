@@ -68,16 +68,21 @@
 
   function PagePreview(props) {
     var data = props.entry.get("data").toJS();
-    var crumb = data.crumbLabel || data.title || "";
+    var closing = data.closing || [];
     return h("div", { className: "page" },
       h("section", { className: "page-hero" },
-        h("div", { className: "page__wrap" },
-          h("p", { className: "page-hero__crumb" }, h("a", { href: "#" }, "Home"), " / ", html(inlineMd(crumb), "span")),
-          html(inlineMd(data.title), "h1", { className: "page-hero__title" }),
-          data.lead ? html(inlineMd(data.lead), "p", { className: "page-hero__lead" }) : null)),
+        data.eyebrow ? html(inlineMd(data.eyebrow), "p", { className: "page-hero__eyebrow" }) : null,
+        html(inlineMd(data.title), "h1", { className: "page-hero__title" }),
+        data.lead ? html(inlineMd(data.lead), "p", { className: "page-hero__lead" }) : null,
+        h("span", { className: "page-hero__notch", "aria-hidden": "true" })),
       h("section", { className: "page-body" },
         h("div", { className: "page__wrap" },
-          h("article", { className: "page-content" }, (data.blocks || []).map(Block)))));
+          h("article", { className: "page-content" }, (data.blocks || []).map(Block)))),
+      closing.length ? h("section", { className: "page-closing" },
+        h("div", { className: "page__wrap" },
+          h("ul", { className: "page-closing__list" }, closing.map(function (link, i) {
+            return h("li", { key: i }, html(inlineMd(link.label || ""), "a", { className: "page-closing__link", href: "#" }));
+          })))) : null);
   }
 
   // ---- outline preview for the structured files ----------------------------

@@ -1,19 +1,20 @@
 {% extends "./base.njk" %}
 {% set pageTitle = title %}
-{% set crumbText = crumbLabel or pageTitle %}
+{% set eyebrowText = eyebrow or (page.url | menuSection(site.menu)) %}
+{% set closingLinks = (closing or settings.closing) | exceptPath(page.url) %}
 {% set title = ((headTitle or title) + " | Aspire Indian International School") | safe %}
 {% block content %}  <!-- build:page --><div class="page" data-section="page" data-k="page-root">
 
-    <section class="page-hero">
-      <div class="page__wrap">
-        <p class="page-hero__crumb"><a href="/">Home</a> / {{ crumbText | markdownInline | safe }}</p>
-        <h1 class="page-hero__title">{{ pageTitle | markdownInline | safe }}</h1>
-{% if lead %}        <p class="page-hero__lead">{{ lead | markdownInline | safe }}</p>
-{% endif %}      </div>
+    <section class="page-hero" aria-labelledby="page-hero-title">
+{% if eyebrowText %}      <p class="page-hero__eyebrow">{{ eyebrowText | markdownInline | safe }}</p>
+{% endif %}      <h1 id="page-hero-title" class="page-hero__title">{{ pageTitle | markdownInline | safe }}</h1>
+{% if lead %}      <p class="page-hero__lead">{{ lead | markdownInline | safe }}</p>
+{% endif %}      <span class="page-hero__notch" aria-hidden="true"></span>
     </section>
 
     <section class="page-body">
-      <div class="page__wrap page-grid">
+      <svg class="page-body__swirl" viewBox="0 0 100 100" fill="none" aria-hidden="true" focusable="false"><path d="M50 90c-22 0-36-16-36-36 0-18 14-32 32-32 15 0 27 11 27 25 0 12-9 21-21 21-9 0-16-7-16-16 0-7 6-12 12-12" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="page__wrap">
         <article class="page-content">
 {% for block in blocks %}{% if block.blankLineBefore %}
 {% endif %}{% if block.type == "richtext" %}{% if block.raw %}          {{ block.body | safe }}{% else %}          {{ block.body | markdown | safe }}{% endif %}{% elif block.type == "image" %}{% if block.src %}        <figure class="tp"><img src="{{ block.src }}" alt="{{ block.description | escapeHtml | safe }}" loading="lazy"></figure>
@@ -27,9 +28,16 @@
 {% for item in block.items %}          <li class="page-points__item">{{ item | markdownInline | safe }}</li>
 {% endfor %}        </ul>
 {% endif %}{% endfor %}        </article>
-        {% include "sidebar.njk" %}
       </div>
     </section>
-
+{% if closingLinks.length %}
+    <section class="page-closing" aria-label="Keep exploring AIIS">
+      <div class="page__wrap">
+        <ul class="page-closing__list">
+{% for link in closingLinks %}          <li><a class="page-closing__link" href="{{ link.path }}">{{ link.label | markdownInline | safe }}</a></li>
+{% endfor %}        </ul>
+      </div>
+    </section>
+{% endif %}
   </div><!-- /build:page -->
 {% endblock %}
