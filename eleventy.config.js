@@ -30,9 +30,23 @@ function registerContentPages(eleventyConfig) {
     eleventyConfig.addTemplate(`pages/${filename}`, raw, { ...pagesConfig });
   }
 
-  // `addTemplate`'s content is read once at config time, above — without an
-  // explicit watch target, editing a file in content/pages/ wouldn't trigger
-  // a rebuild in `--serve`/`--watch` mode.
+  // KNOWN LIMITATION (`--serve`/`--watch` mode only): `addTemplate`'s content
+  // is read once, above, at config-evaluation time. The watch targets below
+  // do make Eleventy notice a `content/pages/*.md` edit and run a rebuild,
+  // but that rebuild re-renders the SAME string captured above, not the
+  // edited file — so the edit is NOT reflected in the output. (Confirmed:
+  // `UserConfig.addTemplate` throws "Virtual template conflict" if this
+  // function is re-invoked from a rebuild hook such as
+  // `eleventy.beforeWatch` to re-read the files, since it refuses to
+  // register the same virtual path twice — there is no public API to
+  // update an already-registered virtual template's content in Eleventy
+  // 3.1.8.) A real fix needs a different content model for these pages
+  // (e.g. global data read fresh per build and paginated, rather than
+  // baked virtual templates) — out of scope for a config tweak. Until then,
+  // editing a file under content/pages/ requires restarting `npm run dev`
+  // to see the change; content/*.json changes do NOT have this problem
+  // (see the `addWatchTarget("content/*.json")` call below — those are read
+  // fresh by src/_data/*.js on every build).
   eleventyConfig.addWatchTarget(`${PAGES_DIR}/**/*.md`);
   eleventyConfig.addWatchTarget(configPath);
 }
