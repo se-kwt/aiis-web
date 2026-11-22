@@ -177,6 +177,13 @@ export default function (eleventyConfig) {
 
   registerContentPages(eleventyConfig);
 
+  // content/*.json (homepage.json, our-story.json, settings.json, site.json)
+  // sit outside Eleventy's "src" input dir, so without this, editing one
+  // while `npm run dev` runs triggers no rebuild at all. src/_data/*.js
+  // already re-reads its file fresh on every call, so this watch target
+  // alone is enough to make dev-mode CMS edits to these files live.
+  eleventyConfig.addWatchTarget("content/*.json");
+
   return {
     dir: { input: "src", includes: "_includes", layouts: "_layouts", data: "_data", output: "_site" },
     htmlTemplateEngine: "njk",
