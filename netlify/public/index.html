@@ -1,4 +1,12 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>AIIS CMS login proxy</title>
-<p>This host only provides the Decap CMS GitHub login. It serves no website content.</p>
+<title>AIIS CMS login</title>
+<p>This host only provides login and publishing for the AIIS content manager. It serves no website content.</p>
+<script>
+  // Netlify Identity emails (invite, password recovery, email change) link to
+  // this site with a #token in the URL. The content manager lives on GitHub
+  // Pages, so forward the token there.
+  if (/^#(invite|recovery|email_change|confirmation)_token=/.test(location.hash)) {
+    location.replace("https://se-kwt.github.io/admin/" + location.hash);
+  }
+</script>

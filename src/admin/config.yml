@@ -1,10 +1,12 @@
 backend:
-  name: github
-  repo: se-kwt/se-kwt.github.io
+  name: git-gateway
   branch: main
-  # Our own OAuth proxy (see netlify/README.md). Without base_url, Decap falls
-  # back to api.netlify.com and login fails with "Not Found".
-  base_url: https://aiis-cms-auth.netlify.app
+  # Editors log in with an email + password (Netlify Identity). Netlify's Git
+  # Gateway then commits to the repo linked to this Netlify site, so editors
+  # need no GitHub account. The public site is on GitHub Pages, so the
+  # Identity/Gateway endpoints must be given as absolute URLs.
+  identity_url: https://aiis-cms-auth.netlify.app/.netlify/identity
+  gateway_url: https://aiis-cms-auth.netlify.app/.netlify/git
 local_backend: true   # only takes effect when the admin is opened on localhost
 media_folder: "src/assets/photos"
 public_folder: "/assets/photos"

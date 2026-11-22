@@ -5,6 +5,13 @@
   <title>Content Manager</title>
 </head>
 <body>
+  <!-- Netlify Identity widget: handles invite / password-recovery links.
+       The site is on GitHub Pages, so point it at the Netlify site that
+       runs Identity. Must load (and init) before Decap. -->
+  <script src="https://unpkg.com/netlify-identity-widget@1.9.2/build/netlify-identity.js" integrity="sha384-W48n3M6qhpy1l1CQWUeRsujCOsRc0mnAI29DPW3SNJp+CqnWuzBEtCK2/Y/2Kwt7" crossorigin="anonymous"></script>
+  <script>
+    netlifyIdentity.init({ APIUrl: "https://aiis-cms-auth.netlify.app/.netlify/identity" });
+  </script>
   <script src="https://unpkg.com/decap-cms@3.18.0/dist/decap-cms.js" integrity="sha384-Vu0vdYOBhK+2KywHCtNZ9sCqpzkwx358AT6pCSg8om/clLoDzpWYF41jrtEk/WMM" crossorigin="anonymous"></script>
 </body>
 </html>
